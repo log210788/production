@@ -1,0 +1,3375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara's Peaceful English Sanctuary | Lesson 01 Transcript & Vocabulary</title>
+
+  <!-- Google Fonts: Cormorant Garamond (Literary Serif), Plus Jakarta Sans (Soft Modern UI), JetBrains Mono (Timestamps & IPA) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+              400: '#cbb38e',
+              500: '#b6966b',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              300: '#e2b086',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#854524',
+              800: '#6c3921',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e4ece7',
+              200: '#cadad1',
+              300: '#a5bfb1',
+              400: '#7b9f8d',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#3a5448',
+              800: '#30443b',
+            },
+            slatewarm: {
+              700: '#3d4441',
+              800: '#2b312e',
+              900: '#1e2321',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- GSAP for Gentle Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Popper & Tippy.js for Interactive Vocabulary Explanations -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/shift-away.css" />
+
+  <!-- Canvas Confetti for Gentle Practice Encouragement -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-base: #f9f6f0;
+      --bg-card: rgba(255, 253, 249, 0.90);
+      --bg-subcard: rgba(255, 255, 255, 0.94);
+      --border-soft: #e6decb;
+      --border-accent: #d9c8b0;
+      --text-main: #2b312e;
+      --text-muted: #5c6660;
+      --grad-1: rgba(238, 208, 181, 0.42);
+      --grad-2: rgba(202, 218, 209, 0.48);
+      --grad-3: rgba(246, 241, 231, 0.70);
+    }
+
+    body[data-theme="winchester"] {
+      --bg-base: #f3f6f5;
+      --bg-card: rgba(252, 254, 253, 0.91);
+      --bg-subcard: rgba(255, 255, 255, 0.95);
+      --border-soft: #d7e2dc;
+      --border-accent: #b8ccc2;
+      --text-main: #26312d;
+      --text-muted: #52635c;
+      --grad-1: rgba(202, 218, 209, 0.50);
+      --grad-2: rgba(219, 228, 238, 0.48);
+      --grad-3: rgba(244, 240, 230, 0.55);
+    }
+
+    body[data-theme="twilight"] {
+      --bg-base: #f5efe6;
+      --bg-card: rgba(253, 249, 242, 0.92);
+      --bg-subcard: rgba(255, 252, 247, 0.96);
+      --border-soft: #e2d2be;
+      --border-accent: #cfaea0;
+      --text-main: #2d2622;
+      --text-muted: #665850;
+      --grad-1: rgba(226, 176, 134, 0.36);
+      --grad-2: rgba(214, 196, 176, 0.42);
+      --grad-3: rgba(235, 220, 202, 0.55);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(at 8% 5%, var(--grad-1) 0px, transparent 52%),
+        radial-gradient(at 92% 18%, var(--grad-2) 0px, transparent 52%),
+        radial-gradient(at 50% 88%, var(--grad-3) 0px, transparent 58%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      transition: background-color 0.5s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    .sanctuary-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 36px -10px rgba(91, 130, 111, 0.08), 0 4px 14px -3px rgba(43, 49, 46, 0.04);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sanctuary-subcard {
+      background: var(--bg-subcard);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 14px -4px rgba(43, 49, 46, 0.04);
+      transition: all 0.25s ease;
+    }
+
+    /* Inline Vocabulary Highlight in Transcript */
+    .vocab-mark {
+      display: inline-block;
+      background: linear-gradient(120deg, rgba(226, 176, 134, 0.25) 0%, rgba(165, 191, 177, 0.28) 100%);
+      border-bottom: 2px dashed #a3582b;
+      color: #5b3216;
+      font-weight: 600;
+      padding: 0px 5px;
+      margin: 0 1px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .vocab-mark:hover, .vocab-mark.active-vocab {
+      background: linear-gradient(120deg, rgba(190, 111, 56, 0.25) 0%, rgba(91, 130, 111, 0.32) 100%);
+      border-bottom-style: solid;
+      border-bottom-color: #476858;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(163, 88, 43, 0.14);
+    }
+
+    body.hide-vocab-highlights .vocab-mark {
+      background: transparent !important;
+      border-bottom: none !important;
+      color: inherit !important;
+      font-weight: inherit !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    /* Note-taker fix badge */
+    .asr-fix-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f4f7f5;
+      color: #476858;
+      border: 1px solid #cadad1;
+      padding: 1px 7px;
+      border-radius: 999px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    body.hide-asr-fixes .asr-fix-pill {
+      display: none !important;
+    }
+
+    /* Custom Tippy Tooltip Theme: Peaceful Autumn */
+    .tippy-box[data-theme~='autumn-sanctuary'] {
+      background-color: #fffdf9;
+      color: #2b312e;
+      border: 1px solid #dfd0b5;
+      border-radius: 1rem;
+      box-shadow: 0 20px 38px -8px rgba(61, 68, 65, 0.16), 0 6px 16px -4px rgba(163, 88, 43, 0.08);
+      padding: 0.35rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .tippy-box[data-theme~='autumn-sanctuary'][data-placement^='top'] > .tippy-arrow::before {
+      border-top-color: #dfd0b5;
+    }
+    .tippy-box[data-theme~='autumn-sanctuary'][data-placement^='bottom'] > .tippy-arrow::before {
+      border-bottom-color: #dfd0b5;
+    }
+
+    /* Highlight pulse when jumping to a transcript line */
+    @keyframes gentleGlow {
+      0% { background-color: rgba(226, 176, 134, 0.45); transform: scale(1.005); }
+      50% { background-color: rgba(165, 191, 177, 0.38); }
+      100% { background-color: transparent; transform: scale(1); }
+    }
+    .turn-highlight-flash {
+      animation: gentleGlow 2.8s ease-out;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f6f1e7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbb38e;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a3582b;
+    }
+
+    @media print {
+      .no-print, #autumn-breeze-canvas { display: none !important; }
+      body { background: #fff !important; }
+      .sanctuary-card, .sanctuary-subcard { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+  </style>
+</head>
+<body data-theme="kensington" class="font-sans antialiased min-h-screen selection:bg-autumn-200 selection:text-slatewarm-900 relative">
+
+  <!-- CALMING AUTUMN BREEZE CANVAS OVERLAY (Interactive Physics Leaves & Motes) -->
+  <canvas id="autumn-breeze-canvas" class="fixed inset-0 pointer-events-none z-20 opacity-80"></canvas>
+
+  <!-- STICKY PEACEFUL NAVIGATION & ATMOSPHERE BAR -->
+  <header class="sticky top-0 z-40 border-b border-[#e6decb]/90 bg-[#fbf9f5]/85 backdrop-blur-md no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sage-600 via-sage-500 to-autumn-500 flex items-center justify-center text-white font-serif text-xl font-bold shadow-sm">
+          B
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-serif font-bold text-lg sm:text-xl tracking-tight text-slatewarm-900">Barbara's Peaceful English Sanctuary</span>
+            <span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-sage-100 text-sage-800 border border-sage-200">
+              <i data-lucide="feather" class="w-3 h-3 text-sage-600"></i>
+              Lesson 01 • Full-Stack Career Pivot & Fluency
+            </span>
+          </div>
+          <p class="text-[11px] text-stone-500 hidden md:block">A calm, tidy space with your corrected lesson transcript, timestamps, and 72 flagged vocabulary notes</p>
+        </div>
+      </div>
+
+      <!-- Calming Atmosphere Controls: Breeze Audio, Leaf Animation, UK Voice Speed & Palette -->
+      <div class="flex flex-wrap items-center gap-2">
+        
+        <!-- Ambient Autumn Breeze Soundscape Player (Web Audio API) -->
+        <div class="flex items-center gap-1.5 bg-white/90 border border-[#dfd0b5] rounded-xl px-2.5 py-1 shadow-sm">
+          <button id="soundscape-btn" onclick="toggleSoundscape()" class="flex items-center gap-1.5 text-xs font-semibold text-sage-700 hover:text-sage-900 transition px-1.5 py-0.5 rounded-lg" title="Play soothing autumn breeze & gentle rain soundscape">
+            <i data-lucide="wind" id="soundscape-icon" class="w-3.5 h-3.5 text-autumn-600"></i>
+            <span id="soundscape-label">Breeze Audio: Off</span>
+          </button>
+          <select id="soundscape-preset" onchange="changeSoundscapePreset(this.value)" class="text-[11px] bg-parchment-50 border border-parchment-200 rounded-lg px-1.5 py-0.5 text-stone-700 focus:outline-none" title="Choose calming ambient sound">
+            <option value="breeze">🍂 Valencia & Brighton Breeze</option>
+            <option value="rain">🌧️ Soft Autumn Rain</option>
+            <option value="study">🕯️ Warm Coding Hearth</option>
+          </select>
+          <input id="soundscape-volume" type="range" min="0.05" max="0.6" step="0.05" value="0.22" oninput="updateSoundscapeVolume(this.value)" class="w-14 accent-sage-600 cursor-pointer hidden sm:block" title="Ambient Sound Volume" />
+        </div>
+
+        <!-- Falling Autumn Leaves Toggle -->
+        <button id="leaves-toggle-btn" onclick="cycleLeafBreeze()" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-autumn-50 border border-[#dfd0b5] text-xs font-medium text-stone-700 flex items-center gap-1.5 shadow-sm transition" title="Adjust falling autumn leaves animation">
+          <i data-lucide="leaf" class="w-3.5 h-3.5 text-autumn-600"></i>
+          <span id="leaves-label" class="hidden sm:inline">Leaves: Gentle</span>
+        </button>
+
+        <!-- UK Voice Speed -->
+        <div class="flex items-center gap-1 bg-white/90 border border-[#dfd0b5] rounded-xl px-2 py-1 shadow-sm text-xs">
+          <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+          <button onclick="setVoiceRate(0.85)" id="rate-slow" class="px-1.5 py-0.5 rounded-md text-[11px] text-stone-600 hover:bg-parchment-100 transition">0.85×</button>
+          <button onclick="setVoiceRate(1.0)" id="rate-normal" class="px-1.5 py-0.5 rounded-md text-[11px] bg-sage-600 text-white font-semibold transition">UK 1×</button>
+        </div>
+
+        <!-- Theme Mood Selector -->
+        <div class="hidden lg:flex items-center gap-1 bg-white/90 border border-[#dfd0b5] rounded-xl p-1 text-[11px] shadow-sm">
+          <button onclick="setThemeMood('kensington')" id="theme-kensington" class="px-2 py-0.5 rounded-lg bg-autumn-100 text-autumn-800 font-semibold transition">Bath Stone</button>
+          <button onclick="setThemeMood('winchester')" id="theme-winchester" class="px-2 py-0.5 rounded-lg text-stone-600 hover:text-stone-900 transition">Winchester Mist</button>
+          <button onclick="setThemeMood('twilight')" id="theme-twilight" class="px-2 py-0.5 rounded-lg text-stone-600 hover:text-stone-900 transition">Warm Study</button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 space-y-7 relative z-10">
+
+    <!-- PEACEFUL HERO BANNER -->
+    <section class="sanctuary-card rounded-3xl p-6 sm:p-9 relative overflow-hidden">
+      <div class="absolute -right-12 -top-12 w-64 h-64 bg-autumn-200/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-12 -bottom-12 w-64 h-64 bg-sage-200/35 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
+        <div class="lg:col-span-8 space-y-3.5">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-sage-100/90 border border-sage-200 text-sage-800 text-xs font-medium">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-autumn-600"></i>
+            <span>October 27, 2026 • First Conversation with Louie • Valencia, Web Development & Creative Production</span>
+          </div>
+
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-slatewarm-900 leading-[1.16]">
+            Welcome, Barbara — Your <span class="text-autumn-700 italic font-semibold">Digital Sanctuary</span> for Tech & Fluency
+          </h1>
+
+          <p class="text-stone-600 text-sm sm:text-base leading-relaxed max-w-3xl">
+            Thank you so much for a wonderful, inspiring first conversation! Just as promised during our lesson, here is your <strong class="text-slatewarm-800">complete, tidied transcript (00:00–56:37)</strong> with exact timestamps and <strong class="text-slatewarm-800">72 flagged vocabulary words, tech expressions & idioms</strong>. All of the automated note-taker's funny mishearings (like writing <em>"Surprise Steria"</em> instead of <em>"Sopra Steria"</em>, <em>"convent"</em> instead of <em>"conventions"</em>, and even swapping our speaker names halfway through!) have been forensically sorted out for you.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-2.5 pt-1 text-xs text-stone-700">
+            <span class="inline-flex items-center gap-1.5 bg-parchment-100/90 px-3 py-1.5 rounded-xl border border-parchment-300">
+              <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5 text-autumn-600"></i>
+              <span><strong>Tip 1:</strong> Click or hover over any <span class="vocab-mark text-xs">highlighted word</span> in the transcript to see its meaning, Spanish link & UK audio</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 bg-sage-50/90 px-3 py-1.5 rounded-xl border border-sage-200">
+              <i data-lucide="headphones" class="w-3.5 h-3.5 text-sage-600"></i>
+              <span><strong>Tip 2:</strong> Click <strong>"Breeze Audio"</strong> at the top for a relaxing background soundscape while you review</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Calm Lesson Summary Cards -->
+        <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+          <div onclick="switchTab('transcript')" class="cursor-pointer p-4 rounded-2xl bg-parchment-50/95 border border-parchment-300 hover:border-autumn-400 transition shadow-sm group">
+            <div class="flex items-center justify-between text-autumn-700 mb-1">
+              <span class="text-[11px] font-mono font-semibold uppercase">56m 37s</span>
+              <i data-lucide="scroll-text" class="w-4 h-4 group-hover:scale-110 transition"></i>
+            </div>
+            <div class="font-serif font-bold text-slatewarm-900 text-lg">Full Transcript</div>
+            <p class="text-[11px] text-stone-600 mt-0.5">6 chapters tidied with inline vocab & timestamps</p>
+          </div>
+
+          <div onclick="switchTab('vocab')" class="cursor-pointer p-4 rounded-2xl bg-sage-50/95 border border-sage-200 hover:border-sage-400 transition shadow-sm group">
+            <div class="flex items-center justify-between text-sage-700 mb-1">
+              <span class="text-[11px] font-mono font-semibold uppercase">72 Flagged</span>
+              <i data-lucide="book-open-check" class="w-4 h-4 group-hover:scale-110 transition"></i>
+            </div>
+            <div class="font-serif font-bold text-slatewarm-900 text-lg">Tech & Idioms</div>
+            <p class="text-[11px] text-stone-600 mt-0.5">B2–C2 words, UK audio & Spanish links</p>
+          </div>
+
+          <div onclick="switchTab('fixes')" class="cursor-pointer p-4 rounded-2xl bg-autumn-50/95 border border-autumn-200 hover:border-autumn-400 transition shadow-sm group">
+            <div class="flex items-center justify-between text-autumn-700 mb-1">
+              <span class="text-[11px] font-mono font-semibold uppercase">15 Fixes</span>
+              <i data-lucide="wand-sparkles" class="w-4 h-4 group-hover:scale-110 transition"></i>
+            </div>
+            <div class="font-serif font-bold text-slatewarm-900 text-lg">Note-Taker Fixes</div>
+            <p class="text-[11px] text-stone-600 mt-0.5">6 strengths, 6 gentle polishes & ASR log</p>
+          </div>
+
+          <div onclick="switchTab('places')" class="cursor-pointer p-4 rounded-2xl bg-parchment-50/95 border border-parchment-300 hover:border-sage-400 transition shadow-sm group">
+            <div class="flex items-center justify-between text-sage-700 mb-1">
+              <span class="text-[11px] font-mono font-semibold uppercase">4 Themes</span>
+              <i data-lucide="compass" class="w-4 h-4 group-hover:scale-110 transition"></i>
+            </div>
+            <div class="font-serif font-bold text-slatewarm-900 text-lg">Themes & Practice</div>
+            <p class="text-[11px] text-stone-600 mt-0.5">Valencia, Goya Animation, TypeScript & Quiz</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIMARY TAB NAVIGATION BAR -->
+    <nav class="sanctuary-card rounded-2xl p-2 flex flex-wrap items-center justify-between gap-2 no-print" aria-label="Lesson Sections">
+      <div class="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
+        <button onclick="switchTab('transcript')" id="tab-btn-transcript" class="tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-sage-700 text-white shadow-sm">
+          <i data-lucide="message-square-quote" class="w-4 h-4"></i>
+          <span>1. Lesson Transcript & Inline Vocab</span>
+          <span class="px-2 py-0.5 text-[10px] rounded-full bg-white/20 text-white font-mono">00:00–56:37</span>
+        </button>
+
+        <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-stone-700 hover:bg-parchment-100">
+          <i data-lucide="book-marked" class="w-4 h-4 text-autumn-600"></i>
+          <span>2. Vocabulary Dictionary</span>
+          <span class="px-2 py-0.5 text-[10px] rounded-full bg-autumn-100 text-autumn-800 font-mono">72 Words</span>
+        </button>
+
+        <button onclick="switchTab('fixes')" id="tab-btn-fixes" class="tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-stone-700 hover:bg-parchment-100">
+          <i data-lucide="sparkles" class="w-4 h-4 text-sage-600"></i>
+          <span>3. Note-Taker Fixes & Gentle Notes</span>
+        </button>
+
+        <button onclick="switchTab('places')" id="tab-btn-places" class="tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-stone-700 hover:bg-parchment-100">
+          <i data-lucide="landmark" class="w-4 h-4 text-autumn-600"></i>
+          <span>4. Career Themes & Places</span>
+        </button>
+
+        <button onclick="switchTab('practice')" id="tab-btn-practice" class="tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-stone-700 hover:bg-parchment-100">
+          <i data-lucide="coffee" class="w-4 h-4 text-sage-600"></i>
+          <span>5. Peaceful Practice</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: FULL LESSON TRANSCRIPT WITH INLINE VOCABULARY & TIMESTAMPS   -->
+    <!-- =================================================================== -->
+    <section id="tab-panel-transcript" class="tab-panel space-y-6">
+      
+      <!-- Transcript Controls & Chapter Bar -->
+      <div class="sanctuary-card rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#e6decb] pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Interactive Conversation Transcript</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-full bg-autumn-100 text-autumn-800 font-medium">Speakers & Spelling Corrected</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-0.5">
+              Our Full Conversation — With Vocabulary Explained Right Where We Said It
+            </h2>
+            <p class="text-xs sm:text-sm text-stone-600 mt-1">
+              Every underlined <span class="vocab-mark">vocabulary word</span> is interactive. Hover over it for a quick tooltip, or click it to inspect its full details, British pronunciation, and Spanish connection in the side panel.
+            </p>
+          </div>
+
+          <!-- Search & Display Toggles -->
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input id="transcript-search" type="text" oninput="filterTranscript()" placeholder="Search transcript or time..." class="pl-9 pr-3 py-1.5 rounded-xl bg-white border border-[#dfd0b5] text-xs text-stone-800 focus:outline-none focus:border-sage-600 w-48 sm:w-56" />
+            </div>
+
+            <select id="speaker-filter" onchange="filterTranscript()" class="px-3 py-1.5 rounded-xl bg-white border border-[#dfd0b5] text-xs font-medium text-stone-700 focus:outline-none">
+              <option value="all">Both Speakers</option>
+              <option value="Barbara">Barbara's Turns Only</option>
+              <option value="Louie">Louie's Turns Only</option>
+            </select>
+
+            <button onclick="toggleVocabHighlights()" id="btn-toggle-highlights" class="px-3 py-1.5 rounded-xl bg-autumn-100 text-autumn-800 border border-autumn-300 text-xs font-semibold transition flex items-center gap-1.5">
+              <i data-lucide="highlighter" class="w-3.5 h-3.5"></i>
+              <span>Vocab Highlights: On</span>
+            </button>
+
+            <button onclick="toggleAsrBadges()" id="btn-toggle-asr" class="px-3 py-1.5 rounded-xl bg-sage-100 text-sage-800 border border-sage-300 text-xs font-semibold transition flex items-center gap-1.5" title="Show or hide badges where the automated note-taker's spelling errors were fixed">
+              <i data-lucide="check-check" class="w-3.5 h-3.5"></i>
+              <span>Note-Taker Fixes: Visible</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chapter Quick-Jump Pills -->
+        <div class="flex flex-wrap items-center gap-1.5 pt-1">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-stone-500 mr-1">Chapters:</span>
+          <button onclick="scrollToChapter('chap-1')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            00:00 • I. Career Pivot & Valencia
+          </button>
+          <button onclick="scrollToChapter('chap-2')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            05:32 • II. Art Direction, AI & Goya Film
+          </button>
+          <button onclick="scrollToChapter('chap-3')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            14:27 • III. Sopra Steria, Angular & TypeScript
+          </button>
+          <button onclick="scrollToChapter('chap-4')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            22:07 • IV. Junior Market & Global Culture
+          </button>
+          <button onclick="scrollToChapter('chap-5')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            27:44 • V. Hungary Interview, Brighton & GitHub Pages
+          </button>
+          <button onclick="scrollToChapter('chap-6')" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-autumn-100 text-stone-700 hover:text-autumn-800 text-xs font-medium transition border border-parchment-200">
+            39:14 • VI. "Heads Up!" Game & Interview Plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Transcript Grid: Left (Conversation Stream) + Right (Sticky Vocabulary Inspector) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left 8 Cols: Full Conversation Stream -->
+        <div class="lg:col-span-8 space-y-4" id="transcript-stream-container">
+          <!-- Rendered dynamically by JS from complete cleaned transcript data -->
+        </div>
+
+        <!-- Right 4 Cols: Sticky Live Vocabulary Inspector & Quick Guide -->
+        <aside class="lg:col-span-4 lg:sticky lg:top-20 space-y-4">
+          
+          <!-- Active Word Inspector Card -->
+          <div class="sanctuary-card rounded-3xl p-5 sm:p-6 border-t-4 border-t-autumn-500 space-y-4" id="vocab-inspector-card">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-mono uppercase tracking-widest text-autumn-700 font-semibold flex items-center gap-1.5">
+                <i data-lucide="sparkle" class="w-3.5 h-3.5"></i>
+                Vocabulary Spotlight
+              </span>
+              <span id="insp-time" class="px-2.5 py-0.5 rounded-full bg-parchment-100 border border-parchment-300 font-mono text-xs text-stone-700">
+                🕒 03:55
+              </span>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <h3 id="insp-word" class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900">proprietary</h3>
+                <button id="insp-audio-btn" onclick="speakWord('proprietary')" class="p-2.5 rounded-xl bg-sage-100 hover:bg-sage-200 text-sage-800 transition shrink-0" title="Listen in British English">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 mt-1">
+                <span id="insp-ipa" class="text-xs font-mono text-stone-500">/prəˈpraɪ.ə.tər.i/</span>
+                <span id="insp-pos" class="px-2 py-0.5 text-[11px] rounded-md bg-parchment-100 text-stone-700 font-medium">adjective</span>
+                <span id="insp-level" class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800 font-mono font-semibold">C1</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-parchment-50 border border-parchment-200 space-y-1.5">
+              <div class="text-[11px] font-mono uppercase tracking-wider text-stone-500">Meaning & Nuance</div>
+              <p id="insp-def" class="text-xs sm:text-sm text-slatewarm-800 leading-relaxed">
+                Designed, owned, and used exclusively by one particular company for its own internal operations rather than sold or shared publicly.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-sage-50/80 border border-sage-200 space-y-1.5">
+              <div class="text-[11px] font-mono uppercase tracking-wider text-sage-700">How It Was Used in Our Lesson</div>
+              <p id="insp-quote" class="text-xs italic text-stone-700 leading-relaxed">
+                "Louie (03:55): I used to do web development inside of my job for our own proprietary needs... Barbara (04:03): Like an internal project."
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between pt-1 text-xs border-t border-[#e6decb]">
+              <span class="text-stone-500">Conexión en español:</span>
+              <span id="insp-es" class="font-semibold text-sage-800">propietario / de uso interno exclusivo</span>
+            </div>
+          </div>
+
+          <!-- Quick Legend & Reassurance Box for Barbara -->
+          <div class="sanctuary-card rounded-3xl p-5 space-y-3">
+            <div class="flex items-center gap-2 text-sage-800 font-serif font-bold text-lg">
+              <i data-lucide="heart-handshake" class="w-5 h-5 text-autumn-600"></i>
+              <span>A Gentle Note for You, Barbara</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              In today's conversation, you explained complex technical and personal experiences with remarkable clarity—from your <strong>Goya-nominated stop-motion animation</strong> production work to why <strong>TypeScript return types</strong> fail to compile and why mentoring junior developers is an <strong>investment, not a waste</strong>.
+            </p>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Because you already understand Web Development and GitHub Pages, this single URL is yours forever—no messy PDF attachments needed!
+            </p>
+          </div>
+
+        </aside>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: VOCABULARY & IDIOMS EXPLORER (72 FLAGGED WORDS BY TIMESTAMP) -->
+    <!-- =================================================================== -->
+    <section id="tab-panel-vocab" class="tab-panel hidden space-y-6">
+      <div class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#e6decb] pb-5">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Timestamped Lexicon • 72 Flagged Items</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+              Vocabulary, Tech Terminology & Idioms from Lesson 01
+            </h2>
+            <p class="text-xs sm:text-sm text-stone-600 mt-1">
+              Every word includes the exact timestamp when we said it. Click the timestamp badge (<strong>🕒 MM:SS ↗</strong>) or <strong>"See in Transcript"</strong> on any card to jump straight to that moment in our conversation!
+            </p>
+          </div>
+
+          <!-- Search & Level Filter -->
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input id="vocab-search" type="text" oninput="renderVocabGrid()" placeholder="Search word, Spanish, time..." class="pl-9 pr-3 py-2 rounded-xl bg-white border border-[#dfd0b5] text-xs text-stone-800 focus:outline-none focus:border-sage-600 w-72" />
+            </div>
+
+            <select id="vocab-level-filter" onchange="renderVocabGrid()" class="px-3 py-2 rounded-xl bg-white border border-[#dfd0b5] text-xs font-medium text-stone-700">
+              <option value="all">All Levels (B2–C2)</option>
+              <option value="C2">C2 Mastery / Idiomatic</option>
+              <option value="C1">C1 Advanced</option>
+              <option value="B2">B2 Upper-Intermediate</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="setVocabCategory('all')" id="vcat-all" class="vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-sage-700 text-white transition">
+            All 72 Flagged Words
+          </button>
+          <button onclick="setVocabCategory('career')" id="vcat-career" class="vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-parchment-100 text-stone-700 hover:bg-autumn-100 transition">
+            💻 Tech, Coding & Career Pivot
+          </button>
+          <button onclick="setVocabCategory('production')" id="vcat-production" class="vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-parchment-100 text-stone-700 hover:bg-autumn-100 transition">
+            🎬 Creative Production & Balance
+          </button>
+          <button onclick="setVocabCategory('interview')" id="vcat-interview" class="vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-parchment-100 text-stone-700 hover:bg-autumn-100 transition">
+            🎯 Interviews, Business & Recruitment
+          </button>
+          <button onclick="setVocabCategory('idioms')" id="vcat-idioms" class="vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-parchment-100 text-stone-700 hover:bg-autumn-100 transition">
+            ✨ Idioms, Emotions & Heads Up!
+          </button>
+        </div>
+
+        <!-- Vocabulary Cards Grid -->
+        <div id="vocab-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: NOTE-TAKER SPELLING FIXES & GENTLE PHRASING REFINEMENTS      -->
+    <!-- =================================================================== -->
+    <section id="tab-panel-fixes" class="tab-panel hidden space-y-6">
+      
+      <!-- Part A: Gentle Phrasing Refinements & Strengths for Barbara -->
+      <div class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="border-b border-[#e6decb] pb-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Supportive Language Notes</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Your Natural Strengths & 6 Gentle Phrasing Polishes
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1">
+            First, let's celebrate 6 natural expressions and persuasive arguments you used effortlessly today—followed by 6 high-impact phrasing upgrades that will help you shine in international developer interviews.
+          </p>
+        </div>
+
+        <!-- Barbara's Highlights Banner -->
+        <div class="p-5 rounded-2xl bg-sage-50/90 border border-sage-200 space-y-3">
+          <div class="flex items-center gap-2 text-sage-800 font-serif font-bold text-xl">
+            <i data-lucide="award" class="w-5 h-5 text-autumn-600"></i>
+            <span>Your Natural Strengths Observed in Today's Lesson</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">00:28</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"changing my career path"</div>
+              <p class="text-stone-600 mt-0.5">Spot-on professional collocation for transitioning from creative production into software engineering.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">02:22</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"I'm well set up here"</div>
+              <p class="text-stone-600 mt-0.5">Warm, idiomatic way of explaining that your home and family life are happily established in Valencia.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">07:14</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"I moved forward in that direction"</div>
+              <p class="text-stone-600 mt-0.5">Natural, confident narrative phrasing for explaining how your early career unfolded after university.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">08:06</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"supposed to be a one-year gap"</div>
+              <p class="text-stone-600 mt-0.5">Flawless grammar: using "supposed to be" + singular hyphenated modifier ("one-year gap").</p>
+            </div>
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">23:39</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"It's not wasting—it's investing."</div>
+              <p class="text-stone-600 mt-0.5">Articulate, memorable contrast arguing why companies must train and mentor junior developers.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-white/90 border border-sage-200">
+              <span class="font-mono text-[11px] text-sage-700">32:39</span>
+              <div class="font-bold text-slatewarm-900 mt-0.5">"So it was like a tandem."</div>
+              <p class="text-stone-600 mt-0.5">Exact European/British term for a reciprocal bilingual language exchange with Erasmus students.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Gentle Polishes Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="gentle-polishes-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Part B: The 15 AI Note-Taker Spelling & Mishearing Fixes -->
+      <div class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="border-b border-[#e6decb] pb-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Transcript Clean-Up Log • 15 Fixes</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            How We Sorted Out the Automated Note-Taker's Spelling & Speaker Mistakes
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1">
+            Automated speech-to-text bots frequently mishear company names (like <em>Sopra Steria</em>), programming languages (<em>C++</em>, <em>SQL</em>), or words like <em>conventions</em> and <em>blushing</em>—and at 25:11 the bot even swapped our speaker names! Here is every place where the raw note-taker got confused and what we actually said:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="asr-fixes-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 4: CAREER THEMES, TECH & PLACES FROM OUR CONVERSATION           -->
+    <!-- =================================================================== -->
+    <section id="tab-panel-places" class="tab-panel hidden space-y-6">
+      <div class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="border-b border-[#e6decb] pb-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Visual & Cultural Companion</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            The Places, Creative Milestones & Tech Themes We Explored Together
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1">
+            Our conversation travelled from your home in Valencia and summer memories on Brighton Pier to Goya-nominated stop-motion animation, TypeScript architecture at Sopra Steria, and how to stand out in remote software interviews.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Card 1: Valencia, Barcelona & Seville -->
+          <div class="sanctuary-subcard rounded-2xl p-6 space-y-3 border-l-4 border-l-autumn-500">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-autumn-700 font-semibold">02:08 – 03:29 • Mediterranean Spain</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-autumn-100 text-autumn-800 text-[11px] font-medium">Home & Remote Work</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatewarm-900">1. Valencia, Barcelona & Seville — Putting Down Roots</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Living in <strong>Valencia</strong> gives you the vibrant coastal lifestyle and cultural energy of Barcelona on a calmer, more family-friendly scale. By targeting <strong>remote roles</strong> with international teams, you can grow a global software career while remaining <strong>settled</strong> close to your home and children.
+            </p>
+            <div class="p-3.5 rounded-xl bg-parchment-50 border border-parchment-200 text-xs text-stone-700 space-y-1">
+              <div class="font-semibold text-slatewarm-900">Your Reflection in the Lesson:</div>
+              <p class="italic">"I want to work remotely. I don't want to move—I want to remain here. I have my home, I have my family, I'm well set up here. Valencia is quite similar to Barcelona, but smaller."</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">remotely</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">settled</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">work-life balance</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">be present</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Artistic Direction & Goya-Nominated Animation -->
+          <div class="sanctuary-subcard rounded-2xl p-6 space-y-3 border-l-4 border-l-sage-600">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-sage-700 font-semibold">05:32 – 14:26 • Creative Production</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-sage-100 text-sage-800 text-[11px] font-medium">Your Unique Story</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatewarm-900">2. From Premios Goya Animation to Full-Stack Code</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Your double specialization in <strong>Artistic Direction</strong> and <strong>Multimedia Design</strong>, combined with coordinating teams, funding, and logistics for a <strong>Spanish Academy Award (Goya)-nominated animated short film</strong> and major congresses, is a huge superpower in tech interviews! It proves you can manage complex deadlines, solve problems fast, and bridge design with engineering.
+            </p>
+            <div class="p-3.5 rounded-xl bg-parchment-50 border border-parchment-200 text-xs text-stone-700 space-y-1">
+              <div class="font-semibold text-slatewarm-900">Your Reflection in the Lesson:</div>
+              <p class="italic">"I was coordinating the teams, looking for funding, organizing production... and it was quite satisfactory because we were nominated for the Spanish Academy Prizes!"</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">tactile / hands-on</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">logistics</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">retouching</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">3D renders</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Sopra Steria, TypeScript & The AI Recalibration -->
+          <div class="sanctuary-subcard rounded-2xl p-6 space-y-3 border-l-4 border-l-autumn-400">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-autumn-700 font-semibold">17:48 – 27:43 • Software Engineering</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-autumn-100 text-autumn-800 text-[11px] font-medium">Your Tech Stack</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatewarm-900">3. Sopra Steria, TypeScript & The Junior Market</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Having trained across <strong>Java, PHP, Laravel, JavaScript, and React</strong> during your studies, and then mastering enterprise <strong>Angular and TypeScript</strong> during your 3-month internship at <strong>Sopra Steria</strong>, you understand both flexible front-end builds and strict static typing. Even more impressively, your habit of <em>describing</em> bugs to AI rather than copy-pasting code builds true engineering depth.
+            </p>
+            <div class="p-3.5 rounded-xl bg-parchment-50 border border-parchment-200 text-xs text-stone-700 space-y-1">
+              <div class="font-semibold text-slatewarm-900">Your Insight in the Lesson:</div>
+              <p class="italic">"When you have a problem, having to describe it to the AI instead of copying and pasting the code helps you realize what your function is actually doing... And teaching juniors is not wasting time—it's investing."</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">full-stack</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">internship</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">compile</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">recalibration</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-sage-100 text-sage-800">shareholders</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Brighton Pier, Asynchronous Video Interviews & Heads Up! -->
+          <div class="sanctuary-subcard rounded-2xl p-6 space-y-3 border-l-4 border-l-sage-500">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-sage-700 font-semibold">27:44 – 56:37 • Fluency & Interviews</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-sage-100 text-sage-800 text-[11px] font-medium">Next Steps Together</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatewarm-900">4. Brighton Pier, Video Prompts & Interview Structure</h3>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              From your summer selling ice cream on <strong>Brighton Pier</strong> and mentoring <strong>Erasmus</strong> students in Valencia to tackling 2-minute recorded video prompts for international tech companies (like the SQL/JS role in Hungary), our roadmap combines rapid vocabulary activation games (like <em>Heads Up!</em>) with clear, repeatable frameworks for answering interview questions under time pressure.
+            </p>
+            <div class="p-3.5 rounded-xl bg-parchment-50 border border-parchment-200 text-xs text-stone-700 space-y-1">
+              <div class="font-semibold text-slatewarm-900">Our Plan Going Forward:</div>
+              <p class="italic">"We will split our lessons into structured interview answering—so you never feel like you are 'speaking into the emptiness' on a 2-minute timer—combined with fast-paced conversation and vocabulary activities."</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">monologue</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">extracurricular</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">flustered vs. flattered</span>
+              <span class="px-2 py-0.5 text-[11px] rounded-md bg-autumn-100 text-autumn-800">reframe</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 5: PEACEFUL PRACTICE SANCTUARY (FLASHCARDS & REFLECTION)        -->
+    <!-- =================================================================== -->
+    <section id="tab-panel-practice" class="tab-panel hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left 6 Cols: Calm Flashcard Deck -->
+        <div class="lg:col-span-6 sanctuary-card rounded-3xl p-6 sm:p-8 space-y-5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Calm Memory Cards</span>
+              <span id="fc-counter" class="text-xs font-mono text-stone-500">Card 1 of 12</span>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatewarm-900">Gentle Vocabulary Flashcards</h3>
+            <p class="text-xs text-stone-600">Click the card to flip between the word, its meaning, and how we used it in our conversation.</p>
+          </div>
+
+          <div onclick="flipFlashcard()" class="cursor-pointer sanctuary-subcard rounded-2xl p-7 min-h-[240px] flex flex-col items-center justify-center text-center space-y-3 border-2 border-[#dfd0b5] hover:border-autumn-400 transition select-none">
+            <span id="fc-badge" class="px-2.5 py-0.5 rounded-full bg-autumn-100 text-autumn-800 text-[11px] font-mono">03:55 • adjective (C1)</span>
+            <h4 id="fc-front-title" class="font-serif text-3xl font-bold text-slatewarm-900">proprietary</h4>
+            <p id="fc-sub" class="text-xs sm:text-sm text-stone-600 max-w-md leading-relaxed">
+              Click anywhere on this card to reveal the meaning, lesson quote & Spanish equivalent
+            </p>
+            <div id="fc-back-details" class="hidden space-y-2 pt-2 border-t border-parchment-200 w-full">
+              <p id="fc-quote" class="text-xs italic text-sage-800"></p>
+              <p id="fc-es" class="text-xs font-semibold text-autumn-700"></p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-2">
+            <button onclick="prevFlashcard()" class="px-4 py-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-xs font-semibold text-stone-700 flex items-center gap-1.5 transition">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+            </button>
+            <button onclick="speakCurrentFlashcard()" class="px-4 py-2 rounded-xl bg-sage-100 hover:bg-sage-200 text-xs font-semibold text-sage-800 flex items-center gap-1.5 transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i> Listen (UK)
+            </button>
+            <button onclick="nextFlashcard()" class="px-4 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-xs font-semibold text-white flex items-center gap-1.5 transition">
+              Next <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Interactive Context Quiz -->
+        <div class="lg:col-span-6 sanctuary-card rounded-3xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">No-Pressure Review</span>
+              <h3 class="font-serif text-2xl font-bold text-slatewarm-900 mt-0.5">Match the Word to Our Conversation</h3>
+            </div>
+            <span id="quiz-score-badge" class="px-3 py-1 rounded-full bg-sage-100 text-sage-800 text-xs font-mono font-semibold">0 / 6 Completed</span>
+          </div>
+
+          <div id="quiz-container" class="space-y-4 max-h-[420px] overflow-y-auto pr-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Thoughtful Prompts for Future Conversations -->
+      <div class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-4">
+        <div class="flex items-center gap-2 text-autumn-800 font-serif font-bold text-2xl">
+          <i data-lucide="coffee" class="w-5 h-5 text-autumn-600"></i>
+          <span>3 Peaceful Prompts to Ponder Before Our Next Lesson</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+            <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Prompt 01 • Your 90-Second Pitch</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Bridging Design, Production & Code</h4>
+            <p class="text-stone-600 leading-relaxed">
+              How can we frame your background in <strong>artistic direction</strong> and <strong>Goya-nominated film production</strong> so a hiring manager immediately sees that you bring senior-level project management and UI eye to a junior <strong>full-stack</strong> role?
+            </p>
+          </div>
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+            <span class="text-[11px] font-mono uppercase text-autumn-700 font-semibold">Prompt 02 • Technical Storytelling</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">A Favourite Feature at Sopra Steria</h4>
+            <p class="text-stone-600 leading-relaxed">
+              Think of one component or bug you worked on using <strong>Angular and TypeScript</strong> during your <strong>internship</strong>. In our next lesson, we will practice explaining the problem, how you debugged the <strong>return type</strong>, and the final result in 90 seconds.
+            </p>
+          </div>
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+            <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Prompt 03 • Classic Interview Question</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">"Where Do You See Yourself in 5 Years?"</h4>
+            <p class="text-stone-600 leading-relaxed">
+              You mentioned at <code>52:34</code> that you have never had to answer this classic question before! Next time, we will build a natural, authentic 3-step structure for it that highlights your passion for continuous learning and <strong>investing</strong> in team growth.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-xs text-stone-500 border-t border-[#e6decb]/80 mt-8 no-print">
+    <p class="font-serif italic text-base text-slatewarm-800 mb-1">"It's not wasting time—it's investing." — Lesson 01 Sanctuary prepared for Barbara</p>
+    <p>With calm autumn breezes • Full Cleaned Transcript (00:00–56:37), Timestamps & 72 Vocabulary Notes</p>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT: VOCABULARY DATA, FULL TRANSCRIPT, AUDIO & AUTUMN BREEZE   -->
+  <!-- ===================================================================== -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. COMPLETE VOCABULARY DICTIONARY (72 FLAGGED ITEMS WITH TIMESTAMPS)
+    // -------------------------------------------------------------------------
+    const VOCAB_DB = {
+      "correspondence": {
+        word: "correspondence",
+        ipa: "/ˌkɒr.ɪˈspɒn.dəns/",
+        pos: "noun",
+        level: "B2",
+        time: "00:12",
+        turnId: "turn-5",
+        cat: "interview",
+        def: "Written communication exchanged by messages, emails, or letters before a meeting.",
+        quote: "Louie (00:12): \"Thank you for the correspondence, talking with me about your aims before.\"",
+        es: "correspondencia / intercambio de mensajes"
+      },
+      "oral-skills": {
+        word: "oral skills (spoken fluency)",
+        ipa: "/ˈɔː.rəl skɪlz/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "00:28",
+        turnId: "turn-6",
+        cat: "interview",
+        def: "Your ability to express ideas clearly, naturally, and confidently in spoken conversation.",
+        quote: "Barbara (00:28): \"I want to improve my oral skills because I'm looking for a new job.\"",
+        es: "habilidades orales / expresión oral"
+      },
+      "career-path": {
+        word: "career path",
+        ipa: "/kəˈrɪə pɑːθ/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "00:28",
+        turnId: "turn-6",
+        cat: "career",
+        def: "The direction, progression, and sequence of jobs that make up your professional life.",
+        quote: "Barbara (00:28): \"I'm looking for a new job. I'm changing my career path.\"",
+        es: "trayectoria profesional / rumbo laboral"
+      },
+      "remotely": {
+        word: "remotely",
+        ipa: "/rɪˈməʊt.li/",
+        pos: "adverb",
+        level: "B2",
+        time: "02:08",
+        turnId: "turn-12",
+        cat: "career",
+        def: "Working from home or another location outside a traditional central office using digital tools.",
+        quote: "Barbara (02:08): \"I want to work remotely. I don't want to move.\"",
+        es: "en remoto / a distancia (teletrabajo)"
+      },
+      "set-up": {
+        word: "well set up",
+        ipa: "/wel set ʌp/",
+        pos: "idiomatic adj",
+        level: "B2",
+        time: "02:22",
+        turnId: "turn-14",
+        cat: "idioms",
+        def: "Comfortably established and organized with everything you need (home, family, routine) in a place.",
+        quote: "Barbara (02:22): \"I have my home, I have my family... I'm well set up here.\"",
+        es: "bien instalada / organizada / establecida"
+      },
+      "settled": {
+        word: "settled",
+        ipa: "/ˈset.əld/",
+        pos: "adjective",
+        level: "B2",
+        time: "02:23",
+        turnId: "turn-15",
+        cat: "idioms",
+        def: "Feeling comfortable, rooted, and permanently at home in a community or stage of life.",
+        quote: "Louie (02:23): \"Yeah, you're settled here. Yes, correct.\"",
+        es: "asentada / arraigada / establecida"
+      },
+      "proprietary": {
+        word: "proprietary",
+        ipa: "/prəˈpraɪ.ə.tər.i/",
+        pos: "adjective",
+        level: "C1",
+        time: "03:55",
+        turnId: "turn-21",
+        cat: "career",
+        def: "Designed, owned, and used exclusively by one specific company for its own internal needs.",
+        quote: "Louie (03:55): \"I used to do web development inside of my job for our own proprietary needs.\"",
+        es: "propietario / de uso interno exclusivo"
+      },
+      "plugins": {
+        word: "plugin (integration)",
+        ipa: "/ˈplʌɡ.ɪn/",
+        pos: "noun",
+        level: "B2",
+        time: "04:44",
+        turnId: "turn-25",
+        cat: "career",
+        def: "A software add-on or module that adds a specific feature or connects two separate software systems.",
+        quote: "Louie (04:44): \"Maybe the software company was too expensive, and their plugins were terrible.\"",
+        es: "complemento / plugin / módulo de integración"
+      },
+      "front-end": {
+        word: "front-end & back-end",
+        ipa: "/ˈfrʌnt.end ænd ˈbæk.end/",
+        pos: "noun / adj",
+        level: "B2",
+        time: "05:10",
+        turnId: "turn-26",
+        cat: "career",
+        def: "The user-facing visual interface of a web app (front-end) and the server, logic, and database behind it (back-end).",
+        quote: "Louie (05:10): \"I love front-end development, and back-end as well, because I can make my own projects.\"",
+        es: "front-end (interfaz de usuario) y back-end (servidor/base de datos)"
+      },
+      "artistic-direction": {
+        word: "artistic direction",
+        ipa: "/ɑːˈtɪs.tɪk daɪˈrek.ʃən/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "06:03",
+        turnId: "turn-28",
+        cat: "production",
+        def: "Leading the visual style, mood, photography, and aesthetic identity of a creative project or campaign.",
+        quote: "Barbara (06:03): \"I did a double specialization: artistic direction and multimedia design.\"",
+        es: "dirección artística / dirección de arte"
+      },
+      "career-gap": {
+        word: "one-year gap (career break)",
+        ipa: "/wʌn jɪə ɡæp/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "08:06",
+        turnId: "turn-32",
+        cat: "career",
+        def: "A planned or unplanned period away from formal employment, often to raise children or study.",
+        quote: "Barbara (08:06): \"In the beginning, it was supposed to be a one-year gap, and after that, it became like four, five years.\"",
+        es: "parón laboral de un año / pausa profesional"
+      },
+      "retouching": {
+        word: "retouching",
+        ipa: "/ˌriːˈtʌtʃ.ɪŋ/",
+        pos: "noun",
+        level: "B2",
+        time: "08:50",
+        turnId: "turn-32",
+        cat: "production",
+        def: "Digitally editing, polishing, and colour-correcting photographs in software like Photoshop.",
+        quote: "Barbara (08:50): \"I used to work in artistic direction of photography, and I did a lot of retouching jobs with Photoshop.\"",
+        es: "retoque fotográfico"
+      },
+      "renders": {
+        word: "3D renders",
+        ipa: "/θriː diː ˈren.dəz/",
+        pos: "noun",
+        level: "C1",
+        time: "09:41",
+        turnId: "turn-34",
+        cat: "production",
+        def: "Photorealistic computer-generated images created from 3D models instead of studio photography.",
+        quote: "Barbara (09:41): \"They don't take photos of the products anymore—they do it with 3D and renders.\"",
+        es: "renderizados 3D / imágenes generadas por ordenador"
+      },
+      "logistics": {
+        word: "logistics",
+        ipa: "/ləˈdʒɪs.tɪks/",
+        pos: "noun (plural)",
+        level: "B2",
+        time: "10:29",
+        turnId: "turn-36",
+        cat: "production",
+        def: "The detailed organization, scheduling, budgeting, and coordination required to make a complex event or film happen.",
+        quote: "Barbara (10:29): \"I was in production... I did the paperwork, mostly. All the logistics.\"",
+        es: "la logística (en inglés siempre lleva 's': logistics)"
+      },
+      "tactile": {
+        word: "tactile / hands-on",
+        ipa: "/ˈtæk.taɪl/",
+        pos: "adjective",
+        level: "C1",
+        time: "10:41",
+        turnId: "turn-38",
+        cat: "production",
+        def: "Connected with the sense of touch; crafted physically with your hands (like stop-motion clay or puppets).",
+        quote: "Barbara (10:41): \"It was an animation film... you do it with your hands. The director and the animators did it with their hands.\"",
+        es: "táctil / artesanal / hecho a mano"
+      },
+      "nominated": {
+        word: "nominated (for)",
+        ipa: "/ˈnɒm.ɪ.neɪ.tɪd/",
+        pos: "verb / adj",
+        level: "B2",
+        time: "11:05",
+        turnId: "turn-40",
+        cat: "production",
+        def: "Officially selected as a leading candidate for an important honour or award (such as the Goya Awards).",
+        quote: "Barbara (11:05): \"And it was quite satisfactory because we were nominated for the Spanish Academy Prizes.\"",
+        es: "nominado/a (a un premio)"
+      },
+      "conventions": {
+        word: "conventions & congresses",
+        ipa: "/kənˈven.ʃənz/",
+        pos: "noun",
+        level: "B2",
+        time: "11:37",
+        turnId: "turn-42",
+        cat: "production",
+        def: "Large formal conferences or professional gatherings of people from a specific industry.",
+        quote: "Barbara (11:37): \"It was always production, but we did concerts, we did conventions, congresses.\"",
+        es: "convenciones y congresos"
+      },
+      "overtime": {
+        word: "extra hours (overtime)",
+        ipa: "/ˈəʊ.və.taɪm/",
+        pos: "noun",
+        level: "B2",
+        time: "12:15",
+        turnId: "turn-44",
+        cat: "production",
+        def: "Time worked beyond your normal scheduled working hours, such as evenings and weekends.",
+        quote: "Barbara (12:15): \"There were weeks when I did maybe 26 hours extra in one week.\"",
+        es: "horas extras"
+      },
+      "exhausting": {
+        word: "exhausting",
+        ipa: "/ɪɡˈzɔː.stɪŋ/",
+        pos: "adjective",
+        level: "B2",
+        time: "13:08",
+        turnId: "turn-46",
+        cat: "production",
+        def: "Making you feel completely drained of physical or mental energy.",
+        quote: "Barbara (13:08): \"I had to think fast and resolve many problems at the same time. It was satisfactory, but really exhausting.\"",
+        es: "agotador / extenuante"
+      },
+      "work-life-balance": {
+        word: "work-life balance",
+        ipa: "/ˌwɜːk.laɪf ˈbæl.əns/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "13:58",
+        turnId: "turn-49",
+        cat: "production",
+        def: "The healthy division of your time and energy between your job and your family, rest, and personal life.",
+        quote: "Louie (13:58): \"No work-life balance. There's no work-life balance.\"",
+        es: "conciliación de la vida laboral y familiar"
+      },
+      "be-present": {
+        word: "be present",
+        ipa: "/bi ˈprez.ənt/",
+        pos: "adjective phrase",
+        level: "B2",
+        time: "14:04",
+        turnId: "turn-50",
+        cat: "idioms",
+        def: "To be fully engaged, attentive, and emotionally available in the moment with the people you love.",
+        quote: "Barbara (14:04): \"I felt guilty because I thought, I want to be present when my kids are little.\"",
+        es: "estar presente (en cuerpo y alma)"
+      },
+      "key-moments": {
+        word: "key moments",
+        ipa: "/kiː ˈməʊ.mənts/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "14:23",
+        turnId: "turn-51",
+        cat: "idioms",
+        def: "The most meaningful, irreplaceable milestones in someone's life or childhood.",
+        quote: "Barbara (14:17): \"I don't want to miss their childhood.\" Louie: \"The key moments.\"",
+        es: "momentos clave / etapas fundamentales"
+      },
+      "accomplished": {
+        word: "accomplish",
+        ipa: "/əˈkʌm.plɪʃ/",
+        pos: "verb",
+        level: "B2",
+        time: "16:42",
+        turnId: "turn-54",
+        cat: "career",
+        def: "To succeed in finishing or achieving a meaningful goal after effort.",
+        quote: "Louie (16:42): \"You're learning it to the requirements of your goal, of what needs to be accomplished.\"",
+        es: "lograr / alcanzar / llevar a cabo"
+      },
+      "debugging": {
+        word: "debugging",
+        ipa: "/ˌdiːˈbʌɡ.ɪŋ/",
+        pos: "noun / verb",
+        level: "B2",
+        time: "16:50",
+        turnId: "turn-54",
+        cat: "career",
+        def: "Finding, diagnosing, and resolving errors or unexpected behaviour ('bugs') in computer code.",
+        quote: "Louie (16:50): \"And now we have such quick debugging—to debug something used to take forever.\"",
+        es: "depuración de código (debugging)"
+      },
+      "ide": {
+        word: "IDE (Integrated Development Environment)",
+        ipa: "/ˌaɪ.diːˈiː/",
+        pos: "noun",
+        level: "B2",
+        time: "17:30",
+        turnId: "turn-56",
+        cat: "career",
+        def: "The workspace application (like VS Code, IntelliJ, or WebStorm) where developers write, test, and debug code.",
+        quote: "Louie (17:30): \"My whole setup—how I do everything—is fixed into an IDE, so I can be very productive.\"",
+        es: "entorno de desarrollo integrado (IDE)"
+      },
+      "full-stack": {
+        word: "full-stack (work stack)",
+        ipa: "/ˈfʊl.stæk/",
+        pos: "noun / adj",
+        level: "B2",
+        time: "17:48",
+        turnId: "turn-57",
+        cat: "career",
+        def: "Covering both front-end user interfaces (React, Angular) and back-end servers/databases (Java, PHP, Laravel, SQL).",
+        quote: "Barbara (17:48): \"My studies are like a full-stack program: we did Java, PHP, JavaScript, React, Laravel...\"",
+        es: "desarrollo full-stack (completo: front-end y back-end)"
+      },
+      "internship": {
+        word: "internship",
+        ipa: "/ˈɪn.tɜːn.ʃɪp/",
+        pos: "noun",
+        level: "B2",
+        time: "18:31",
+        turnId: "turn-59",
+        cat: "career",
+        def: "A period of practical work experience at a company for a student or recent graduate to learn industry workflows.",
+        quote: "Barbara (18:31): \"I did a three-month internship in a really big company—Sopra Steria—and we worked with Angular and TypeScript.\"",
+        es: "prácticas en empresa / pasantía"
+      },
+      "declaring": {
+        word: "declare (a variable / return type)",
+        ipa: "/dɪˈkleər/",
+        pos: "verb",
+        level: "C1",
+        time: "19:49",
+        turnId: "turn-62",
+        cat: "career",
+        def: "In programming, to formally define a variable or function along with its name and expected data type.",
+        quote: "Barbara (20:09): \"In TypeScript, you have to mark what the function has to return—if it's void, if it's a string, you have to label it.\"",
+        es: "declarar / tipar (una variable o el tipo de retorno)"
+      },
+      "compile": {
+        word: "compile",
+        ipa: "/kəmˈpaɪl/",
+        pos: "verb",
+        level: "B2",
+        time: "20:41",
+        turnId: "turn-63",
+        cat: "career",
+        def: "To translate source code (like TypeScript or Java) into executable code after verifying there are no type errors.",
+        quote: "Barbara (20:41): \"Sometimes the function returns undefined, and it doesn't compile!\"",
+        es: "compilar"
+      },
+      "probation-period": {
+        word: "probation period",
+        ipa: "/prəˈbeɪ.ʃən ˈpɪə.ri.əd/",
+        pos: "noun phrase",
+        level: "C1",
+        time: "20:50",
+        turnId: "turn-64",
+        cat: "interview",
+        def: "A trial period (usually 1 to 6 months) at the start of a new job during which a company evaluates a new employee.",
+        quote: "Louie (20:50): \"When you start at a new company... in your probation period...\"",
+        es: "periodo de prueba"
+      },
+      "recalibration": {
+        word: "recalibration",
+        ipa: "/ˌriː.kæl.ɪˈbreɪ.ʃən/",
+        pos: "noun",
+        level: "C2",
+        time: "23:21",
+        turnId: "turn-67",
+        cat: "interview",
+        def: "A period of fundamental adjustment in how an industry or system measures value and organizes work.",
+        quote: "Barbara (23:11): \"It's a good time to be a programmer, but a complicated time to be a junior.\" Louie: \"It's a recalibration time.\"",
+        es: "recalibración / reajuste del sector"
+      },
+      "investing": {
+        word: "investing (vs. wasting)",
+        ipa: "/ɪnˈvest.ɪŋ/",
+        pos: "verb / noun",
+        level: "B2",
+        time: "23:39",
+        turnId: "turn-68",
+        cat: "interview",
+        def: "Putting time, training, and mentorship into people now so they grow into valuable senior contributors later.",
+        quote: "Barbara (23:39): \"They don't want to waste their time teaching juniors. But it's not wasting—it's investing.\"",
+        es: "invertir (tiempo y formación en el futuro)"
+      },
+      "business-model": {
+        word: "business model",
+        ipa: "/ˈbɪz.nɪs ˈmɒd.əl/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "24:01",
+        turnId: "turn-69",
+        cat: "interview",
+        def: "A company's core strategy for creating value, structuring teams, and generating profit.",
+        quote: "Louie (24:01): \"I think the business model has changed.\" Barbara: \"Exactly—they are focusing on productivity.\"",
+        es: "modelo de negocio"
+      },
+      "shareholders": {
+        word: "stakeholders & shareholders",
+        ipa: "/ˈʃeəˌhəʊl.dəz/",
+        pos: "noun",
+        level: "C1",
+        time: "25:04",
+        turnId: "turn-71",
+        cat: "interview",
+        def: "Shareholders own stock in a company (seeking financial return); stakeholders are everyone affected by the company's decisions.",
+        quote: "Barbara (25:04): \"Because they're thinking about the stakeholders—the shareholders at the moment.\"",
+        es: "grupos de interés (stakeholders) y accionistas (shareholders)"
+      },
+      "reactionary": {
+        word: "reactionary (reactive)",
+        ipa: "/riˈæk.ʃən.ər.i/",
+        pos: "adjective",
+        level: "C1",
+        time: "26:40",
+        turnId: "turn-73",
+        cat: "interview",
+        def: "Acting impulsively in response to immediate trends rather than planning thoughtfully for the long term.",
+        quote: "Louie (26:40): \"Lots of companies are reactionary: 'Oh, this is happening, we must change immediately!'\"",
+        es: "reactivo / impulsivo a corto plazo"
+      },
+      "customizable": {
+        word: "customizable",
+        ipa: "/ˈkʌs.tə.maɪ.zə.bəl/",
+        pos: "adjective",
+        level: "B2",
+        time: "27:15",
+        turnId: "turn-73",
+        cat: "career",
+        def: "Able to be tailored or modified to fit the exact needs of an individual user or client.",
+        quote: "Louie (27:15): \"How I explain it to my friends and family is that everything is customizable now.\"",
+        es: "personalizable / adaptable a medida"
+      },
+      "monologue": {
+        word: "monologue",
+        ipa: "/ˈmɒn.ə.lɒɡ/",
+        pos: "noun",
+        level: "B2",
+        time: "29:11",
+        turnId: "turn-78",
+        cat: "interview",
+        def: "A long speech by one person alone without any natural back-and-forth interaction from a listener.",
+        quote: "Barbara (29:11): \"I remember trying to speak, but it was like a monologue because I didn't have another person on the other side.\"",
+        es: "monólogo"
+      },
+      "extracurricular": {
+        word: "extracurricular",
+        ipa: "/ˌek.strə.kəˈrɪk.jə.lər/",
+        pos: "adjective",
+        level: "C1",
+        time: "31:14",
+        turnId: "turn-82",
+        cat: "career",
+        def: "Taken outside the normal compulsory school timetable, such as after-school language classes.",
+        quote: "Barbara (31:14): \"I always had extracurricular English lessons, but when I started university I stopped.\"",
+        es: "extraescolar / extracurricular"
+      },
+      "mentor": {
+        word: "mentor (buddy programme)",
+        ipa: "/ˈmen.tɔːr/",
+        pos: "noun",
+        level: "B2",
+        time: "31:43",
+        turnId: "turn-82",
+        cat: "interview",
+        def: "An experienced student or colleague who guides, welcomes, and supports a newcomer.",
+        quote: "Barbara (31:43): \"They assigned me an Erasmus student and I was like their mentor—I helped them with accommodation and classes.\"",
+        es: "mentor/a (programa Buddy / Mentor Erasmus)"
+      },
+      "tandem": {
+        word: "tandem (language exchange)",
+        ipa: "/ˈtæn.dəm/",
+        pos: "noun",
+        level: "B2",
+        time: "32:39",
+        turnId: "turn-84",
+        cat: "idioms",
+        def: "A partnership between two speakers of different native languages who take turns helping each other practice.",
+        quote: "Barbara (32:39): \"They said, 'No, no, now in Spanish because we need to learn Spanish!' So it was like a tandem.\"",
+        es: "tándem lingüístico / intercambio de idiomas"
+      },
+      "timestamped": {
+        word: "timestamped",
+        ipa: "/ˈtaɪm.stæmpt/",
+        pos: "adjective",
+        level: "B2",
+        time: "34:49",
+        turnId: "turn-87",
+        cat: "career",
+        def: "Marked with the exact minute and second when something was said or recorded.",
+        quote: "Louie (34:49): \"You will get the complete transcript, and it's timestamped, so you can look back at what we said.\"",
+        es: "con marca de tiempo (minuto y segundo exacto)"
+      },
+      "carpenter": {
+        word: "carpenter",
+        ipa: "/ˈkɑː.pɪn.tər/",
+        pos: "noun",
+        level: "B2",
+        time: "41:52",
+        turnId: "turn-94",
+        cat: "idioms",
+        def: "A skilled craftsperson who makes and repairs wooden objects and structures.",
+        quote: "Louie (41:52): \"Carpenter!\" Barbara (41:54): \"It's the same in Spanish—carpintero! I was looking for a more difficult word.\"",
+        es: "carpintero/a"
+      },
+      "blushing": {
+        word: "blushing",
+        ipa: "/ˈblʌʃ.ɪŋ/",
+        pos: "verb / adj",
+        level: "B2",
+        time: "43:51",
+        turnId: "turn-98",
+        cat: "idioms",
+        def: "Turning red in the face because you feel shy, modest, or pleased after receiving a compliment.",
+        quote: "Barbara (43:02): \"When someone pays you a compliment and you feel like the heat is going up to your face... similar to blushing.\"",
+        es: "sonrojarse / ponerse rojo/a"
+      },
+      "bashful": {
+        word: "bashful / flattered",
+        ipa: "/ˈbæʃ.fəl/",
+        pos: "adjective",
+        level: "C1",
+        time: "44:14",
+        turnId: "turn-99",
+        cat: "idioms",
+        def: "Shyly pleased and easily embarrassed when receiving praise or attention ('flattered' = feeling honoured by a compliment).",
+        quote: "Louie (44:14): \"You feel good, but you're shy at the same time—bashful!\"",
+        es: "tímido/a ante los halagos / halagado/a (flattered)"
+      },
+      "flustered": {
+        word: "flustered",
+        ipa: "/ˈflʌs.təd/",
+        pos: "adjective",
+        level: "C1",
+        time: "44:29",
+        turnId: "turn-100",
+        cat: "idioms",
+        def: "Agitated, confused, and nervous in the moment because too many things are happening at once.",
+        quote: "Louie (44:45): \"Flustered is when you're overcome in the moment—the workload is too much and you can't think straight.\"",
+        es: "aturdido/a / atareado/a / nervioso/a en el momento"
+      },
+      "overwhelmed": {
+        word: "overwhelmed",
+        ipa: "/ˌəʊ.vəˈwelmd/",
+        pos: "adjective",
+        level: "B2",
+        time: "45:02",
+        turnId: "turn-101",
+        cat: "idioms",
+        def: "Feeling weighed down by a huge amount of work, emotion, or responsibility.",
+        quote: "Barbara (45:02): \"Like overwhelmed?\" Louie: \"Yes! Overwhelmed is the big burden; flustered is the immediate impact in the moment.\"",
+        es: "abrumado/a / sobrepasado/a"
+      },
+      "grateful": {
+        word: "grateful",
+        ipa: "/ˈɡreɪt.fəl/",
+        pos: "adjective",
+        level: "B2",
+        time: "47:18",
+        turnId: "turn-103",
+        cat: "idioms",
+        def: "Feeling or showing warm appreciation for kindness or something helpful someone has done for you.",
+        quote: "Barbara (47:01): \"When someone does something nice for you, you feel like this... Grateful!\"",
+        es: "agradecido/a"
+      },
+      "fate": {
+        word: "fate",
+        ipa: "/feɪt/",
+        pos: "noun",
+        level: "B2",
+        time: "48:29",
+        turnId: "turn-105",
+        cat: "idioms",
+        def: "Destiny; a power believed to control future events and outcomes inevitably.",
+        quote: "Louie (48:26): \"It's like destiny—it's going to happen.\" Barbara (48:29): \"Fate!\"",
+        es: "el destino / el sino"
+      },
+      "uncertainty": {
+        word: "uncertainty",
+        ipa: "/ʌnˈsɜː.tən.ti/",
+        pos: "noun",
+        level: "B2",
+        time: "49:20",
+        turnId: "turn-107",
+        cat: "idioms",
+        def: "The state of not knowing for sure what will happen in the future.",
+        quote: "Barbara (50:55): \"Right now I'm full of uncertainty with my life.\" Louie: \"I'm sure it's fate that you will accomplish your goals.\"",
+        es: "incertidumbre"
+      },
+      "biased": {
+        word: "biased",
+        ipa: "/ˈbaɪ.əst/",
+        pos: "adjective",
+        level: "C1",
+        time: "52:58",
+        turnId: "turn-112",
+        cat: "interview",
+        def: "Unfairly prejudiced for or against someone or something because of a narrow internal perspective.",
+        quote: "Louie (52:58): \"Sometimes a company can be biased because they look at hiring in a strange way.\"",
+        es: "sesgado/a / parcial"
+      },
+      "pride-before-fall": {
+        word: "pride comes before a fall",
+        ipa: "/praɪd kʌmz bɪˈfɔːr ə fɔːl/",
+        pos: "proverb (C2)",
+        level: "C2",
+        time: "54:22",
+        turnId: "turn-114",
+        cat: "idioms",
+        def: "Being too arrogant or attached to how you did things in the past can lead to failure in a new environment.",
+        quote: "Louie (54:22): \"We say, 'Pride comes before a fall'—saying 'At my old company we did this, so this is wrong.'\"",
+        es: "el orgullo precede a la caída / la soberbia pasa factura"
+      },
+      "reframe": {
+        word: "reframe (one's mindset)",
+        ipa: "/ˌriːˈfreɪm/",
+        pos: "verb",
+        level: "C1",
+        time: "54:33",
+        turnId: "turn-114",
+        cat: "interview",
+        def: "To look at a situation, career change, or challenge from a fresh, more constructive mental perspective.",
+        quote: "Louie (54:33): \"So we need to reframe their mind and help them adjust in the recruitment process.\"",
+        es: "replantear / cambiar el enfoque mental"
+      },
+      "aims": {
+        word: "aims",
+        ipa: "/eɪmz/",
+        pos: "noun (plural)",
+        level: "B2",
+        time: "00:12",
+        turnId: "turn-5",
+        cat: "interview",
+        def: "The specific goals, targets, or purposes you hope to achieve.",
+        quote: "Louie (00:12): \"Thank you for the correspondence, talking with me about your aims beforehand.\"",
+        es: "objetivos / metas / propósitos"
+      },
+      "field": {
+        word: "field (industry sector)",
+        ipa: "/fiːld/",
+        pos: "noun",
+        level: "B2",
+        time: "01:30",
+        turnId: "turn-10",
+        cat: "career",
+        def: "A particular branch of study, profession, or industry (such as web development or artistic direction).",
+        quote: "Barbara (01:30): \"So now I'm looking for a job in this field.\"",
+        es: "campo profesional / sector"
+      },
+      "remain": {
+        word: "remain",
+        ipa: "/rɪˈmeɪn/",
+        pos: "verb",
+        level: "B2",
+        time: "02:13",
+        turnId: "turn-14",
+        cat: "idioms",
+        def: "To stay in the same place or condition; to continue living where you are.",
+        quote: "Barbara (02:13): \"I want to remain here. I have my home, I have my family.\"",
+        es: "permanecer / quedarse"
+      },
+      "take-it": {
+        word: "I take it (that...)",
+        ipa: "/aɪ teɪk ɪt/",
+        pos: "idiom",
+        level: "C1",
+        time: "02:23",
+        turnId: "turn-15",
+        cat: "idioms",
+        def: "A polite British conversational way of saying 'I assume' or 'I understand from context that...'.",
+        quote: "Louie (02:23): \"And I take it, Barbara, you're from Spain. Is that correct?\"",
+        es: "supongo que / entiendo que / doy por hecho que"
+      },
+      "rebuild": {
+        word: "rebuild & restore",
+        ipa: "/ˌriːˈbɪld/",
+        pos: "verb",
+        level: "B2",
+        time: "04:04",
+        turnId: "turn-25",
+        cat: "production",
+        def: "To build something again or renovate historic architecture back to its original beauty.",
+        quote: "Louie (04:04): \"My company before COVID used to rebuild and restore historical buildings.\"",
+        es: "reconstruir y restaurar"
+      },
+      "double-specialization": {
+        word: "double specialization",
+        ipa: "/ˈdʌb.əl ˌspeʃ.əl.aɪˈzeɪ.ʃən/",
+        pos: "noun phrase",
+        level: "B2",
+        time: "06:03",
+        turnId: "turn-28",
+        cat: "production",
+        def: "Focusing intensively on two distinct academic or professional tracks within a university degree.",
+        quote: "Barbara (06:03): \"I did a double specialization: artistic direction and multimedia design.\"",
+        es: "doble especialización / mención doble"
+      },
+      "move-forward": {
+        word: "move forward",
+        ipa: "/muːv ˈfɔː.wəd/",
+        pos: "phrasal verb",
+        level: "B2",
+        time: "07:14",
+        turnId: "turn-30",
+        cat: "idioms",
+        def: "To make progress and advance into the next stage of a project, decision, or career.",
+        quote: "Barbara (07:14): \"The opportunity came in one of them, so I moved forward in that direction.\"",
+        es: "avanzar / seguir adelante"
+      },
+      "look-after": {
+        word: "look after",
+        ipa: "/lʊk ˈɑːf.tər/",
+        pos: "phrasal verb",
+        level: "B2",
+        time: "07:52",
+        turnId: "turn-32",
+        cat: "idioms",
+        def: "To take care of someone or be responsible for their well-being.",
+        quote: "Barbara (07:26): \"I stopped working because I needed to look after my kids.\"",
+        es: "cuidar de / ocuparse de"
+      },
+      "coordinating": {
+        word: "coordinate (teams)",
+        ipa: "/kəʊˈɔː.dɪ.neɪt/",
+        pos: "verb",
+        level: "B2",
+        time: "10:34",
+        turnId: "turn-38",
+        cat: "production",
+        def: "To organize different people, departments, and schedules so that they work together smoothly.",
+        quote: "Barbara (10:50): \"I was coordinating the teams, looking for funding, and organizing production.\"",
+        es: "coordinar (equipos y recursos)"
+      },
+      "satisfactory": {
+        word: "satisfactory / rewarding",
+        ipa: "/ˌsæt.ɪsˈfæk.tər.i/",
+        pos: "adjective",
+        level: "B2",
+        time: "11:05",
+        turnId: "turn-40",
+        cat: "production",
+        def: "Giving a deep sense of fulfilment and pride because the hard work achieved a great result.",
+        quote: "Barbara (11:05): \"And it was quite satisfactory because we were nominated for the Spanish Academy Prizes.\"",
+        es: "satisfactorio / gratificante (rewarding)"
+      },
+      "challenging": {
+        word: "challenging",
+        ipa: "/ˈtʃæl.ɪn.dʒɪŋ/",
+        pos: "adjective",
+        level: "B2",
+        time: "12:26",
+        turnId: "turn-46",
+        cat: "production",
+        def: "Demanding quick thinking, skill, and determination in a way that tests your abilities.",
+        quote: "Barbara (13:00): \"It was really challenging for me because there was always something new.\"",
+        es: "desafiante / exigente / estimulante"
+      },
+      "after-hours": {
+        word: "after hours",
+        ipa: "/ˈɑːf.tər ˈaʊəz/",
+        pos: "adverb / adj",
+        level: "C1",
+        time: "13:24",
+        turnId: "turn-48",
+        cat: "production",
+        def: "Occurring late in the evening or on weekends after normal official working hours have ended.",
+        quote: "Barbara (13:32): \"I had to work after hours and be on the phone even on holidays.\"",
+        es: "fuera del horario laboral / a deshoras"
+      },
+      "networking": {
+        word: "networking (systems)",
+        ipa: "/ˈnet.wɜː.kɪŋ/",
+        pos: "noun",
+        level: "B2",
+        time: "14:27",
+        turnId: "turn-52",
+        cat: "career",
+        def: "Designing, connecting, and managing computer networks and communication protocols (or building professional contacts).",
+        quote: "Louie (15:18): \"My uncle loved programming—he did Cisco networking as his job.\"",
+        es: "redes informáticas (o creación de contactos profesionales)"
+      },
+      "requirements": {
+        word: "requirements",
+        ipa: "/rɪˈkwaɪə.mənts/",
+        pos: "noun (plural)",
+        level: "B2",
+        time: "15:23",
+        turnId: "turn-54",
+        cat: "career",
+        def: "The technical specifications, features, and conditions that a software project or job role needs.",
+        quote: "Louie (16:35): \"You're learning it to the requirements of your goal, of what needs to be accomplished.\"",
+        es: "requisitos (técnicos o del proyecto)"
+      },
+      "worldwide": {
+        word: "worldwide",
+        ipa: "/ˌwɜːldˈwaɪd/",
+        pos: "adjective / adv",
+        level: "B2",
+        time: "18:31",
+        turnId: "turn-59",
+        cat: "career",
+        def: "Operating or existing across the entire world; global.",
+        quote: "Barbara (18:50): \"Sopra Steria is originally a French company, but it's worldwide.\"",
+        es: "a nivel mundial / internacional"
+      },
+      "copying-and-pasting": {
+        word: "copying and pasting",
+        ipa: "/ˈkɒp.i.ɪŋ ænd ˈpeɪ.stɪŋ/",
+        pos: "verb phrase",
+        level: "B2",
+        time: "21:07",
+        turnId: "turn-65",
+        cat: "career",
+        def: "Duplicating text or code directly from one place to another without writing or analyzing it yourself.",
+        quote: "Barbara (21:50): \"It's a good way to learn when you have to describe a problem to the AI instead of copying and pasting the code.\"",
+        es: "copiar y pegar"
+      },
+      "short-term": {
+        word: "short-term",
+        ipa: "/ˌʃɔːtˈtɜːm/",
+        pos: "adjective",
+        level: "B2",
+        time: "24:45",
+        turnId: "turn-71",
+        cat: "interview",
+        def: "Focused only on immediate results over the next few months rather than sustainable future growth.",
+        quote: "Louie (25:00): \"America and Europe, they're thinking short-term.\"",
+        es: "a corto plazo / cortoplacista"
+      },
+      "queries": {
+        word: "database queries",
+        ipa: "/ˈdeɪ.tə.beɪs ˈkwɪə.riz/",
+        pos: "noun phrase",
+        level: "C1",
+        time: "27:53",
+        turnId: "turn-76",
+        cat: "career",
+        def: "Precise requests written in a language like SQL to retrieve, filter, or update data in a database.",
+        quote: "Barbara (28:25): \"Two problems of JavaScript and two database queries with SQL.\"",
+        es: "consultas a la base de datos (SQL queries)"
+      },
+      "feedback": {
+        word: "feedback",
+        ipa: "/ˈfiːd.bæk/",
+        pos: "noun",
+        level: "B2",
+        time: "29:11",
+        turnId: "turn-78",
+        cat: "interview",
+        def: "Visual, verbal, or written responses from another person that show whether they understand and connect with you.",
+        quote: "Barbara (29:36): \"Speaking to the emptiness is hard because you don't have the feedback of the other person.\"",
+        es: "retroalimentación / respuesta / reacción"
+      },
+      "refresh": {
+        word: "refresh (one's English)",
+        ipa: "/rɪˈfreʃ/",
+        pos: "verb",
+        level: "B2",
+        time: "30:30",
+        turnId: "turn-79",
+        cat: "idioms",
+        def: "To revive, update, and reactivate knowledge or a skill you learned in the past.",
+        quote: "Barbara (30:30): \"I said, 'Okay, I need to refresh my English!'\"",
+        es: "refrescar / poner al día / reactivar"
+      }
+    };
+
+    // Defensive Vocabulary Helper (Rule 2)
+    function v(key, displayWord) {
+      const item = (typeof VOCAB_DB !== 'undefined' && VOCAB_DB[key]) ? VOCAB_DB[key] : null;
+      const label = displayWord || (item ? item.word : key);
+      return '<span class="vocab-mark" data-vkey="' + key + '" onclick="inspectVocab(\'' + key + '\')">' + label + '</span>';
+    }
+
+    // Note-taker ASR Fix Pill Helper
+    function fixBadge(corrected, rawMistake) {
+      return '<span class="asr-fix-pill" title="Note-taker misheard \'' + corrected.replace(/'/g, "\\'") + '\' as \'' + rawMistake.replace(/'/g, "\\'") + '\'">✨ Fixed: "' + corrected + '" <span class="text-stone-400">(note-taker wrote: "' + rawMistake + '")</span></span>';
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. COMPLETE CLEANED LESSON TRANSCRIPT (00:00 – 56:37, 6 CHAPTERS)
+    // -------------------------------------------------------------------------
+    const TRANSCRIPT_TURNS = [
+      {
+        id: "turn-1",
+        chapterId: "chap-1",
+        chapterTitle: "Chapter I • Career Pivot to Web Development, Remote Work & Life in Valencia (00:00 – 05:31)",
+        speaker: "Louie",
+        time: "00:00",
+        html: `Hi Barbara, how are you doing today?`
+      },
+      {
+        id: "turn-2",
+        speaker: "Barbara",
+        time: "00:02",
+        html: `Hi, good morning!`
+      },
+      {
+        id: "turn-3",
+        speaker: "Louie",
+        time: "00:04",
+        html: `Good morning! Thank you very much for taking the time to meet with me. Can you hear me okay?`
+      },
+      {
+        id: "turn-4",
+        speaker: "Barbara",
+        time: "00:11",
+        html: `Yeah, I can hear you.`
+      },
+      {
+        id: "turn-5",
+        speaker: "Louie",
+        time: "00:12",
+        html: `Okay. And thank you for the ${v("correspondence", "correspondence")}, talking with me about your ${v("aims", "aims")} beforehand. But I would just love to know, in your own words, Barbara—why are we here today?`
+      },
+      {
+        id: "turn-6",
+        speaker: "Barbara",
+        time: "00:28",
+        html: `It's a good question! I want to improve my ${v("oral-skills", "oral skills")} because I'm looking for a new job—I'm changing my ${v("career-path", "career path")}.`
+      },
+      {
+        id: "turn-7",
+        speaker: "Louie",
+        time: "00:56",
+        html: `Great. Yeah.`
+      },
+      {
+        id: "turn-8",
+        speaker: "Barbara",
+        time: "00:57",
+        html: `So I've been working in photography, design, and production—event production—but I didn't like the job. So I studied—I don't know how to say it—it's not a four-year university degree, it's a two-year higher vocational diploma <em>(Grado Superior)</em> in <strong>web development</strong>.`
+      },
+      {
+        id: "turn-9",
+        speaker: "Louie",
+        time: "01:29",
+        html: `Mm-hmm.`
+      },
+      {
+        id: "turn-10",
+        speaker: "Barbara",
+        time: "01:30",
+        html: `So now I'm looking for a job in this ${v("field", "field")}, and the majority of the positions require you to speak in English because they are in foreign countries, or working with a foreign team. So they ask for a high level of oral English.`
+      },
+      {
+        id: "turn-11",
+        speaker: "Louie",
+        time: "02:00",
+        html: `Mm-hmm. And will you work ${v("remotely", "remotely")}, or will you move?`
+      },
+      {
+        id: "turn-12",
+        speaker: "Barbara",
+        time: "02:08",
+        html: `I want to work ${v("remotely", "remotely")}. I don't want to move.`
+      },
+      {
+        id: "turn-13",
+        speaker: "Louie",
+        time: "02:12",
+        html: `Okay.`
+      },
+      {
+        id: "turn-14",
+        speaker: "Barbara",
+        time: "02:13",
+        html: `I want to ${v("remain", "remain")} here. I have my home, I have my family... I'm ${v("set-up", "well set up")} here.`
+      },
+      {
+        id: "turn-15",
+        speaker: "Louie",
+        time: "02:23",
+        html: `Yeah, you're ${v("settled", "settled")} here. Yes, correct! And lovely—congratulations on your lovely family. And ${v("take-it", "I take it")}, Barbara, you're from Spain. Is that correct?`
+      },
+      {
+        id: "turn-16",
+        speaker: "Barbara",
+        time: "02:34",
+        html: `Yeah, I'm from Spain.`
+      },
+      {
+        id: "turn-17",
+        speaker: "Louie",
+        time: "02:36",
+        html: `My brother has just moved to <strong>Seville</strong> with his wife. They have been together maybe 15 or 16 years, and they lived in <strong>Barcelona</strong> together. She is half Spanish, half Irish, and her family live in Seville—they're from Seville. And so they have now moved to Seville. It's really nice—Seville's great, and Barcelona.`
+      },
+      {
+        id: "turn-18",
+        speaker: "Barbara",
+        time: "03:13",
+        html: `I've never been to Seville. I've been to Barcelona. I live in <strong>Valencia</strong>—do you know Valencia?`
+      },
+      {
+        id: "turn-19",
+        speaker: "Louie",
+        time: "03:22",
+        html: `Yes, yes!`
+      },
+      {
+        id: "turn-20",
+        speaker: "Barbara",
+        time: "03:23",
+        html: `It's south of Barcelona. It's quite similar to Barcelona, but smaller.`
+      },
+      {
+        id: "turn-21",
+        speaker: "Louie",
+        time: "03:29",
+        html: `Oh, nice. And if I may ask—I love web development. I haven't done it as a standalone job; however, in my previous career, I used to do web development inside of my job for our own ${v("proprietary", "proprietary")} needs. Do you know what <em>proprietary</em> means?`
+      },
+      {
+        id: "turn-22",
+        speaker: "Barbara",
+        time: "03:55",
+        html: `No.`
+      },
+      {
+        id: "turn-23",
+        speaker: "Louie",
+        time: "03:55",
+        html: `Okay—it's a lovely word. It means it only works for us.`
+      },
+      {
+        id: "turn-24",
+        speaker: "Barbara",
+        time: "04:01",
+        html: `Ah, okay! Like an internal project.`
+      },
+      {
+        id: "turn-25",
+        speaker: "Louie",
+        time: "04:04",
+        html: `Exactly! So, for example, my company before COVID used to ${v("rebuild", "rebuild and restore")} historical buildings. After which, we might put different businesses in them—like a restaurant, or a venue space that people could rent for weddings and events. Sometimes I would need ${v("proprietary", "proprietary")} software for running the kitchen. Maybe the commercial software company was too expensive, and their ${v("plugins", "plugins")} were terrible—one piece of software wouldn't work with another piece of software.`
+      },
+      {
+        id: "turn-26",
+        speaker: "Louie",
+        time: "05:10",
+        html: `Whereas if I built it myself, it would work with everything, which was easier. So it took me a long time, but I love ${v("front-end", "front-end and back-end")} development because I can make my own projects. Why did you choose web development?`
+      },
+      {
+        id: "turn-27",
+        chapterId: "chap-2",
+        chapterTitle: "Chapter II • Audiovisual Roots, Motherhood, AI Disruption & Goya-Nominated Film Production (05:32 – 14:26)",
+        speaker: "Barbara",
+        time: "05:32",
+        html: `Okay—when I started at university, I studied an <strong>Audiovisual Communication</strong> degree.`
+      },
+      {
+        id: "turn-28",
+        speaker: "Barbara",
+        time: "05:58",
+        html: `I specialized in ${v("artistic-direction", "artistic direction")}—I did a ${v("double-specialization", "double specialization")}: artistic direction and multimedia design. So when I finished at university, I started working in the artistic direction field, although I also liked web design and everything related to it. In fact, my final university project was a website! But I found a job in the other field first, so life took me in that direction.`
+      },
+      {
+        id: "turn-29",
+        speaker: "Louie",
+        time: "07:00",
+        html: `It took you in a different direction.`
+      },
+      {
+        id: "turn-30",
+        speaker: "Barbara",
+        time: "07:03",
+        html: `Yeah, I had two directions, and I liked both of them. The opportunity came in one of them, so I ${v("move-forward", "moved forward")} in that direction. But then there was a time when I became pregnant.`
+      },
+      {
+        id: "turn-31",
+        speaker: "Louie",
+        time: "07:23",
+        html: `Congratulations! How many years or months apart are your children?`
+      },
+      {
+        id: "turn-32",
+        speaker: "Barbara",
+        time: "07:52",
+        html: `I stopped working because I needed to ${v("look-after", "look after")} my kids. I have two kids, and they came really close one after the other—<strong>23 months</strong> apart! Almost two years, but not quite two years. So I had two babies at the same time: one big baby and one small baby. Just when I planned to start working again, I got pregnant again. So in the beginning, it was supposed to be a ${v("career-gap", "one-year gap")}, and after that it became four or five years. When I tried to look for a new job after that—I used to work in artistic direction of photography, doing a lot of ${v("retouching", "retouching")} jobs with Photoshop.`
+      },
+      {
+        id: "turn-33",
+        speaker: "Barbara",
+        time: "08:59",
+        html: `So when I tried to come back, filters and <strong>AI</strong> ${fixBadge("AI (Artificial Intelligence)", "the IA")} had appeared, so there is almost no work in that field anymore. It's very difficult because it has disappeared.`
+      },
+      {
+        id: "turn-34",
+        speaker: "Barbara",
+        time: "09:25",
+        html: `When companies now want to make a catalogue of their products, they don't take photos of the products anymore—they do it with ${v("renders", "3D and renders")}. So my old job doesn't exist anymore.`
+      },
+      {
+        id: "turn-35",
+        speaker: "Louie",
+        time: "09:50",
+        html: `Mm-hmm, I understand. Please continue.`
+      },
+      {
+        id: "turn-36",
+        speaker: "Barbara",
+        time: "09:55",
+        html: `So I thought, "Okay, let's move forward—I'm going to look for another job." And I started working in production, where we made a <strong>short film</strong>. I was in production, so I did the paperwork mostly—all the ${v("logistics", "logistics")}.`
+      },
+      {
+        id: "turn-37",
+        speaker: "Louie",
+        time: "10:31",
+        html: `Ooh, lovely! Part of the production team.`
+      },
+      {
+        id: "turn-38",
+        speaker: "Barbara",
+        time: "10:34",
+        html: `Yeah, I was part of the team. It was a stop-motion animation film, so it's very ${v("tactile", "tactile / hands-on")}—the director and the animators crafted it with their hands, and I was ${v("coordinating", "coordinating")} the teams, looking for funding, and organizing production.`
+      },
+      {
+        id: "turn-39",
+        speaker: "Louie",
+        time: "11:03",
+        html: `Mm-hmm.`
+      },
+      {
+        id: "turn-40",
+        speaker: "Barbara",
+        time: "11:05",
+        html: `And it was quite ${v("satisfactory", "satisfactory")} because we were ${v("nominated", "nominated")} for the <strong>Spanish Academy Awards (Premios Goya)</strong>! ${fixBadge("Spanish Academy Awards (Goya Prizes)", "Spanish Academy. Prizes.")}`
+      },
+      {
+        id: "turn-41",
+        speaker: "Louie",
+        time: "11:16",
+        html: `Ooh, congratulations! Yes!`
+      },
+      {
+        id: "turn-42",
+        speaker: "Barbara",
+        time: "11:19",
+        html: `In my company we did film, but we also produced a lot of cultural events: concerts, ${v("conventions", "conventions, congresses")} ${fixBadge("conventions, congresses", "convent. Congresses.")}.`
+      },
+      {
+        id: "turn-43",
+        speaker: "Louie",
+        time: "11:44",
+        html: `Conventions, concerts—lots of productions.`
+      },
+      {
+        id: "turn-44",
+        speaker: "Barbara",
+        time: "11:50",
+        html: `Yeah, lots of productions. So I had to work most weekends—it was a lot of working hours outside my normal timetable. Lots of ${v("overtime", "extra hours")}. There were weeks when I did maybe <strong>26 extra hours</strong> in a single week!`
+      },
+      {
+        id: "turn-45",
+        speaker: "Louie",
+        time: "12:25",
+        html: `Oh, wow. Wow.`
+      },
+      {
+        id: "turn-46",
+        speaker: "Barbara",
+        time: "12:26",
+        html: `So I was really tired and really stressed. I thought, "Okay, let's change again, because I need a job that I can balance with my personal life." That previous job was really fun and dynamic because every day we did something different, I met a lot of people, and it was ${v("challenging", "challenging")}—I had to think fast and resolve many problems at the same time. It was rewarding, but really ${v("exhausting", "exhausting")}.`
+      },
+      {
+        id: "turn-47",
+        speaker: "Louie",
+        time: "13:22",
+        html: `Mm-hmm.`
+      },
+      {
+        id: "turn-48",
+        speaker: "Barbara",
+        time: "13:24",
+        html: `And it was affecting my personal life because I had to work ${v("after-hours", "after hours")} and be on the phone even on holidays. They were calling me and I had to answer the phone on the beach, or stop in the middle of having dinner with my family. So I said, "I don't want this."`
+      },
+      {
+        id: "turn-49",
+        speaker: "Louie",
+        time: "13:58",
+        html: `There's no ${v("work-life-balance", "work-life balance")}.`
+      },
+      {
+        id: "turn-50",
+        speaker: "Barbara",
+        time: "14:02",
+        html: `No, it was only work. And I felt guilty because I want to ${v("be-present", "be present")} while my kids are little. I don't want to miss their childhood.`
+      },
+      {
+        id: "turn-51",
+        speaker: "Louie",
+        time: "14:21",
+        html: `The ${v("key-moments", "key moments")}. Yes, of course.`
+      },
+      {
+        id: "turn-52",
+        chapterId: "chap-3",
+        chapterTitle: "Chapter III • Programming Origins, Sopra Steria Internship, React vs. Angular & TypeScript (14:27 – 22:06)",
+        speaker: "Louie",
+        time: "14:27",
+        html: `Now, I think you've chosen a great career. We are living in the time of the programmer—when you understand how programs work with each other, you can build things so quickly that you couldn't do before. When I was younger, I started learning how to program when I was about six or seven, because on the computers we had back then, you had to program your own games. And my uncle did <strong>Cisco ${v("networking", "networking")}</strong> as his job.`
+      },
+      {
+        id: "turn-53",
+        speaker: "Barbara",
+        time: "15:21",
+        html: `Oh, okay.`
+      },
+      {
+        id: "turn-54",
+        speaker: "Louie",
+        time: "15:23",
+        html: `In his bedroom at my grandparents' house, he had books on how to learn <strong>C</strong>, <strong>C++</strong> ${fixBadge("C++", "C+")}, <strong>JavaScript</strong>, and <strong>SQL</strong> ${fixBadge("SQL", "CQL")}. I visited my grandparents every weekend without my brothers, so I would go through the coding examples, and when I first made a window appear in C, I was amazed! Later I realized that the best way to learn programming is to have an actual project—then you're learning it to the ${v("requirements", "requirements")} of your goal, for what needs to be ${v("accomplished", "accomplished")}. And now ${v("debugging", "debugging")} is instant.`
+      },
+      {
+        id: "turn-55",
+        speaker: "Barbara",
+        time: "17:01",
+        html: `Yeah, because you can ask the <strong>AI</strong> ${fixBadge("AI", "the IA")}—it does all the heavy lifting.`
+      },
+      {
+        id: "turn-56",
+        speaker: "Louie",
+        time: "17:08",
+        html: `Yes! And you can be imaginative and much more productive. My whole setup is integrated into an ${v("ide", "IDE")}, so I can be very productive. That said, can you tell me about your work stack—what are you currently using?`
+      },
+      {
+        id: "turn-57",
+        speaker: "Barbara",
+        time: "17:48",
+        html: `I've just finished my studies, which were a ${v("full-stack", "full-stack")} program. We did <strong>Java, PHP, JavaScript, React, Laravel</strong>...`
+      },
+      {
+        id: "turn-58",
+        speaker: "Louie",
+        time: "18:12",
+        html: `And I think you mentioned <strong>Angular</strong> as well. When you work at a company as part of your training, that's an <strong>internship</strong>.`
+      },
+      {
+        id: "turn-59",
+        speaker: "Barbara",
+        time: "18:31",
+        html: `${v("internship", "Internship")}—yeah! When I finished my studies, I did a three-month internship at a really big company: <strong>Sopra Steria</strong> ${fixBadge("Sopra Steria", "Surprise Steria")}. It's originally a French company, but it's ${v("worldwide", "worldwide")}. I learned a lot in three months there, and we worked with <strong>Angular</strong> and <strong>TypeScript</strong>.`
+      },
+      {
+        id: "turn-60",
+        speaker: "Barbara",
+        time: "18:55",
+        html: `So in my studies I did JavaScript and React, and in my internship I did TypeScript and Angular. They're quite similar—you do the same things, just structured differently.`
+      },
+      {
+        id: "turn-61",
+        speaker: "Louie",
+        time: "19:10",
+        html: `Yes! I use TypeScript sometimes as well, so I understand how the structure is different.`
+      },
+      {
+        id: "turn-62",
+        speaker: "Barbara",
+        time: "19:23",
+        html: `Just like in Java, you have to put a colon <em>(two points)</em> ${fixBadge("colon (:) / type annotation", "two points")} and specify the type—whether it's a <code>string</code>, <code>void</code>, or another function. When you ${v("declaring", "declare")} a function in TypeScript, you have to label what the function returns.`
+      },
+      {
+        id: "turn-63",
+        speaker: "Barbara",
+        time: "20:26",
+        html: `Sometimes that's the tricky part, because if a function potentially returns <code>undefined</code>, it doesn't ${v("compile", "compile")}! At first you don't know why, but I really like it.`
+      },
+      {
+        id: "turn-64",
+        speaker: "Louie",
+        time: "20:50",
+        html: `When you start at a new company, do you think it's common that they restrict AI during the ${v("probation-period", "probation period")}? How was it in your internship?`
+      },
+      {
+        id: "turn-65",
+        speaker: "Barbara",
+        time: "21:07",
+        html: `In my internship, we were allowed to ask the <strong>AI</strong> conceptual questions, but for privacy and security we couldn't paste the company's proprietary code into it. And honestly, I think it's a great way to learn: when you have a problem and you have to <strong>describe it</strong> to the AI instead of ${v("copying-and-pasting", "copying and pasting")} the code, you suddenly realize what your function is actually doing versus what you want it to do!`
+      },
+      {
+        id: "turn-66",
+        chapterId: "chap-4",
+        chapterTitle: "Chapter IV • The Junior Developer Market, AI Productivity vs. Mentorship & Global Work Cultures (22:07 – 27:43)",
+        speaker: "Barbara",
+        time: "22:07",
+        html: `What I'm seeing right now, though, is that companies aren't hiring juniors—it's really difficult to find a junior job offer. Every day when I check LinkedIn, out of 20 job offers, maybe only one is for juniors, and even then it asks for "Junior with 3 years' experience"—which is not a junior! I think a lot of entry-level junior tasks are currently being filled with AI. So it's a great time to be a programmer, but a complicated time to be a junior.`
+      },
+      {
+        id: "turn-67",
+        speaker: "Louie",
+        time: "23:21",
+        html: `Yeah, it's a ${v("recalibration", "recalibration")} time.`
+      },
+      {
+        id: "turn-68",
+        speaker: "Barbara",
+        time: "23:25",
+        html: `Yeah, because if companies only hire seniors, when those seniors retire there won't be any new seniors—because companies don't want to "waste" their time teaching juniors. But it's not wasting time; it's ${v("investing", "investing")}!`
+      },
+      {
+        id: "turn-69",
+        speaker: "Louie",
+        time: "24:01",
+        html: `Yes—the ${v("business-model", "business model")} has changed.`
+      },
+      {
+        id: "turn-70",
+        speaker: "Barbara",
+        time: "24:06",
+        html: `Exactly. Right now they are focusing purely on immediate productivity, saying, "With AI we can do 10 times the work a junior does." But that junior was learning, and after two or three years they would be doing the senior job. Companies are focusing on short-term productivity rather than looking to the future.`
+      },
+      {
+        id: "turn-71",
+        speaker: "Louie",
+        time: "24:45",
+        html: `Yes, and I believe that is very much a ${v("short-term", "short-term")} Western corporate mentality in America and Europe right now.`
+      },
+      {
+        id: "turn-72",
+        speaker: "Barbara",
+        time: "25:04",
+        html: `Because they're thinking about the ${v("shareholders", "stakeholders and shareholders")} at the moment.`
+      },
+      {
+        id: "turn-73",
+        speaker: "Louie",
+        time: "25:11",
+        html: `See, yeah! ${fixBadge("Speaker Restored: Louie (25:11–56:37)", "Bot swapped Barbara/Louie names")} Whereas I teach a few programming project managers on Preply who are still hiring juniors, though they are restructuring their teams—for instance, having candidates code without AI during their first month of ${v("probation-period", "probation")} just to verify their core fundamentals. And in countries like Japan, companies haven't fired everyone; instead of being ${v("reactionary", "reactionary")}, they move developers into new roles because everything is becoming ${v("customizable", "customizable")} for customers.`
+      },
+      {
+        id: "turn-74",
+        speaker: "Barbara",
+        time: "27:39",
+        html: `Mm-hmm, yeah.`
+      },
+      {
+        id: "turn-75",
+        chapterId: "chap-5",
+        chapterTitle: "Chapter V • The Hungarian Tech Interview, Summer on Brighton Pier, Erasmus Mentoring & GitHub Pages Notes (27:44 – 39:13)",
+        speaker: "Louie",
+        time: "27:44",
+        html: `At the moment, have you been for any interviews yet?`
+      },
+      {
+        id: "turn-76",
+        speaker: "Barbara",
+        time: "27:53",
+        html: `I had one interview with a company in <strong>Hungary</strong>, though it wasn't a traditional live interview. First, they sent me a link with technical problems to resolve: JavaScript problems and ${v("queries", "database queries")} with <strong>SQL</strong>.`
+      },
+      {
+        id: "turn-77",
+        speaker: "Barbara",
+        time: "28:45",
+        html: `And after that, I had the personal interview stage: it was one written question at a time ${fixBadge("one written question... answering", "One. Right question... asking")}, and I had to record myself on video answering each question within two minutes. At that moment, I realized: <em>"I need an English teacher!"</em>`
+      },
+      {
+        id: "turn-78",
+        speaker: "Barbara",
+        time: "29:11",
+        html: `I don't remember the exact question, but I remember trying to speak and it felt like a ${v("monologue", "monologue")} because there wasn't another person on the other side. I think it would have been difficult even in Spanish! Speaking into the emptiness is hard because you don't have the other person's facial ${v("feedback", "feedback")}, and you only have two minutes on the timer to think fast.`
+      },
+      {
+        id: "turn-79",
+        speaker: "Barbara",
+        time: "30:30",
+        html: `So when I finished recording, I said, "Okay, I need to ${v("refresh", "refresh")} my English!" I started studying English when I was six or seven years old, and I even lived in England for three months one summer.`
+      },
+      {
+        id: "turn-80",
+        speaker: "Louie",
+        time: "30:47",
+        html: `Oh, nice! Where in England?`
+      },
+      {
+        id: "turn-81",
+        speaker: "Barbara",
+        time: "30:50",
+        html: `In <strong>Brighton</strong>! Have you stayed in Brighton? I worked on <strong>Brighton Pier</strong> at an ice cream kiosk ${fixBadge("ice cream kiosk on Brighton Pier", "ice cream spot")}, selling ice creams to people for almost three months one summer.`
+      },
+      {
+        id: "turn-82",
+        speaker: "Barbara",
+        time: "31:14",
+        html: `Growing up, I always had ${v("extracurricular", "extracurricular")} English lessons. At university in Valencia—which is a sunny beach city—we had lots of <strong>Erasmus</strong> students. I joined the university buddy / ${v("mentor", "mentor")} programme ${fixBadge("buddy / mentor programme", "protégé program")}, where they assigned me an Erasmus student each year. I helped them find accommodation, choose their classes, and introduced them to my group of friends.`
+      },
+      {
+        id: "turn-83",
+        speaker: "Louie",
+        time: "32:24",
+        html: `Mm-hmm!`
+      },
+      {
+        id: "turn-84",
+        speaker: "Barbara",
+        time: "32:30",
+        html: `It was a great opportunity for me to speak English, though after a while they would say, "No, no—now in Spanish, because we need to learn Spanish!" So it was like a ${v("tandem", "tandem")}.`
+      },
+      {
+        id: "turn-85",
+        speaker: "Barbara",
+        time: "32:44",
+        html: `When I finished university, I stopped speaking English regularly because I didn't have anyone to practice with. I still watch TV series and movies in English and read in English, but when I need to speak, I need more practice to feel confident.`
+      },
+      {
+        id: "turn-86",
+        speaker: "Louie",
+        time: "33:20",
+        html: `Okay! Let me show you how we will accomplish your goals. First, let me show you how I take your lesson notes so you never have to worry about writing things down while we talk.`
+      },
+      {
+        id: "turn-87",
+        speaker: "Louie",
+        time: "34:24",
+        html: `I have an AI transcription bot writing down what we say, and after class I check and curate everything into a complete ${v("timestamped", "timestamped")} ${fixBadge("timestamped", "times, uh, stamped")} interactive web page hosted on <strong>GitHub Pages</strong>. Every vocabulary word has its CEFR level (B2, C1, C2), definition, pronunciation, and translation into your native language, plus a Vocabulary Dictionary tab where everything is neatly tiled ${fixBadge("last but by no means least", "last but no means")}.`
+      },
+      {
+        id: "turn-88",
+        speaker: "Barbara",
+        time: "36:08",
+        html: `Oh, really good—I love it! And will it have only the last lesson, or all the lessons?`
+      },
+      {
+        id: "turn-89",
+        speaker: "Louie",
+        time: "37:22",
+        html: `Every lesson! You have one permanent student URL hosted on GitHub Pages ${fixBadge("web app / website", "web ha— website")}, and each week I commit your new lesson to your repository so all your notes stay tidy in one place forever.`
+      },
+      {
+        id: "turn-90",
+        chapterId: "chap-6",
+        chapterTitle: "Chapter VI • Interactive \"Heads Up!\" Vocabulary Game & Interview Strategy (39:14 – 56:37)",
+        speaker: "Louie",
+        time: "39:14",
+        html: `Going forward, we're going to mix structured interview techniques with fast-paced conversation and vocabulary activities. Let's demonstrate with a quick round of the game <strong>Heads Up!</strong> (first excuse my accidental Dr. Seuss link—here is the game link!). I'll choose the category <strong>Jobs</strong> and describe each word for you to guess.`
+      },
+      {
+        id: "turn-91",
+        speaker: "Barbara",
+        time: "40:13",
+        html: `Okay, let's go!`
+      },
+      {
+        id: "turn-92",
+        speaker: "Louie",
+        time: "40:25",
+        html: `Three, two, one! First: a job where someone is digging underground, looking for coal...`
+      },
+      {
+        id: "turn-93",
+        speaker: "Barbara",
+        time: "40:34",
+        html: `Mining—a <strong>miner</strong>! Next: someone who works at sea on a ship, not the captain—a <strong>sailor</strong>! Someone who delivers letters in the morning—a <strong>mailman</strong>! Someone who draws and designs things for a company—a <strong>designer</strong>! Someone who flies a plane—a <strong>pilot</strong>! Someone who presents a TV show—a <strong>TV host</strong>!`
+      },
+      {
+        id: "turn-94",
+        speaker: "Louie",
+        time: "41:26",
+        html: `Very good! Next: someone who uses their hands to sculpt and build things out of wood... like Jesus's earthly father...`
+      },
+      {
+        id: "turn-95",
+        speaker: "Barbara",
+        time: "41:34",
+        html: `Woodworker? No, I don't remember the word...`
+      },
+      {
+        id: "turn-96",
+        speaker: "Louie",
+        time: "41:50",
+        html: `${v("carpenter", "Carpenter")}!`
+      },
+      {
+        id: "turn-97",
+        speaker: "Barbara",
+        time: "41:54",
+        html: `<em>Carpenter!</em> It's the same in Spanish—<em>carpintero</em>! I was looking for a much more difficult word starting with F!`
+      },
+      {
+        id: "turn-98",
+        speaker: "Louie",
+        time: "42:17",
+        html: `Maybe because of <em>fabrication</em>! Now let's do it the other way round—can you choose the category <strong>Emotions</strong> for 90 seconds and describe them to me?`
+      },
+      {
+        id: "turn-99",
+        speaker: "Barbara",
+        time: "43:02",
+        html: `Okay, start! Three, two, one. First: when someone pays you a compliment and you feel like the heat is going up to your face—you like the compliment, you feel good, but you feel shy, similar to ${v("blushing", "blushing")} ${fixBadge("Blushing?", "Flash— flashing?")}...`
+      },
+      {
+        id: "turn-100",
+        speaker: "Louie",
+        time: "44:14",
+        html: `You feel good and shy at the same time—${v("bashful", "bashful")}? Flattered? What's the word on the card?`
+      },
+      {
+        id: "turn-101",
+        speaker: "Barbara",
+        time: "44:29",
+        html: `The card says <strong>"${v("flustered", "flustered")}"</strong>! Oh—doesn't it mean that? Maybe I had the wrong meaning! What does <em>flustered</em> actually mean?`
+      },
+      {
+        id: "turn-102",
+        speaker: "Louie",
+        time: "44:45",
+        html: `${v("flustered", "Flustered")} is when you feel overcome and agitated in the moment because too much is happening at once—like when the workload is too heavy and you can't speak or think straight ("Oh, give me one second, I'm so flustered!"). It's similar to ${v("overwhelmed", "overwhelmed")}, except you can be overwhelmed and still communicate calmly, whereas <em>flustered</em> is the visible, flurried impact in the moment! ${fixBadge("build a great memory link in this instance", "build a great memory learn in this. Instance")}`
+      },
+      {
+        id: "turn-103",
+        speaker: "Barbara",
+        time: "45:57",
+        html: `Ah, okay, now I know! Let's try the next emotions: 1) When you are at home at night, everything is done, and you are surrounded by quiet relaxation—<strong>calm</strong>! 2) A feeling for Halloween month when you watch horror movies—<strong>scared</strong>! 3) When someone does something nice for you—${v("grateful", "grateful")} (and thankful)!`
+      },
+      {
+        id: "turn-104",
+        speaker: "Louie",
+        time: "47:34",
+        html: `Very good! Let's do one more round with <strong>Abstract Concepts</strong>: 1) When an action could have a negative outcome, like in the strategy board game—<strong>risk</strong>!`
+      },
+      {
+        id: "turn-105",
+        speaker: "Barbara",
+        time: "48:26",
+        html: `2) Like destiny, something that is meant to happen—${v("fate", "fate")}! 3) Settings on our phone when we don't want people to see our personal data—<strong>privacy</strong>!`
+      },
+      {
+        id: "turn-106",
+        speaker: "Louie",
+        time: "48:51",
+        html: `4) And when it's unclear what is going to happen in the future—for example, how AI will develop—that is ${v("uncertainty", "uncertainty")}.`
+      },
+      {
+        id: "turn-107",
+        speaker: "Barbara",
+        time: "49:33",
+        html: `<em>Uncertainty!</em> Yeah, I know the meaning, I just need the words to come quickly. And yes, I've played the board game <em>Risk</em>! Right now I feel full of ${v("uncertainty", "uncertainty")} with my career change.`
+      },
+      {
+        id: "turn-108",
+        speaker: "Louie",
+        time: "51:02",
+        html: `I play <em>Risk</em> online every day with my Scottish friend Andy and other teachers—it's brutal because everyone messages on WhatsApp forming secret alliances! And Barbara, I'm sure it is ${v("fate", "fate")} that you will accomplish your goals.`
+      },
+      {
+        id: "turn-109",
+        speaker: "Barbara",
+        time: "51:09",
+        html: `Thank you!`
+      },
+      {
+        id: "turn-110",
+        speaker: "Louie",
+        time: "51:31",
+        html: `In our next lessons, we will split our time between fast-paced speaking activities and structured interview answering.`
+      },
+      {
+        id: "turn-111",
+        speaker: "Barbara",
+        time: "51:56",
+        html: `That sounds great—especially with these new recruitment trends ${fixBadge("new trends", "new. Trans.")} in IT and software companies. I really need this because in the past I always found jobs through word of mouth ("Do you want to come work with me?"), so I've never done a formal corporate interview where they ask, <em>"Where do you see yourself in five years?"</em>`
+      },
+      {
+        id: "turn-112",
+        speaker: "Louie",
+        time: "52:30",
+        html: `I can definitely help with that. In my previous business, I hired thousands of people and consulted on executive recruitment for companies like <strong>Hilton</strong>. Often, internal hiring teams are ${v("biased", "biased")} or fail to manage expectations, causing new hires to quit within six months.`
+      },
+      {
+        id: "turn-113",
+        speaker: "Barbara",
+        time: "54:01",
+        html: `Okay.`
+      },
+      {
+        id: "turn-114",
+        speaker: "Louie",
+        time: "54:01",
+        html: `We say in English, <em>"${v("pride-before-fall", "pride comes before a fall")}"</em>—when someone goes into a new company saying, "At my old company we did it this way." So my job in final interviews was to ${v("reframe", "reframe")} their mindset and prepare them to succeed. We'll use that exact insider knowledge to structure your interview answers.`
+      },
+      {
+        id: "turn-115",
+        speaker: "Barbara",
+        time: "55:26",
+        html: `Perfect—because I need to increase my fluency so the words come naturally to my mouth.`
+      },
+      {
+        id: "turn-116",
+        speaker: "Louie",
+        time: "55:37",
+        html: `They will! And because you have a programmer's mindset, in a few weeks' time I have a special high-energy speaking activity that I think you're going to love—and afterwards I'll give it to you so you can play it with your family and friends too. Thank you so much for your time today, Barbara, and enjoy the rest of your week!`
+      },
+      {
+        id: "turn-117",
+        speaker: "Barbara",
+        time: "56:37",
+        html: `Thank you! Goodbye!`
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 3. 6 GENTLE PHRASING POLISHES & 15 NOTE-TAKER FIXES
+    // -------------------------------------------------------------------------
+    const GENTLE_POLISHES = [
+      {
+        time: "00:39",
+        topic: "1. Describing Your 2-Year Web Development Qualification",
+        said: "It's not a degree, it's a bit less than a degree. It's two years only of web development.",
+        natural: "I completed a two-year Associate's Degree (or Higher National Diploma) in Web Development.",
+        why: "In international tech interviews, never downplay Spain's 'Ciclo Formativo de Grado Superior (DAW)' as 'less than a degree'! In the UK it corresponds to an HND (Higher National Diploma) and in the US/international tech market to an Associate's Degree in Web Development."
+      },
+      {
+        time: "10:41",
+        topic: "2. 'Tactile / Hands-On' vs. 'Touchy'",
+        said: "It was an animation film, so it's very touchy... you do it with your hands.",
+        natural: "It was a stop-motion animation film, so it's very tactile and hands-on—everything is crafted by hand.",
+        why: "In English, 'touchy' means easily offended or overly sensitive (susceptible/irritable). When describing physical craft where animators mould puppets or sets by hand, 'tactile', 'hands-on', or 'hand-crafted' sounds wonderfully natural."
+      },
+      {
+        time: "12:51",
+        topic: "3. 'Fun & Dynamic' vs. 'Funny'",
+        said: "This previous job, it was really funny because every day we did something different.",
+        natural: "My previous job was really fun and dynamic because every day was different.",
+        why: "'Funny' means comical or making you laugh out loud (gracioso/chistoso). When an experience is enjoyable, stimulating, and full of variety (divertido/entretenido), native speakers use 'fun', 'engaging', or 'dynamic'."
+      },
+      {
+        time: "19:38",
+        topic: "4. TypeScript Punctuation & Return Types ('Colon' vs. 'Two Points')",
+        said: "You have to put two points and whatever it is—if it's string, if it's void.",
+        natural: "You have to add a colon and a type annotation to specify the return type (such as string or void).",
+        why: "In Spanish, ':' is 'dos puntos' (literally 'two points'), whereas in English coding and punctuation it is called 'a colon'. Calling ': string' a 'type annotation' or 'return type' will sound super sharp in technical interviews!"
+      },
+      {
+        time: "23:46",
+        topic: "5. False Friend: 'Current' vs. 'Actual' + 'Focus On'",
+        said: "I think the actual situation has to change the way of focusing in productivity.",
+        natural: "I think the current situation has to change how companies focus on productivity.",
+        why: "Classic false friend! 'Actual' in English means 'real/exact' (real), whereas Spanish 'actual' (at the present time) is 'current' or 'present'. Also, the verb 'focus' always pairs with the preposition 'on' ('focus on productivity')."
+      },
+      {
+        time: "43:26",
+        topic: "6. 'Flattered / Bashful' vs. 'Flustered' + 'Pay a Compliment'",
+        said: "When someone makes you a compliment and you feel good and shy... Flustered?",
+        natural: "When someone pays you a compliment, you feel flattered (or bashful) and start blushing.",
+        why: "We say 'pay someone a compliment' (rather than 'make'). Feeling pleased and honoured by praise is 'flattered' (halagado/a), and feeling shyly pleased is 'bashful'—whereas 'flustered' (aturdido/agobiado) means feeling stressed and flurried when too many things happen at once!"
+      }
+    ];
+
+    const ASR_FIXES = [
+      {
+        time: "18:50",
+        speaker: "Barbara",
+        wrong: "Surprise Steria",
+        right: "Sopra Steria",
+        note: "Major French-founded international IT consultancy where Barbara completed her 3-month Angular & TypeScript internship."
+      },
+      {
+        time: "08:59 & 21:10",
+        speaker: "Barbara",
+        wrong: "the IA",
+        right: "AI (Artificial Intelligence)",
+        note: "Spanish acronym 'IA' (Inteligencia Artificial) transcribed phonetically by the bot."
+      },
+      {
+        time: "11:15",
+        speaker: "Barbara",
+        wrong: "Spanish Academy. Prizes.",
+        right: "Spanish Academy Awards (Premios Goya)",
+        note: "Barbara's production team was nominated for Spain's prestigious Goya Awards for their animated short film."
+      },
+      {
+        time: "11:37",
+        speaker: "Barbara",
+        wrong: "convent. Congresses.",
+        right: "conventions, congresses",
+        note: "Large corporate and cultural conventions organized by Barbara's production company."
+      },
+      {
+        time: "15:23",
+        speaker: "Louie",
+        wrong: "C+",
+        right: "C++",
+        note: "Classic object-oriented programming language Louie explored in his uncle's study."
+      },
+      {
+        time: "16:18",
+        speaker: "Louie",
+        wrong: "CQL",
+        right: "SQL",
+        note: "Structured Query Language for managing relational databases."
+      },
+      {
+        time: "19:38",
+        speaker: "Barbara",
+        wrong: "two points",
+        right: "colon (:) / type annotation",
+        note: "Direct translation of Spanish 'dos puntos' (:) used when declaring TypeScript types."
+      },
+      {
+        time: "25:11–56:37",
+        speaker: "Both Speakers",
+        wrong: "Inverted Barbara / Louie speaker tags",
+        right: "Speaker Labels Forensically Restored",
+        note: "At 25:11 the automated note-taker swapped the speaker labels for the rest of the call—every turn has been restored to the true speaker."
+      },
+      {
+        time: "28:52",
+        speaker: "Barbara",
+        wrong: "One. Right question... asking this question",
+        right: "one written question... answering this question",
+        note: "The asynchronous video interview prompt for the tech company in Hungary."
+      },
+      {
+        time: "31:03",
+        speaker: "Barbara",
+        wrong: "ice cream spot",
+        right: "ice cream kiosk / stand on Brighton Pier",
+        note: "Barbara's summer job living in Brighton, England for three months."
+      },
+      {
+        time: "31:43",
+        speaker: "Barbara",
+        wrong: "protégé program",
+        right: "Erasmus buddy / mentor programme",
+        note: "University mentorship programme in Valencia helping incoming Erasmus students settle in."
+      },
+      {
+        time: "34:49",
+        speaker: "Louie",
+        wrong: "times, uh, stamped",
+        right: "timestamped",
+        note: "Every conversation turn marked with its exact minute and second."
+      },
+      {
+        time: "36:08",
+        speaker: "Louie",
+        wrong: "last but no means",
+        right: "last but by no means least",
+        note: "Classic British idiom used when introducing a final important point."
+      },
+      {
+        time: "43:49",
+        speaker: "Louie",
+        wrong: "Flash— flashing?",
+        right: "Blushing?",
+        note: "Guessing the emotion when your cheeks turn red after a compliment."
+      },
+      {
+        time: "52:05",
+        speaker: "Barbara",
+        wrong: "new. Trans.",
+        right: "new trends",
+        note: "Emerging technical and video recruitment trends in international software companies."
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 4. FLASHCARD DECK (12 KEY ITEMS) & 6-QUESTION CONTEXT QUIZ
+    // -------------------------------------------------------------------------
+    const FLASHCARD_KEYS = [
+      "proprietary",
+      "tactile",
+      "work-life-balance",
+      "internship",
+      "compile",
+      "recalibration",
+      "investing",
+      "shareholders",
+      "tandem",
+      "flustered",
+      "bashful",
+      "reframe"
+    ];
+    let currentCardIndex = 0;
+    let isCardFlipped = false;
+
+    const QUIZ_QUESTIONS = [
+      {
+        q: "1. When a company builds internal software exclusively for its own kitchen or operations (03:55), that software is called ________.",
+        options: ["proprietary", "reactionary", "extracurricular"],
+        correct: 0,
+        explain: "'Proprietary' (/prəˈpraɪ.ə.tər.i/) means owned and used exclusively by one specific organization."
+      },
+      {
+        q: "2. Because Barbara's Goya-nominated animated short film was crafted physically by hand (10:41), the best adjective to describe that medium is ________.",
+        options: ["touchy", "tactile / hands-on", "biased"],
+        correct: 1,
+        explain: "'Tactile' or 'hands-on' describes physical hand-crafted work, whereas 'touchy' means easily offended!"
+      },
+      {
+        q: "3. In TypeScript (20:41), if a function specifies a return type after a colon (:) but accidentally returns undefined, the code will not ________.",
+        options: ["unwind", "blush", "compile"],
+        correct: 2,
+        explain: "TypeScript checks static types before running; if the return type doesn't match, it won't 'compile'."
+      },
+      {
+        q: "4. As Barbara argued at 23:39, training and mentoring junior developers is not wasting time—it is ________ in the future.",
+        options: ["investing", "betraying", "retouching"],
+        correct: 0,
+        explain: "'It's not wasting—it's investing!' was one of your strongest, most persuasive points in the lesson."
+      },
+      {
+        q: "5. During the 'Heads Up!' game (44:29), we learned that feeling agitated andustered in the moment because of too much workload is called feeling ________.",
+        options: ["flattered", "flustered", "settled"],
+        correct: 1,
+        explain: "'Flustered' means flurried and overwhelmed in the moment, whereas feeling pleased by a compliment is 'flattered' or 'bashful'."
+      },
+      {
+        q: "6. When transitioning to a new company (54:33), we want to avoid arrogance ('pride comes before a fall') and ________ our mindset to adapt smoothly.",
+        options: ["reframe", "nominate", "declare"],
+        correct: 0,
+        explain: "To 'reframe' your mindset means to look at a new role or challenge from a fresh, adaptable perspective."
+      }
+    ];
+    let quizAnswered = new Set();
+
+    // -------------------------------------------------------------------------
+    // 5. RENDER FUNCTIONS (TRANSCRIPT, VOCABULARY, FIXES, FLASHCARDS, QUIZ)
+    // -------------------------------------------------------------------------
+    function renderTranscript() {
+      const container = document.getElementById('transcript-stream-container');
+      const searchVal = (document.getElementById('transcript-search')?.value || '').toLowerCase().trim();
+      const speakerFilter = document.getElementById('speaker-filter')?.value || 'all';
+
+      let html = '';
+      TRANSCRIPT_TURNS.forEach(turn => {
+        if (turn.chapterTitle && speakerFilter === 'all' && !searchVal) {
+          html += `
+            <div id="${turn.chapterId}" class="pt-3 pb-1">
+              <div class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-sage-100/90 via-parchment-100 to-autumn-50 border border-sage-200 flex items-center gap-2 text-xs sm:text-sm font-serif font-bold text-sage-800 shadow-sm">
+                <i data-lucide="bookmark" class="w-4 h-4 text-autumn-600 shrink-0"></i>
+                <span>${turn.chapterTitle}</span>
+              </div>
+            </div>
+          `;
+        }
+
+        if (speakerFilter !== 'all' && turn.speaker !== speakerFilter) return;
+        const plainText = turn.html.replace(/<[^>]+>/g, '').toLowerCase();
+        if (searchVal && !plainText.includes(searchVal) && !turn.time.includes(searchVal)) return;
+
+        const isBarbara = turn.speaker === 'Barbara';
+        const cardStyle = isBarbara
+          ? 'bg-[#fffdf9] border-l-4 border-l-autumn-500 border border-[#e6decb]'
+          : 'bg-[#f8faf8] border-l-4 border-l-sage-600 border border-[#d8e4dc]';
+        const badgeStyle = isBarbara
+          ? 'bg-autumn-100 text-autumn-800 border-autumn-200'
+          : 'bg-sage-100 text-sage-800 border-sage-200';
+
+        html += `
+          <article id="${turn.id}" class="rounded-2xl p-4 sm:p-5 ${cardStyle} shadow-sm transition-all duration-300 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold border ${badgeStyle}">
+                  ${isBarbara ? '🌸 Barbara' : '🍂 Louie'}
+                </span>
+                <span class="font-mono text-xs text-stone-500 flex items-center gap-1">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  ${turn.time}
+                </span>
+              </div>
+              <button onclick="speakPlainTurn('${turn.id}')" class="text-stone-400 hover:text-sage-700 transition p-1 rounded-lg" title="Listen to this line in British English">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <div class="text-sm sm:text-[15px] text-slatewarm-800 leading-relaxed font-sans">
+              ${turn.html}
+            </div>
+          </article>
+        `;
+      });
+
+      if (!html) {
+        html = `<div class="sanctuary-card rounded-2xl p-8 text-center text-stone-500 text-sm">No transcript lines matched your search. Try clearing the search box!</div>`;
+      }
+
+      container.innerHTML = html;
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      if (typeof tippy === 'function') initVocabTooltips();
+    }
+
+    function initVocabTooltips() {
+      document.querySelectorAll('.vocab-mark').forEach(el => {
+        const key = el.getAttribute('data-vkey');
+        const item = VOCAB_DB[key];
+        if (!item) return;
+
+        if (el._tippy) el._tippy.destroy();
+
+        tippy(el, {
+          theme: 'autumn-sanctuary',
+          allowHTML: true,
+          interactive: true,
+          animation: 'shift-away',
+          maxWidth: 320,
+          content: `
+            <div class="p-2.5 space-y-2 text-left">
+              <div class="flex items-center justify-between gap-2 border-b border-parchment-200 pb-1.5">
+                <div>
+                  <span class="font-serif font-bold text-base text-slatewarm-900">${item.word}</span>
+                  <span class="block font-mono text-[10px] text-stone-500">${item.ipa} • ${item.pos}</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="px-1.5 py-0.5 rounded bg-autumn-100 text-autumn-800 font-mono text-[10px] font-bold">${item.level}</span>
+                  <span class="px-1.5 py-0.5 rounded bg-sage-100 text-sage-800 font-mono text-[10px]">🕒 ${item.time}</span>
+                </div>
+              </div>
+              <p class="text-xs text-stone-700 leading-snug">${item.def}</p>
+              <div class="flex items-center justify-between pt-1 text-[11px] border-t border-parchment-200">
+                <span class="text-sage-800 font-semibold">🇪🇸 ${item.es}</span>
+                <button onclick="speakWord('${item.word.replace(/\s*\(.*?\)/g, '').replace(/'/g, "\\'")}')" class="px-2 py-0.5 rounded bg-sage-700 text-white text-[10px] font-semibold">🔊 Listen UK</button>
+              </div>
+            </div>
+          `
+        });
+      });
+    }
+
+    function inspectVocab(key) {
+      const item = VOCAB_DB[key];
+      if (!item) return;
+
+      document.querySelectorAll('.vocab-mark').forEach(el => {
+        el.classList.toggle('active-vocab', el.getAttribute('data-vkey') === key);
+      });
+
+      document.getElementById('insp-time').textContent = '🕒 ' + item.time;
+      document.getElementById('insp-word').textContent = item.word;
+      document.getElementById('insp-ipa').textContent = item.ipa;
+      document.getElementById('insp-pos').textContent = item.pos;
+      document.getElementById('insp-level').textContent = item.level;
+      document.getElementById('insp-def').textContent = item.def;
+      document.getElementById('insp-quote').textContent = item.quote;
+      document.getElementById('insp-es').textContent = item.es;
+      document.getElementById('insp-audio-btn').setAttribute('onclick', "speakWord('" + item.word.replace(/\s*\(.*?\)/g, '').replace(/'/g, "\\'") + "')");
+
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo('#vocab-inspector-card', { scale: 0.98, opacity: 0.85 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'power2.out' });
+      }
+    }
+
+    // Vocabulary Dictionary Grid
+    let activeVocabCat = 'all';
+    function setVocabCategory(cat) {
+      activeVocabCat = cat;
+      document.querySelectorAll('.vcat-btn').forEach(btn => {
+        const isCurrent = btn.id === ('vcat-' + cat);
+        btn.className = isCurrent
+          ? 'vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-sage-700 text-white transition shadow-sm'
+          : 'vcat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-parchment-100 text-stone-700 hover:bg-autumn-100 transition';
+      });
+      renderVocabGrid();
+    }
+
+    function renderVocabGrid() {
+      const grid = document.getElementById('vocab-cards-grid');
+      const search = (document.getElementById('vocab-search')?.value || '').toLowerCase().trim();
+      const levelFilter = document.getElementById('vocab-level-filter')?.value || 'all';
+
+      const entries = Object.entries(VOCAB_DB).filter(([key, item]) => {
+        if (activeVocabCat !== 'all' && item.cat !== activeVocabCat) return false;
+        if (levelFilter !== 'all' && item.level !== levelFilter) return false;
+        if (search) {
+          const hay = (item.word + ' ' + item.def + ' ' + item.es + ' ' + item.time + ' ' + item.quote).toLowerCase();
+          if (!hay.includes(search)) return false;
+        }
+        return true;
+      });
+
+      grid.innerHTML = entries.map(([key, item]) => `
+        <div class="sanctuary-subcard rounded-2xl p-5 flex flex-col justify-between space-y-3 hover:border-autumn-400">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md bg-autumn-100 text-autumn-800 font-mono text-[11px] font-bold">${item.level}</span>
+                <span class="px-2 py-0.5 rounded-md bg-parchment-100 text-stone-600 text-[11px]">${item.pos}</span>
+              </div>
+              <button onclick="jumpToTranscriptTurn('${item.turnId}', '${key}')" class="px-2.5 py-0.5 rounded-full bg-sage-100 hover:bg-sage-200 text-sage-800 font-mono text-[11px] font-semibold flex items-center gap-1 transition" title="Jump to this exact moment in the transcript">
+                <i data-lucide="clock" class="w-3 h-3"></i>
+                ${item.time} ↗
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <div>
+                <h3 class="font-serif text-xl font-bold text-slatewarm-900">${item.word}</h3>
+                <span class="text-xs font-mono text-stone-500">${item.ipa}</span>
+              </div>
+              <button onclick="speakWord('${item.word.replace(/\s*\(.*?\)/g, '').replace(/'/g, "\\'")}')" class="p-2 rounded-xl bg-parchment-100 hover:bg-sage-100 text-sage-800 transition" title="Listen in British English">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <p class="text-xs sm:text-sm text-stone-700 leading-relaxed">${item.def}</p>
+            <p class="text-xs italic text-stone-500 bg-parchment-50 p-2.5 rounded-xl border border-parchment-200">${item.quote}</p>
+          </div>
+
+          <div class="pt-2 border-t border-parchment-200 flex items-center justify-between text-xs">
+            <span class="text-sage-800 font-medium">🇪🇸 ${item.es}</span>
+            <button onclick="jumpToTranscriptTurn('${item.turnId}', '${key}')" class="text-autumn-700 hover:underline font-semibold text-[11px]">
+              See in Transcript →
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+    }
+
+    function jumpToTranscriptTurn(turnId, vocabKey) {
+      switchTab('transcript');
+      setTimeout(() => {
+        if (vocabKey) inspectVocab(vocabKey);
+        const el = document.getElementById(turnId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('turn-highlight-flash');
+          void el.offsetWidth;
+          el.classList.add('turn-highlight-flash');
+        }
+      }, 100);
+    }
+
+    function renderFixesAndPolishes() {
+      const polishesEl = document.getElementById('gentle-polishes-grid');
+      polishesEl.innerHTML = GENTLE_POLISHES.map(p => `
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2.5 border-l-4 border-l-sage-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-sage-800">${p.topic}</span>
+            <span class="px-2 py-0.5 rounded-full bg-parchment-100 font-mono text-[11px] text-stone-600">🕒 ${p.time}</span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-autumn-50/70 border border-autumn-200/80 text-xs text-stone-600">
+            <span class="font-semibold text-autumn-800">In the moment:</span> "${p.said}"
+          </div>
+          <div class="p-2.5 rounded-xl bg-sage-50 border border-sage-200 text-xs text-slatewarm-900 flex items-center justify-between gap-2">
+            <div><span class="font-semibold text-sage-800">Natural Polish:</span> <strong>"${p.natural}"</strong></div>
+            <button onclick="speakWord('${p.natural.replace(/'/g, "\\'")}')" class="p-1.5 rounded-lg bg-white text-sage-700 hover:bg-sage-100 shrink-0" title="Listen">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">${p.why}</p>
+        </div>
+      `).join('');
+
+      const fixesEl = document.getElementById('asr-fixes-grid');
+      fixesEl.innerHTML = ASR_FIXES.map(f => `
+        <div class="sanctuary-subcard rounded-2xl p-4 space-y-2 border-t-2 border-t-autumn-400">
+          <div class="flex items-center justify-between text-[11px] font-mono text-stone-500">
+            <span>${f.speaker}</span>
+            <span>🕒 ${f.time}</span>
+          </div>
+          <div class="text-xs line-through text-stone-400">Note-taker wrote: "${f.wrong}"</div>
+          <div class="text-sm font-serif font-bold text-sage-800">Actually said: "${f.right}"</div>
+          <p class="text-xs text-stone-600 leading-relaxed">${f.note}</p>
+        </div>
+      `).join('');
+
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+    }
+
+    // Flashcards & Quiz
+    function renderFlashcard() {
+      const key = FLASHCARD_KEYS[currentCardIndex];
+      const item = VOCAB_DB[key];
+      if (!item) return;
+
+      document.getElementById('fc-counter').textContent = 'Card ' + (currentCardIndex + 1) + ' of ' + FLASHCARD_KEYS.length;
+      document.getElementById('fc-badge').textContent = item.time + ' • ' + item.pos + ' (' + item.level + ')';
+
+      const titleEl = document.getElementById('fc-front-title');
+      const subEl = document.getElementById('fc-sub');
+      const backEl = document.getElementById('fc-back-details');
+
+      if (!isCardFlipped) {
+        titleEl.textContent = item.word;
+        subEl.textContent = item.ipa + ' — Click card to reveal meaning & lesson context';
+        backEl.classList.add('hidden');
+      } else {
+        titleEl.textContent = item.word;
+        subEl.textContent = item.def;
+        document.getElementById('fc-quote').textContent = item.quote;
+        document.getElementById('fc-es').textContent = '🇪🇸 ' + item.es;
+        backEl.classList.remove('hidden');
+      }
+    }
+
+    function flipFlashcard() {
+      isCardFlipped = !isCardFlipped;
+      renderFlashcard();
+    }
+    function nextFlashcard() {
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex + 1) % FLASHCARD_KEYS.length;
+      renderFlashcard();
+    }
+    function prevFlashcard() {
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex - 1 + FLASHCARD_KEYS.length) % FLASHCARD_KEYS.length;
+      renderFlashcard();
+    }
+    function speakCurrentFlashcard() {
+      const key = FLASHCARD_KEYS[currentCardIndex];
+      const item = VOCAB_DB[key];
+      if (item) speakWord(item.word.replace(/\s*\(.*?\)/g, ''));
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = QUIZ_QUESTIONS.map((q, qIdx) => `
+        <div class="sanctuary-subcard rounded-2xl p-4 space-y-2.5">
+          <p class="text-xs sm:text-sm font-medium text-slatewarm-900">${q.q}</p>
+          <div class="flex flex-wrap gap-2">
+            ${q.options.map((opt, oIdx) => `
+              <button id="qbtn-${qIdx}-${oIdx}" onclick="answerQuiz(${qIdx}, ${oIdx})" class="px-3 py-1.5 rounded-xl border border-[#dfd0b5] bg-parchment-50 hover:bg-autumn-100 text-xs font-medium text-stone-700 transition">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <p id="qexp-${qIdx}" class="hidden text-xs text-sage-800 bg-sage-50 p-2.5 rounded-xl border border-sage-200"></p>
+        </div>
+      `).join('');
+    }
+
+    function answerQuiz(qIdx, oIdx) {
+      const q = QUIZ_QUESTIONS[qIdx];
+      const expEl = document.getElementById('qexp-' + qIdx);
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById('qbtn-' + qIdx + '-' + idx);
+        if (idx === q.correct) {
+          btn.className = 'px-3 py-1.5 rounded-xl border border-sage-500 bg-sage-600 text-white text-xs font-semibold';
+        } else if (idx === oIdx) {
+          btn.className = 'px-3 py-1.5 rounded-xl border border-autumn-300 bg-autumn-100 text-autumn-900 text-xs';
+        }
+      });
+      expEl.textContent = '✨ ' + q.explain;
+      expEl.classList.remove('hidden');
+
+      if (oIdx === q.correct && !quizAnswered.has(qIdx)) {
+        quizAnswered.add(qIdx);
+        document.getElementById('quiz-score-badge').textContent = quizAnswered.size + ' / ' + QUIZ_QUESTIONS.length + ' Completed';
+        if (quizAnswered.size === QUIZ_QUESTIONS.length && typeof confetti === 'function') {
+          confetti({ particleCount: 55, spread: 60, origin: { y: 0.7 }, colors: ['#be6f38', '#5b826f', '#e2b086'] });
+        }
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. TAB NAVIGATION, FILTERS & THEME SWITCHERS
+    // -------------------------------------------------------------------------
+    function switchTab(tabName) {
+      const tabs = ['transcript', 'vocab', 'fixes', 'places', 'practice'];
+      tabs.forEach(t => {
+        const panel = document.getElementById('tab-panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tabName) {
+          panel.classList.remove('hidden');
+          btn.className = 'tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 bg-sage-700 text-white shadow-sm';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(panel, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+          }
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'tab-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-2 text-stone-700 hover:bg-parchment-100';
+        }
+      });
+    }
+
+    function filterTranscript() {
+      renderTranscript();
+    }
+
+    function scrollToChapter(chapId) {
+      document.getElementById('speaker-filter').value = 'all';
+      document.getElementById('transcript-search').value = '';
+      renderTranscript();
+      const el = document.getElementById(chapId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    let highlightsOn = true;
+    function toggleVocabHighlights() {
+      highlightsOn = !highlightsOn;
+      document.body.classList.toggle('hide-vocab-highlights', !highlightsOn);
+      const btn = document.getElementById('btn-toggle-highlights');
+      btn.querySelector('span').textContent = 'Vocab Highlights: ' + (highlightsOn ? 'On' : 'Off');
+    }
+
+    let asrBadgesOn = true;
+    function toggleAsrBadges() {
+      asrBadgesOn = !asrBadgesOn;
+      document.body.classList.toggle('hide-asr-fixes', !asrBadgesOn);
+      const btn = document.getElementById('btn-toggle-asr');
+      btn.querySelector('span').textContent = 'Note-Taker Fixes: ' + (asrBadgesOn ? 'Visible' : 'Hidden');
+    }
+
+    function setThemeMood(mood) {
+      document.body.setAttribute('data-theme', mood);
+      ['kensington', 'winchester', 'twilight'].forEach(m => {
+        const btn = document.getElementById('theme-' + m);
+        if (!btn) return;
+        btn.className = m === mood
+          ? 'px-2 py-0.5 rounded-lg bg-autumn-100 text-autumn-800 font-semibold transition'
+          : 'px-2 py-0.5 rounded-lg text-stone-600 hover:text-stone-900 transition';
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // 8. BRITISH ENGLISH SPEECH SYNTHESIS (en-GB)
+    // -------------------------------------------------------------------------
+    let speechRate = 1.0;
+    function setVoiceRate(rate) {
+      speechRate = rate;
+      document.getElementById('rate-slow').className = rate < 1
+        ? 'px-1.5 py-0.5 rounded-md text-[11px] bg-sage-600 text-white font-semibold transition'
+        : 'px-1.5 py-0.5 rounded-md text-[11px] text-stone-600 hover:bg-parchment-100 transition';
+      document.getElementById('rate-normal').className = rate >= 1
+        ? 'px-1.5 py-0.5 rounded-md text-[11px] bg-sage-600 text-white font-semibold transition'
+        : 'px-1.5 py-0.5 rounded-md text-[11px] text-stone-600 hover:bg-parchment-100 transition';
+    }
+
+    function speakWord(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-GB';
+      utter.rate = speechRate;
+      const voices = window.speechSynthesis.getVoices();
+      const ukVoice = voices.find(v => v.lang.includes('en-GB') && (v.name.includes('Libby') || v.name.includes('Sonia') || v.name.includes('Google UK') || v.name.includes('Natural'))) || voices.find(v => v.lang.includes('en-GB'));
+      if (ukVoice) utter.voice = ukVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakPlainTurn(turnId) {
+      const turn = TRANSCRIPT_TURNS.find(t => t.id === turnId);
+      if (!turn) return;
+      const temp = document.createElement('div');
+      temp.innerHTML = turn.html;
+      temp.querySelectorAll('.asr-fix-pill').forEach(el => el.remove());
+      speakWord(temp.textContent || '');
+    }
+
+    // -------------------------------------------------------------------------
+    // 9. CALMING AUTUMN BREEZE & RAIN SOUNDSCAPE (WEB AUDIO API)
+    // -------------------------------------------------------------------------
+    let audioCtx = null;
+    let soundscapePlaying = false;
+    let masterGain = null;
+    let lfoTimer = null;
+    let currentFilter = null;
+
+    function buildNoiseBuffer(ctx) {
+      const bufferSize = ctx.sampleRate * 4;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = buffer.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+        b6 = white * 0.115926;
+      }
+      return buffer;
+    }
+
+    function toggleSoundscape() {
+      const label = document.getElementById('soundscape-label');
+      const btn = document.getElementById('soundscape-btn');
+
+      if (!soundscapePlaying) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const noiseSource = audioCtx.createBufferSource();
+        noiseSource.buffer = buildNoiseBuffer(audioCtx);
+        noiseSource.loop = true;
+
+        currentFilter = audioCtx.createBiquadFilter();
+        masterGain = audioCtx.createGain();
+        const vol = parseFloat(document.getElementById('soundscape-volume').value || '0.22');
+        masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        masterGain.gain.exponentialRampToValueAtTime(vol, audioCtx.currentTime + 1.5);
+
+        noiseSource.connect(currentFilter);
+        currentFilter.connect(masterGain);
+        masterGain.connect(audioCtx.destination);
+        noiseSource.start();
+        audioCtx._activeSource = noiseSource;
+
+        soundscapePlaying = true;
+        applyPresetSettings(document.getElementById('soundscape-preset').value);
+
+        label.textContent = 'Breeze Audio: Playing';
+        btn.classList.add('bg-sage-100', 'text-sage-900');
+      } else {
+        if (lfoTimer) clearInterval(lfoTimer);
+        if (audioCtx && audioCtx._activeSource) {
+          try { audioCtx._activeSource.stop(); } catch (e) {}
+        }
+        soundscapePlaying = false;
+        label.textContent = 'Breeze Audio: Off';
+        btn.classList.remove('bg-sage-100', 'text-sage-900');
+      }
+    }
+
+    function applyPresetSettings(preset) {
+      if (!currentFilter || !audioCtx) return;
+      if (lfoTimer) clearInterval(lfoTimer);
+
+      if (preset === 'breeze') {
+        currentFilter.type = 'bandpass';
+        currentFilter.Q.value = 1.8;
+        currentFilter.frequency.setValueAtTime(340, audioCtx.currentTime);
+        let t = 0;
+        lfoTimer = setInterval(() => {
+          if (!soundscapePlaying) return;
+          t += 0.15;
+          const freq = 320 + Math.sin(t) * 140 + Math.cos(t * 0.4) * 60;
+          currentFilter.frequency.setTargetAtTime(Math.max(180, freq), audioCtx.currentTime, 0.4);
+        }, 300);
+      } else if (preset === 'rain') {
+        currentFilter.type = 'lowpass';
+        currentFilter.Q.value = 0.7;
+        currentFilter.frequency.setTargetAtTime(880, audioCtx.currentTime, 0.3);
+      } else {
+        currentFilter.type = 'lowpass';
+        currentFilter.Q.value = 1.2;
+        currentFilter.frequency.setTargetAtTime(240, audioCtx.currentTime, 0.3);
+      }
+    }
+
+    function changeSoundscapePreset(preset) {
+      if (soundscapePlaying) applyPresetSettings(preset);
+    }
+
+    function updateSoundscapeVolume(val) {
+      if (masterGain && audioCtx && soundscapePlaying) {
+        masterGain.gain.setTargetAtTime(parseFloat(val), audioCtx.currentTime, 0.15);
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 10. AUTUMN LEAVES IN BREEZE CANVAS ENGINE
+    // -------------------------------------------------------------------------
+    const canvas = document.getElementById('autumn-breeze-canvas');
+    const ctx = canvas.getContext('2d');
+    let leaves = [];
+    let leafMode = 1; // 1 = Gentle (15 leaves), 2 = Breeze (30 leaves), 0 = Off
+
+    const LEAF_COLORS = [
+      'rgba(190, 111, 56, 0.42)',
+      'rgba(211, 140, 87, 0.40)',
+      'rgba(165, 191, 177, 0.42)',
+      'rgba(203, 179, 142, 0.45)',
+      'rgba(163, 88, 43, 0.34)'
+    ];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createLeaf() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: 6 + Math.random() * 8,
+        speedY: 0.35 + Math.random() * 0.55,
+        speedX: 0.25 + Math.random() * 0.45,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.014,
+        swayOffset: Math.random() * 100,
+        color: LEAF_COLORS[Math.floor(Math.random() * LEAF_COLORS.length)]
+      };
+    }
+
+    function rebuildLeaves() {
+      const count = leafMode === 1 ? 15 : leafMode === 2 ? 30 : 0;
+      leaves = Array.from({ length: count }, () => {
+        const l = createLeaf();
+        l.y = Math.random() * canvas.height;
+        return l;
+      });
+    }
+
+    function cycleLeafBreeze() {
+      leafMode = (leafMode + 1) % 3;
+      const label = document.getElementById('leaves-label');
+      if (leafMode === 1) label.textContent = 'Leaves: Gentle';
+      else if (leafMode === 2) label.textContent = 'Leaves: Breeze';
+      else label.textContent = 'Leaves: Still';
+      rebuildLeaves();
+    }
+
+    let breezeTime = 0;
+    function animateLeaves() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (leafMode !== 0) {
+        breezeTime += 0.01;
+        leaves.forEach(l => {
+          l.y += l.speedY;
+          l.x += l.speedX + Math.sin(breezeTime + l.swayOffset) * 0.45;
+          l.angle += l.spin;
+
+          if (l.y > canvas.height + 20) {
+            l.y = -20;
+            l.x = Math.random() * canvas.width;
+          }
+          if (l.x > canvas.width + 20) l.x = -20;
+
+          ctx.save();
+          ctx.translate(l.x, l.y);
+          ctx.rotate(l.angle);
+          ctx.fillStyle = l.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, l.size, l.size * 0.52, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        });
+      }
+      requestAnimationFrame(animateLeaves);
+    }
+
+    // -------------------------------------------------------------------------
+    // INITIALIZE ON LOAD (WRAPPED IN TRY/CATCH PER RULE 6)
+    // -------------------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderTranscript();
+        renderVocabGrid();
+        renderFixesAndPolishes();
+        renderFlashcard();
+        renderQuiz();
+        inspectVocab('proprietary');
+        rebuildLeaves();
+        animateLeaves();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } catch (err) {
+        console.error('Initialization error caught safely:', err);
+      }
+    });
+  </script>
+</body>
+</html>
