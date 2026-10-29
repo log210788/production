@@ -304,6 +304,18 @@
           <button onclick="setVoiceRate(1.0)" id="rate-normal" class="px-1.5 py-0.5 rounded-md text-[11px] bg-sage-600 text-white font-semibold transition">UK 1×</button>
         </div>
 
+        <!-- Lesson Switcher (Lesson 01 & Lesson 02) -->
+        <div class="flex items-center gap-1 bg-white/95 border border-[#dfd0b5] rounded-xl p-1 text-xs shadow-sm" role="navigation" aria-label="Choose Lesson">
+          <a href="index.html" class="px-2.5 py-1 rounded-lg bg-sage-700 text-white font-semibold flex items-center gap-1.5 shadow-sm transition" aria-current="page">
+            <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+            <span>Lesson 01</span>
+          </a>
+          <a href="lesson-02.html" class="px-2.5 py-1 rounded-lg text-stone-700 hover:bg-autumn-100 hover:text-autumn-900 font-semibold flex items-center gap-1.5 transition" title="Switch to Lesson 02: Cozy Unpacking & Spatial Prepositions">
+            <i data-lucide="package-open" class="w-3.5 h-3.5 text-autumn-600"></i>
+            <span>Lesson 02 📦</span>
+          </a>
+        </div>
+
         <!-- Theme Mood Selector -->
         <div class="hidden lg:flex items-center gap-1 bg-white/90 border border-[#dfd0b5] rounded-xl p-1 text-[11px] shadow-sm">
           <button onclick="setThemeMood('kensington')" id="theme-kensington" class="px-2 py-0.5 rounded-lg bg-autumn-100 text-autumn-800 font-semibold transition">Bath Stone</button>
@@ -317,6 +329,56 @@
 
   <!-- MAIN CONTAINER -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 space-y-7 relative z-10">
+
+    <!-- LESSON SELECTOR BANNER (CHOOSE LESSON 01 OR LESSON 02) -->
+    <section class="sanctuary-card rounded-3xl p-4 sm:p-5 border-2 border-[#dfd0b5] no-print" aria-label="Choose Your Lesson">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-xl bg-autumn-100 text-autumn-700">
+            <i data-lucide="library" class="w-4 h-4"></i>
+          </span>
+          <div>
+            <h2 class="font-serif font-bold text-base sm:text-lg text-slatewarm-900 leading-tight">Choose Your Lesson Sanctuary</h2>
+            <p class="text-xs text-stone-600">Select between your two completed lessons below at any time</p>
+          </div>
+        </div>
+        <span class="text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-sage-100 text-sage-800 border border-sage-200 self-start md:self-auto">
+          Currently Viewing: Lesson 01
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <!-- Lesson 01 Card (Active) -->
+        <a href="index.html" class="group relative rounded-2xl p-4 bg-gradient-to-br from-sage-50/95 via-white to-parchment-50 border-2 border-sage-600 shadow-sm flex items-start justify-between gap-3 transition">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sage-700 text-white">Lesson 01 • Active</span>
+              <span class="text-xs font-mono text-stone-500">Oct 27, 2026 • 56m 37s</span>
+            </div>
+            <h3 class="font-serif font-bold text-lg text-slatewarm-900">Full-Stack Career Pivot, Film & Tech Fluency</h3>
+            <p class="text-xs text-stone-600">Complete 6-chapter transcript, 72 flagged vocabulary & tech idioms, Sopra Steria & Goya animation notes.</p>
+          </div>
+          <span class="shrink-0 w-9 h-9 rounded-xl bg-sage-700 text-white flex items-center justify-center shadow-sm">
+            <i data-lucide="check" class="w-4 h-4"></i>
+          </span>
+        </a>
+
+        <!-- Lesson 02 Card (Switch) -->
+        <a href="lesson-02.html" class="group relative rounded-2xl p-4 bg-white/85 hover:bg-autumn-50/90 border-2 border-[#e2d5be] hover:border-autumn-500 shadow-sm flex items-start justify-between gap-3 transition">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-autumn-100 text-autumn-800 border border-autumn-300 group-hover:bg-autumn-700 group-hover:text-white transition">Lesson 02 • Open Lesson 📦</span>
+              <span class="text-xs font-mono text-stone-500">Oct 28, 2026 • 01h 17m</span>
+            </div>
+            <h3 class="font-serif font-bold text-lg text-slatewarm-900 group-hover:text-autumn-800 transition">Cozy Unpacking Game, Spatial Prepositions & Home</h3>
+            <p class="text-xs text-stone-600">Complete 718-turn transcript across 5 rooms, 52 spatial & household terms, room map, flashcards & quiz.</p>
+          </div>
+          <span class="shrink-0 w-9 h-9 rounded-xl bg-autumn-100 group-hover:bg-autumn-700 text-autumn-800 group-hover:text-white flex items-center justify-center shadow-sm transition">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </span>
+        </a>
+      </div>
+    </section>
 
     <!-- PEACEFUL HERO BANNER -->
     <section class="sanctuary-card rounded-3xl p-6 sm:p-9 relative overflow-hidden">
@@ -903,6 +965,19 @@
             <p class="text-stone-600 leading-relaxed">
               You mentioned at <code>52:34</code> that you have never had to answer this classic question before! Next time, we will build a natural, authentic 3-step structure for it that highlights your passion for continuous learning and <strong>investing</strong> in team growth.
             </p>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-parchment-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <span class="text-stone-600">Switch between your completed lessons:</span>
+          <div class="flex items-center gap-2">
+            <a href="index.html" class="px-3 py-2 rounded-xl bg-sage-700 text-white font-semibold flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="feather" class="w-4 h-4"></i>
+              <span>Lesson 01 (Current)</span>
+            </a>
+            <a href="lesson-02.html" class="px-3.5 py-2 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white font-semibold flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="package-open" class="w-4 h-4"></i>
+              <span>Go to Lesson 02 (Cozy Unpacking) →</span>
+            </a>
           </div>
         </div>
       </div>
