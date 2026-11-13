@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara & Louie • Lesson 03: Full-Stack Tech Interview Mastery & Fluency Lab</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+              400: '#cbb38e',
+              500: '#b6966b',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              300: '#e2b086',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#854524',
+              800: '#6c3921',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e4ece7',
+              200: '#cadad1',
+              300: '#a5bfb1',
+              400: '#7b9f8d',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#3a5448',
+              800: '#30443b',
+            },
+            slatewarm: {
+              700: '#3d4441',
+              800: '#2b312e',
+              900: '#1e2321',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons & Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-base: #f9f6f0;
+      --bg-card: rgba(255, 253, 249, 0.94);
+      --bg-subcard: rgba(255, 255, 255, 0.98);
+      --border-soft: #e6decb;
+      --border-accent: #d9c8b0;
+      --text-main: #2b312e;
+      --text-muted: #5c6660;
+      --grad-1: rgba(238, 208, 181, 0.38);
+      --grad-2: rgba(202, 218, 209, 0.42);
+      --grad-3: rgba(246, 241, 231, 0.65);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      background-image:
+        radial-gradient(at 10% 12%, var(--grad-1) 0px, transparent 55%),
+        radial-gradient(at 88% 18%, var(--grad-2) 0px, transparent 52%),
+        radial-gradient(at 50% 90%, var(--grad-3) 0px, transparent 65%);
+      background-attachment: fixed;
+    }
+
+    .sanctuary-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 35px -10px rgba(60, 45, 30, 0.07);
+    }
+
+    .sanctuary-subcard {
+      background: var(--bg-subcard);
+      border: 1px solid var(--border-soft);
+      transition: all 0.22s ease;
+    }
+
+    .sanctuary-subcard:hover {
+      border-color: var(--border-accent);
+      box-shadow: 0 8px 24px -8px rgba(133, 69, 36, 0.09);
+    }
+
+    .vocab-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 0.375rem;
+      background: rgba(190, 111, 56, 0.12);
+      border-bottom: 2px solid rgba(163, 88, 43, 0.55);
+      color: #6c3921;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .vocab-pill:hover {
+      background: rgba(190, 111, 56, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .star-badge-s { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .star-badge-t { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .star-badge-a { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .star-badge-r { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+    /* Flashcard 3D flip */
+    .flashcard-inner {
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flashcard-flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front, .flashcard-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased selection:bg-autumn-200 selection:text-autumn-900">
+
+  <!-- TOP NAVIGATION -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#fbf9f5]/92 border-b border-[#e6decb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="w-9 h-9 rounded-xl bg-gradient-to-br from-sage-600 to-autumn-500 flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm hover:scale-105 transition" title="Back to Lesson 01 Transcript">
+          B
+        </a>
+        <div>
+          <h1 class="font-serif font-bold text-lg sm:text-xl text-slatewarm-900 leading-none flex items-center gap-2">
+            <span>Barbara & Louie • Lesson 03</span>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded-full bg-autumn-100 text-autumn-800 text-[10px] font-mono uppercase tracking-wider font-semibold">Tech Interview & Fluency Lab</span>
+          </h1>
+          <p class="text-[11px] font-mono text-stone-500 mt-0.5">
+            The 90s Hybrid Pitch • STAR Angular Method • 5-Year Vision • Zero-Latency Recall
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Ambient Soundscape Player (Web Audio API) -->
+        <button id="soundscape-btn" onclick="toggleSoundscape()" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-parchment-100 text-stone-700 text-xs font-semibold flex items-center gap-1.5 border border-parchment-300 transition shadow-sm" title="Toggle calming ambient sound">
+          <i data-lucide="wind" id="soundscape-icon" class="w-3.5 h-3.5 text-autumn-600"></i>
+          <span id="soundscape-label" class="hidden md:inline">Breeze Audio: Off</span>
+        </button>
+
+        <!-- Voice Rate (UK Speech) -->
+        <button onclick="toggleVoiceRate()" id="voice-rate-btn" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-parchment-100 text-stone-700 text-xs font-mono font-medium border border-parchment-300 transition shadow-sm" title="Speech Synthesis Speed">
+          🔊 <span id="voice-rate-text">1.0× UK</span>
+        </button>
+
+        <!-- Navigation back to Lessons -->
+        <a href="index.html" class="px-2.5 py-1.5 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-stone-700 text-xs font-semibold flex items-center gap-1 border border-parchment-300 transition shadow-sm" title="Lesson 01 Portal">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-autumn-700"></i>
+          <span>L01</span>
+        </a>
+        <a href="lesson-02.html" class="px-2.5 py-1.5 rounded-xl bg-sage-100 hover:bg-sage-200 text-sage-900 text-xs font-semibold flex items-center gap-1 border border-sage-300 transition shadow-sm" title="Lesson 02 Unpacking & Prepositions Portal">
+          <i data-lucide="package-open" class="w-3.5 h-3.5 text-sage-700"></i>
+          <span>L02 Unpacking</span>
+        </a>
+
+        <!-- Teacher Strategy Drawer Toggle -->
+        <button onclick="toggleTeacherDrawer()" class="px-3 py-1.5 rounded-xl bg-sage-700 hover:bg-sage-800 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Teacher Guide</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+    <!-- TEACHER STRATEGY DRAWER (FOR LOUIE) -->
+    <section id="teacher-drawer" class="hidden sanctuary-card rounded-3xl p-6 sm:p-8 border-2 border-sage-300 bg-sage-50/95 space-y-5">
+      <div class="flex items-center justify-between border-b border-sage-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-full bg-sage-700 text-white text-[11px] font-mono uppercase tracking-wider font-semibold">Tutor Executive Blueprint</span>
+          <h2 class="font-serif font-bold text-xl sm:text-2xl text-slatewarm-900">Louie's Executive Playbook: Framing Barbara for International Tech Teams</h2>
+        </div>
+        <button onclick="toggleTeacherDrawer()" class="text-xs text-stone-500 hover:text-stone-800 flex items-center gap-1">
+          <i data-lucide="x" class="w-4 h-4"></i> Hide before screen-share
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
+        <div class="bg-white/95 rounded-2xl p-5 border border-sage-200 space-y-2.5">
+          <div class="font-mono text-[11px] uppercase text-autumn-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="crown" class="w-4 h-4"></i>
+            <span>1. The Unfair Superpower (Goya & Production)</span>
+          </div>
+          <p class="text-stone-700 leading-relaxed">
+            Standard junior developers know only syntax and leetcode; they struggle to talk to clients, miss delivery schedules, and panic when specifications change. Barbara has <strong>10+ years coordinating teams, balancing budgets, and shipping a Goya-nominated film</strong> under intense deadline pressure. Frame her career switch not as an apology, but as an <em>executive maturity advantage</em> that saves engineering leads hundreds of management hours.
+          </p>
+        </div>
+
+        <div class="bg-white/95 rounded-2xl p-5 border border-sage-200 space-y-2.5">
+          <div class="font-mono text-[11px] uppercase text-sage-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>2. The "Pride Comes Before a Fall" Reframe</span>
+          </div>
+          <p class="text-stone-700 leading-relaxed">
+            In Lesson 01 (<span class="font-mono">54:01</span>), you shared your Hilton hiring insight: candidates fail when they say <em>"At my old job we did it this way."</em> Barbara's natural personality is refreshingly humble and curious. We coach her to balance that humility with firm ownership: <em>"I respect your architecture and team conventions, while offering the disciplined execution of a seasoned producer."</em>
+          </p>
+        </div>
+
+        <div class="bg-white/95 rounded-2xl p-5 border border-sage-200 space-y-2.5">
+          <div class="font-mono text-[11px] uppercase text-autumn-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="sparkle" class="w-4 h-4"></i>
+            <span>3. Taming the AI & Junior Uncertainty</span>
+          </div>
+          <p class="text-stone-700 leading-relaxed">
+            In Lesson 01 (<span class="font-mono">49:33</span>), Barbara expressed anxiety: <em>"Right now I feel full of uncertainty with my career change."</em> Tech leads in 2026 are flooded with low-quality AI-generated PRs. The antidote is demonstrating <strong>strict TypeScript type discipline</strong>, clean component encapsulation in Angular, and strong architectural reasoning that an LLM cannot fake.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- HERO SECTION: LESSON 02 FOUNDATION & RECALL                         -->
+    <!-- =================================================================== -->
+    <section class="sanctuary-card rounded-3xl p-6 sm:p-9 relative overflow-hidden">
+      <div class="absolute -right-10 -top-10 w-72 h-72 bg-autumn-200/35 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-10 -bottom-10 w-72 h-72 bg-sage-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-sage-100/90 border border-sage-200 text-sage-800 text-xs font-medium">
+            <i data-lucide="compass" class="w-3.5 h-3.5 text-autumn-600"></i>
+            <span>Lesson 03 Focus • Corporate Tech Interview Confidence & Rapid Fluency • October 29, 2026</span>
+          </div>
+
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-slatewarm-900 leading-[1.15]">
+            Bridging Art, Production & Code — <br class="hidden sm:inline" />
+            <span class="text-autumn-700 italic">Your Technical Voice</span> in English
+          </h1>
+
+          <p class="text-stone-600 text-sm sm:text-base leading-relaxed max-w-3xl">
+            In Lesson 01 (<span class="font-mono text-xs">51:56</span>), you shared an honest realization: in the past, your work always came through word-of-mouth recommendations, so you have never had to face a formal English interview where hiring leads ask, <em>"Where do you see yourself in five years?"</em> or ask you to explain an Angular bug under pressure.
+          </p>
+
+          <p class="text-stone-700 text-sm sm:text-base font-medium leading-relaxed max-w-3xl">
+            Today we turn that uncertainty into your strongest asset. We will build your <strong>90-second hybrid pitch</strong>, practice explaining complex <strong>Angular & TypeScript features using the STAR method</strong>, master the <strong>5-year vision question</strong>, and play a <strong>fast-paced spoken fluency gym</strong> so the words come effortlessly to your mouth!
+          </p>
+
+          <div class="flex flex-wrap items-center gap-2.5 pt-2 text-xs text-stone-700">
+            <a href="#fluency-gym" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white font-semibold shadow-sm transition">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+              <span>1. Fast Spoken Fluency Gym</span>
+            </a>
+            <a href="#pitch-studio" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-stone-800 font-semibold border border-parchment-300 transition">
+              <i data-lucide="mic" class="w-3.5 h-3.5 text-autumn-600"></i>
+              <span>2. 90-Second Pitch</span>
+            </a>
+            <a href="#star-lab" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sage-100 hover:bg-sage-200 text-sage-900 font-semibold border border-sage-300 transition">
+              <i data-lucide="layers" class="w-3.5 h-3.5 text-sage-700"></i>
+              <span>3. STAR Method for Sopra Steria</span>
+            </a>
+            <a href="#five-years" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-stone-800 font-semibold border border-parchment-300 transition">
+              <i data-lucide="target" class="w-3.5 h-3.5 text-autumn-600"></i>
+              <span>4. The 5-Year Question</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metric Highlight Tiles -->
+        <div class="lg:col-span-4 grid grid-cols-2 gap-3.5">
+          <div class="sanctuary-subcard rounded-2xl p-4 border border-parchment-300">
+            <span class="text-[11px] font-mono uppercase text-autumn-700 font-semibold">Goal 01</span>
+            <div class="font-serif font-bold text-slatewarm-900 text-xl mt-1">Spoken Speed</div>
+            <p class="text-xs text-stone-600 mt-1">Zero latency when retrieving technical terminology</p>
+          </div>
+          <div class="sanctuary-subcard rounded-2xl p-4 border border-sage-200">
+            <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Goal 02</span>
+            <div class="font-serif font-bold text-slatewarm-900 text-xl mt-1">90s Hybrid Pitch</div>
+            <p class="text-xs text-stone-600 mt-1">Bridging Goya art direction with full-stack code</p>
+          </div>
+          <div class="sanctuary-subcard rounded-2xl p-4 border border-autumn-200">
+            <span class="text-[11px] font-mono uppercase text-autumn-700 font-semibold">Goal 03</span>
+            <div class="font-serif font-bold text-slatewarm-900 text-xl mt-1">STAR Technique</div>
+            <p class="text-xs text-stone-600 mt-1">Structured storytelling for Angular & TypeScript</p>
+          </div>
+          <div class="sanctuary-subcard rounded-2xl p-4 border border-parchment-300">
+            <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Goal 04</span>
+            <div class="font-serif font-bold text-slatewarm-900 text-xl mt-1">Authentic Vision</div>
+            <p class="text-xs text-stone-600 mt-1">Mastering "Where do you see yourself in 5 years?"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 1: FAST-PACED SPOKEN FLUENCY GYM                            -->
+    <!-- =================================================================== -->
+    <section id="fluency-gym" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#e6decb] pb-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full bg-autumn-700 text-white text-[11px] font-mono uppercase tracking-wider font-semibold">Speed & Muscle Memory</span>
+            <span class="text-xs font-mono uppercase text-autumn-800 font-semibold">Heads Up! Warmup Round</span>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Part 1 • Fast Spoken Fluency Gym: Word Recall Without Hesitation
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl">
+            In Lesson 01, you said: <em>"I know the meaning, I just need the words to come quickly to my mouth."</em> In this exercise, click <strong>"Draw Next Word"</strong>, start the 30-second timer, and immediately explain or use the word in a technical/work sentence!
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="startGymTimer(30)" id="gym-timer-btn" class="px-3.5 py-2 rounded-xl bg-autumn-100 hover:bg-autumn-200 text-autumn-900 text-xs font-semibold flex items-center gap-1.5 border border-autumn-300 transition">
+            <i data-lucide="timer" class="w-4 h-4 text-autumn-700"></i>
+            <span id="gym-timer-text">Start 30s Timer</span>
+          </button>
+          <button onclick="drawRandomGymWord()" class="px-4 py-2 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="shuffle" class="w-4 h-4"></i>
+            <span>Draw Next Word</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Speed Card Arena -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Word Spotlight Card -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border-2 border-autumn-200 shadow-sm space-y-4 text-center sm:text-left relative">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-parchment-200 pb-3">
+            <span id="gym-word-cat" class="px-2.5 py-0.5 rounded-full bg-parchment-100 text-stone-700 font-mono text-xs uppercase font-semibold">
+              Category: Tech Architecture
+            </span>
+            <div class="flex items-center gap-2">
+              <span id="gym-word-level" class="px-2 py-0.5 rounded-md bg-sage-100 text-sage-800 font-mono text-xs font-semibold">C1</span>
+              <button onclick="speakGymWord()" class="px-2.5 py-1 rounded-lg bg-parchment-100 hover:bg-parchment-200 text-stone-700 text-xs font-semibold flex items-center gap-1">
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-autumn-700"></i>
+                <span>Listen (UK)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="py-2">
+            <h3 id="gym-word-title" class="font-serif text-3xl sm:text-4xl font-bold text-slatewarm-900">
+              trade-off
+            </h3>
+            <div id="gym-word-ipa" class="font-mono text-xs sm:text-sm text-stone-500 mt-1">
+              /ˈtreɪd.ɒf/ • noun
+            </div>
+          </div>
+
+          <p id="gym-word-def" class="text-stone-700 text-sm sm:text-base leading-relaxed bg-parchment-50 p-4 rounded-xl border border-parchment-200">
+            A situation where you accept an imperfection, delay, or extra cost in order to gain a different advantage (e.g. trading short-term speed for long-term type safety).
+          </p>
+
+          <div class="space-y-1.5 pt-1">
+            <span class="text-xs font-mono text-autumn-700 font-semibold uppercase">Barbara's High-Impact Interview Sentence:</span>
+            <p id="gym-word-quote" class="italic text-xs sm:text-sm text-slatewarm-900 border-l-2 border-autumn-500 pl-3">
+              "When building the Angular service at Sopra Steria, our main <strong>trade-off</strong> was between fast delivery and strict TypeScript type coverage."
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-parchment-200 text-xs text-stone-500">
+            <span id="gym-word-spanish">Conexión en español: <strong>compromiso técnico / concesión equilibrada</strong></span>
+            <span id="gym-counter">Card 1 of 12</span>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Hesitation Killers & Spoken Buffers -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-3 border-2 border-sage-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase text-sage-800 font-semibold">6 Hesitation Killers (Buy Thinking Time)</span>
+              <span class="px-2 py-0.5 rounded bg-sage-100 text-sage-800 text-[10px] font-mono">Fluency Strategy</span>
+            </div>
+            <p class="text-xs text-stone-600">
+              Never sit in silence saying <em>"Err... how you say..."</em>. Use these natural native phrases while your brain retrieves the vocabulary:
+            </p>
+            <div class="space-y-2 text-xs">
+              <div onclick="speakWord(this.innerText)" class="p-2.5 rounded-xl bg-parchment-50 hover:bg-parchment-100 border border-parchment-200 cursor-pointer flex items-center justify-between">
+                <span>"That's a very fair question—at a high level..."</span>
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+              </div>
+              <div onclick="speakWord(this.innerText)" class="p-2.5 rounded-xl bg-parchment-50 hover:bg-parchment-100 border border-parchment-200 cursor-pointer flex items-center justify-between">
+                <span>"The core trade-off we faced was..."</span>
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+              </div>
+              <div onclick="speakWord(this.innerText)" class="p-2.5 rounded-xl bg-parchment-50 hover:bg-parchment-100 border border-parchment-200 cursor-pointer flex items-center justify-between">
+                <span>"To put that into practical perspective..."</span>
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+              </div>
+              <div onclick="speakWord(this.innerText)" class="p-2.5 rounded-xl bg-parchment-50 hover:bg-parchment-100 border border-parchment-200 cursor-pointer flex items-center justify-between">
+                <span>"In other words, the bottleneck wasn't the API, but..."</span>
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+              </div>
+              <div onclick="speakWord(this.innerText)" class="p-2.5 rounded-xl bg-parchment-50 hover:bg-parchment-100 border border-parchment-200 cursor-pointer flex items-center justify-between">
+                <span>"If I zoom in on the technical implementation..."</span>
+                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 2: THE 90-SECOND HYBRID PITCH STUDIO                        -->
+    <!-- =================================================================== -->
+    <section id="pitch-studio" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#e6decb] pb-5">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Prompt 01 from Lesson 01 • Master Your Introduction</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Part 2 • The 90-Second Hybrid Pitch: "Tell Me About Yourself"
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl">
+            How to frame your background so a tech hiring manager immediately thinks: <em>"This isn't a junior; this is an experienced production manager who writes clean full-stack code."</em>
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="startPitchTimer(90)" id="pitch-timer-btn" class="px-3.5 py-2 rounded-xl bg-sage-100 hover:bg-sage-200 text-sage-900 text-xs font-semibold flex items-center gap-1.5 border border-sage-300 transition">
+            <i data-lucide="hourglass" class="w-4 h-4 text-sage-700"></i>
+            <span id="pitch-timer-text">90s Practice Timer</span>
+          </button>
+          <button onclick="speakPitchModel()" class="px-4 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span>Listen to Model Pitch (UK)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4-Beat Story Arc Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Beat 1 -->
+        <div onclick="selectPitchBeat(1)" id="beat-card-1" class="cursor-pointer sanctuary-subcard rounded-2xl p-4 border-2 border-autumn-500 bg-autumn-50/50 space-y-2 transition">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-autumn-100 text-autumn-800 font-mono text-[10px] font-bold">BEAT 1 • 20s</span>
+            <i data-lucide="palette" class="w-4 h-4 text-autumn-600"></i>
+          </div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">Creative Direction & Production</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            10+ years managing artistic teams, logistics & financing for a Goya-nominated animated film.
+          </p>
+        </div>
+
+        <!-- Beat 2 -->
+        <div onclick="selectPitchBeat(2)" id="beat-card-2" class="cursor-pointer sanctuary-subcard rounded-2xl p-4 border border-parchment-300 hover:border-autumn-300 space-y-2 transition">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-parchment-100 text-stone-700 font-mono text-[10px] font-bold">BEAT 2 • 20s</span>
+            <i data-lucide="code" class="w-4 h-4 text-stone-600"></i>
+          </div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">The Technical Pivot (DAW)</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Completing an intensive 2-year Advanced Vocational Degree in Web Application Development.
+          </p>
+        </div>
+
+        <!-- Beat 3 -->
+        <div onclick="selectPitchBeat(3)" id="beat-card-3" class="cursor-pointer sanctuary-subcard rounded-2xl p-4 border border-parchment-300 hover:border-autumn-300 space-y-2 transition">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-sage-100 text-sage-800 font-mono text-[10px] font-bold">BEAT 3 • 25s</span>
+            <i data-lucide="cpu" class="w-4 h-4 text-sage-600"></i>
+          </div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">Enterprise Coding at Sopra Steria</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Building reactive frontends with Angular, TypeScript, strict typing & REST APIs on production teams.
+          </p>
+        </div>
+
+        <!-- Beat 4 -->
+        <div onclick="selectPitchBeat(4)" id="beat-card-4" class="cursor-pointer sanctuary-subcard rounded-2xl p-4 border border-parchment-300 hover:border-autumn-300 space-y-2 transition">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded bg-autumn-100 text-autumn-800 font-mono text-[10px] font-bold">BEAT 4 • 25s</span>
+            <i data-lucide="target" class="w-4 h-4 text-autumn-600"></i>
+          </div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">The Unique Value Proposition</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Bridging design and engineering for international remote squads from Valencia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Pitch Script Box with Vocab Highlighting -->
+      <div class="sanctuary-subcard rounded-2xl p-6 sm:p-7 border-2 border-parchment-300 space-y-4 bg-[#fcfaf6]">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-parchment-200 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs uppercase text-autumn-700 font-semibold">Barbara's Complete 90-Second Model Script</span>
+            <span class="px-2 py-0.5 rounded bg-sage-100 text-sage-800 text-[11px] font-mono">~180 words • 1m 25s spoken</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="copyPitchText()" class="px-3 py-1 rounded-lg bg-parchment-100 hover:bg-parchment-200 text-stone-700 text-xs font-semibold flex items-center gap-1 border border-parchment-300">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span id="copy-btn-text">Copy Script</span>
+            </button>
+            <button onclick="speakPitchModel()" class="px-3 py-1 rounded-lg bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold flex items-center gap-1 shadow-sm">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              <span>Play Audio</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="pitch-script-content" class="font-serif text-lg sm:text-xl leading-relaxed text-slatewarm-900 space-y-4">
+          <p>
+            "I'm a <strong>Full-Stack Web Developer</strong> with a unique background: before transitioning into software engineering, I spent over a decade in <span class="vocab-pill" onclick="speakWord('artistic direction')">artistic direction</span> and multimedia design, coordinating budgets, creative teams, and production logistics for major events and even an <strong>animated short film nominated for the Spanish Academy Awards (Goya)</strong>.
+          </p>
+          <p>
+            Because I love building systems from the ground up, I completed Spain's intensive two-year <span class="vocab-pill" onclick="speakWord('advanced vocational degree')">Advanced Vocational Degree in Web Application Development (DAW)</span>, focusing on modern web standards, databases, and JavaScript architectures.
+          </p>
+          <p>
+            Most recently, during my internship at <strong>Sopra Steria</strong>, I built client-facing features using <strong>Angular and TypeScript</strong>. Working within strict enterprise conventions, I focused on component lifecycle management, reactive data streams, and robust return-type safety.
+          </p>
+          <p>
+            What I bring to your team is not just clean code, but the <span class="vocab-pill" onclick="speakWord('cross-functional')">cross-functional</span> maturity to bridge design and engineering seamlessly. I'm based in Valencia, and I'm looking for a remote full-stack role where I can invest deeply in team growth and help build scalable, user-centric products."
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs border-t border-parchment-200">
+          <div class="p-2.5 rounded-xl bg-white border border-parchment-200">
+            <strong class="text-autumn-800">Why it works:</strong> It mentions the Goya nomination immediately as proof of project delivery, not as an unrelated hobby.
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-parchment-200">
+            <strong class="text-sage-800">Tech credibility:</strong> Emphasizes TypeScript type safety and Sopra Steria enterprise experience.
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-parchment-200">
+            <strong class="text-autumn-800">Clear boundary:</strong> Explicitly states remote preference from Valencia with long-term investment.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 3: TECHNICAL STORYTELLING LAB (THE STAR METHOD)              -->
+    <!-- =================================================================== -->
+    <section id="star-lab" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#e6decb] pb-5">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Prompt 02 from Lesson 01 • Technical Case Studies</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Part 3 • The STAR Technical Lab: Explaining Angular & TypeScript at Sopra Steria
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl">
+            In technical interviews, recruiters don't want abstract theory; they want a crisp 90-second story about a feature you implemented, how you debugged a type or asynchronous bug, and the final result.
+          </p>
+        </div>
+
+        <!-- STAR Case Switcher -->
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <button onclick="switchStarCase(1)" id="star-btn-1" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-sage-700 text-white shadow-sm">
+            Case A: TypeScript Interfaces & Return Types
+          </button>
+          <button onclick="switchStarCase(2)" id="star-btn-2" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300">
+            Case B: Angular RxJS Asynchronous State Bug
+          </button>
+        </div>
+      </div>
+
+      <!-- CASE A: TYPESCRIPT INTERFACES & RETURN TYPES -->
+      <div id="star-case-1" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Situation -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-red-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-s font-mono text-[11px] font-bold uppercase">Situation (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Legacy API Inconsistencies</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              At <strong>Sopra Steria</strong>, our Angular client application consumed backend endpoints that occasionally returned optional nested fields, leading to frequent runtime <code>undefined</code> crashes in development.
+            </p>
+          </div>
+
+          <!-- Task -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-amber-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-t font-mono text-[11px] font-bold uppercase">Task (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Enforcing Strict Type Safety</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              My responsibility was to refactor the data access service, define strict TypeScript models, and guarantee predictable return types across our component hierarchy.
+            </p>
+          </div>
+
+          <!-- Action -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-indigo-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-a font-mono text-[11px] font-bold uppercase">Action (30s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Interfaces, Generics & Pipes</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              I authored clean TypeScript <code>interfaces</code> with explicit optional flags (<code>?</code>), added generic return types to our HTTP service calls, and used RxJS <code>map()</code> pipes to sanitize incoming payloads before reaching components.
+            </p>
+          </div>
+
+          <!-- Result -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-green-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-r font-mono text-[11px] font-bold uppercase">Result (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Zero Runtime Crashes</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              This completely eliminated undefined property runtime errors, improved auto-complete for the entire squad in VS Code, and accelerated code review velocity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Spoken Script for Case A -->
+        <div class="p-5 rounded-2xl bg-parchment-100/90 border border-parchment-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="font-mono text-xs uppercase text-sage-800 font-semibold">🎙️ Practice This Turn (UK Audio Available):</span>
+            <p class="italic text-xs sm:text-sm text-stone-800">
+              "At Sopra Steria, we had issues with nested API payloads causing runtime crashes. My task was to enforce strict type safety across our Angular service. I introduced TypeScript interfaces and typed HTTP requests, which eliminated undefined errors and made our code self-documenting."
+            </p>
+          </div>
+          <button onclick="speakWord('At Sopra Steria, we had issues with nested API payloads causing runtime crashes. My task was to enforce strict type safety across our Angular service. I introduced TypeScript interfaces and typed HTTP requests, which eliminated undefined errors and made our code self-documenting.')" class="shrink-0 px-3.5 py-2 rounded-xl bg-sage-700 hover:bg-sage-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span>Listen</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CASE B: ANGULAR RXJS ASYNCHRONOUS STATE BUG -->
+      <div id="star-case-2" class="hidden space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Situation -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-red-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-s font-mono text-[11px] font-bold uppercase">Situation (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Memory Leak & Multiple Triggers</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              A dashboard component at <strong>Sopra Steria</strong> was re-fetching data five times whenever users toggled between tabs, causing lag on lower-spec machines.
+            </p>
+          </div>
+
+          <!-- Task -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-amber-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-t font-mono text-[11px] font-bold uppercase">Task (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Isolate Observable Lifecycle</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              I investigated the component lifecycle to identify lingering subscriptions and optimize asynchronous data flow.
+            </p>
+          </div>
+
+          <!-- Action -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-indigo-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-a font-mono text-[11px] font-bold uppercase">Action (30s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Async Pipe & takeUntilDestroyed</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              I refactored manual <code>.subscribe()</code> calls to use the declarative Angular <code>async</code> pipe in the HTML template and introduced RxJS operators to deduplicate requests.
+            </p>
+          </div>
+
+          <!-- Result -->
+          <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-t-4 border-green-500">
+            <span class="px-2.5 py-0.5 rounded-full star-badge-r font-mono text-[11px] font-bold uppercase">Result (20s)</span>
+            <h4 class="font-serif font-bold text-lg text-slatewarm-900">Smooth Rendering & Clean Memory</h4>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              Network calls dropped by 60%, memory leaks were eradicated upon component destruction, and UI response felt immediate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Spoken Script for Case B -->
+        <div class="p-5 rounded-2xl bg-parchment-100/90 border border-parchment-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="font-mono text-xs uppercase text-autumn-800 font-semibold">🎙️ Practice This Turn (UK Audio Available):</span>
+            <p class="italic text-xs sm:text-sm text-stone-800">
+              "We encountered an issue where unmanaged RxJS subscriptions caused repetitive HTTP calls whenever a user changed views. I restructured the component to rely on Angular's async pipe and lifecycle teardown operators, which cut unnecessary network traffic by 60%."
+            </p>
+          </div>
+          <button onclick="speakWord('We encountered an issue where unmanaged RxJS subscriptions caused repetitive HTTP calls whenever a user changed views. I restructured the component to rely on Angular async pipe and lifecycle teardown operators, which cut unnecessary network traffic by 60%.')" class="shrink-0 px-3.5 py-2 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span>Listen</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 4: THE 5-YEAR QUESTION DECONSTRUCTION                       -->
+    <!-- =================================================================== -->
+    <section id="five-years" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#e6decb] pb-5">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Prompt 03 from Lesson 01 • Career Architecture</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Part 4 • Deconstructing: "Where Do You See Yourself in 5 Years?"
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl">
+            At <span class="font-mono text-xs">52:34</span> in Lesson 01, you remarked that you had never encountered this classic corporate question. Here is how international tech leads think when asking it—and how to deliver an authentic, grounded answer.
+          </p>
+        </div>
+
+        <button onclick="speakFiveYearModel()" class="px-4 py-2 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition shrink-0">
+          <i data-lucide="volume-2" class="w-4 h-4"></i>
+          <span>Listen to 5-Year Model (UK)</span>
+        </button>
+      </div>
+
+      <!-- The Interviewer's Secret Subtext -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-2 border-parchment-200">
+          <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold">What They Really Want to Know #1</div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">Are You Going to Quit in 6 Months?</h4>
+          <p class="text-stone-600 leading-relaxed">
+            Hiring and onboarding a developer is expensive. They want to know if you are settled, stable, and committed to growing with the company over several years.
+          </p>
+          <div class="text-autumn-800 font-medium pt-1">
+            ✓ <em>Your advantage:</em> You are settled in Valencia with your family and want a stable remote home.
+          </div>
+        </div>
+
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-2 border-parchment-200">
+          <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold">What They Really Want to Know #2</div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">Do You Value Craft Over Fancy Titles?</h4>
+          <p class="text-stone-600 leading-relaxed">
+            Juniors who reply <em>"I want to be CTO in three years"</em> sound naive. Interviewers love candidates who prioritize mastering architecture, testing, and system design.
+          </p>
+          <div class="text-sage-800 font-medium pt-1">
+            ✓ <em>Your advantage:</em> You have real-world maturity; you understand that mastering code takes disciplined practice.
+          </div>
+        </div>
+
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2 border-2 border-parchment-200">
+          <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold">What They Really Want to Know #3</div>
+          <h4 class="font-serif font-bold text-base text-slatewarm-900">Will You Invest in the Team Culture?</h4>
+          <p class="text-stone-600 leading-relaxed">
+            Do you want to elevate other developers, or are you a solo mercenary? Great developers mentor others and improve team processes.
+          </p>
+          <div class="text-autumn-800 font-medium pt-1">
+            ✓ <em>Your advantage:</em> 10+ years coordinating teams means you naturally foster supportive collaboration.
+          </div>
+        </div>
+      </div>
+
+      <!-- The 3-Phase Roadmap -->
+      <div class="sanctuary-subcard rounded-2xl p-6 sm:p-7 border-2 border-autumn-200/80 space-y-4 bg-[#fcfaf5]">
+        <div class="flex items-center justify-between border-b border-parchment-200 pb-3">
+          <span class="font-mono text-xs uppercase text-autumn-800 font-semibold">The 3-Phase Authentic Formula (Barbara's Script)</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-autumn-100 text-autumn-800 font-mono text-xs font-semibold">"It's not wasting time—it's investing"</span>
+        </div>
+
+        <div id="five-year-script-content" class="font-serif text-lg sm:text-xl leading-relaxed text-slatewarm-900 space-y-4">
+          <p>
+            "In five years, I see myself as a seasoned <strong>Senior Full-Stack Engineer</strong> who is deeply trusted across both architecture and user experience.
+          </p>
+          <p>
+            In the <strong>first two years</strong>, my total focus is on technical mastery: deepening my grasp of TypeScript, frontend performance, and resilient backend systems, ensuring my pull requests are consistently thorough and clean.
+          </p>
+          <p>
+            By <strong>years three and four</strong>, I want to leverage my background in artistic direction to serve as a high-trust bridge between design and engineering teams—translating complex product visions into maintainable technical specifications.
+          </p>
+          <p>
+            And by <strong>year five</strong>, I want to be actively mentoring junior developers and career-switchers on our squad. Because I am settled here in Valencia with my family, I am not looking to bounce between jobs every twelve months; I am looking for a team where I can plant roots and make a long-term <span class="vocab-pill" onclick="speakWord('investment')">investment</span>."
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-2 border-t border-parchment-200 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-white border border-parchment-200 text-stone-700"><strong>Key verbs:</strong> deepen, master, leverage, bridge, mentor, plant roots</span>
+          <span class="px-2.5 py-1 rounded-lg bg-white border border-parchment-200 text-stone-700"><strong>Spanish link:</strong> <em>echar raíces / invertir a largo plazo</em></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 5: FALSE FRIENDS & TECHNICAL PHRASING CLINIC                -->
+    <!-- =================================================================== -->
+    <section id="phrasing-clinic" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="border-b border-[#e6decb] pb-4">
+        <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Precision & Polish • Spanish-to-English Tech Nuances</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-0.5">
+          Part 5 • 6 High-Stakes Tech Phrasing Polishes for Interviews
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600 mt-1">
+          In international tech interviews, small word choices signal whether you have true professional fluency. Click any card to hear the British pronunciation!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Polish 1 -->
+        <div onclick="speakWord('In my current role, I focus on full-stack development')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-red-600 font-bold uppercase">False Friend Alert</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"In my actual project..." (Sp. actual)</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"In my <strong>current</strong> role / project..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            In English, <em>actual</em> means <em>real / in fact</em> (verdadero), while <em>actual</em> in Spanish is translated as <strong>current / presently</strong>.
+          </p>
+        </div>
+
+        <!-- Polish 2 -->
+        <div onclick="speakWord('I love tactile, hands-on production work')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-autumn-700 font-bold uppercase">Physical Craft</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"I like touchy projects..."</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"I thrive on <strong>tactile / hands-on</strong> production..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            In English, <em>touchy</em> means overly sensitive or easily offended! For stop-motion art or physical craft, always use <strong>tactile</strong> or <strong>hands-on</strong>.
+          </p>
+        </div>
+
+        <!-- Polish 3 -->
+        <div onclick="speakWord('Building components with Angular is great fun')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-sage-700 font-bold uppercase">Emotional Tone</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"Refactoring Angular is very funny..."</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"Refactoring Angular is really <strong>fun</strong>..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            <em>Funny</em> means makes you laugh (like a comedian). <em>Fun</em> means enjoyable, engaging, and satisfying (divertido / estimulante).
+          </p>
+        </div>
+
+        <!-- Polish 4 -->
+        <div onclick="speakWord('I completed an Advanced Vocational Degree in Web Application Development')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-autumn-700 font-bold uppercase">Education in English</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"I studied a superior grade cycle..."</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"I completed an <strong>Advanced Vocational Degree in Web Application Development (DAW)</strong>..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            International hiring leads understand <strong>Advanced Vocational Degree</strong> or <strong>Higher Technical Diploma</strong> instantly.
+          </p>
+        </div>
+
+        <!-- Polish 5 -->
+        <div onclick="speakWord('We use colons for TypeScript type annotations and semicolons to terminate statements')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-sage-700 font-bold uppercase">Syntax Punctuation</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"We put two points for the type..."</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"We use a <strong>colon (:)</strong> for type annotations and a <strong>semicolon (;)</strong> to end statements..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            In code interviews: <code>:</code> is a <strong>colon</strong>, <code>;</code> is a <strong>semicolon</strong>, <code>{}</code> are <strong>curly braces</strong>, <code>[]</code> are <strong>square brackets</strong>.
+          </p>
+        </div>
+
+        <!-- Polish 6 -->
+        <div onclick="speakWord('I was so flattered when they praised our short film')" class="cursor-pointer sanctuary-subcard rounded-2xl p-5 space-y-3 hover:scale-[1.02] transition">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-autumn-700 font-bold uppercase">Reaction to Praise</span>
+            <i data-lucide="volume-2" class="w-4 h-4 text-stone-400"></i>
+          </div>
+          <div>
+            <div class="text-xs text-stone-500 line-through">"I was so flustered by the compliment..."</div>
+            <div class="text-sm font-semibold text-slatewarm-900 mt-0.5">"I was so <strong>flattered / bashful</strong>..."</div>
+          </div>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            <em>Flustered</em> means stressed and agitated! When you feel pleased and modest about praise or a Goya nomination, you are <strong>flattered</strong> (halagada).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 6: INTERACTIVE MOCK INTERVIEW HOT SEAT                      -->
+    <!-- =================================================================== -->
+    <section id="hot-seat" class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#e6decb] pb-5">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-autumn-700 font-semibold">Live Simulation • 6 Common Scenarios</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+            Part 6 • The Executive Tech Hot Seat
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-3xl">
+            Select any question below to inspect what the hiring panel is testing, model answer bullets, and an audio rehearsal.
+          </p>
+        </div>
+
+        <!-- Question Selector Buttons -->
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <button onclick="selectHotSeat(1)" id="hs-btn-1" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-autumn-700 text-white shadow-sm transition">Q1. Career Switch</button>
+          <button onclick="selectHotSeat(2)" id="hs-btn-2" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300 transition">Q2. Designer Disagreement</button>
+          <button onclick="selectHotSeat(3)" id="hs-btn-3" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300 transition">Q3. AI in Development</button>
+          <button onclick="selectHotSeat(4)" id="hs-btn-4" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300 transition">Q4. Build Failure</button>
+          <button onclick="selectHotSeat(5)" id="hs-btn-5" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300 transition">Q5. Remote from Valencia</button>
+        </div>
+      </div>
+
+      <!-- Active Hot Seat Arena -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border-2 border-autumn-200 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-parchment-200 pb-3">
+          <div>
+            <span id="hs-tag" class="px-2.5 py-0.5 rounded-full bg-autumn-100 text-autumn-800 font-mono text-xs uppercase font-semibold">Scenario 1 • Transferable Seniority</span>
+            <h3 id="hs-question" class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-1">
+              "Why should we hire someone who switched careers rather than a fresh Computer Science graduate?"
+            </h3>
+          </div>
+          <button onclick="speakHotSeatModel()" class="px-3.5 py-2 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span>Listen to Model Answer</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <h4 class="font-mono text-xs uppercase text-stone-500 font-semibold">What the Interviewer is Evaluating:</h4>
+            <div id="hs-eval" class="text-xs sm:text-sm text-stone-700 leading-relaxed bg-parchment-50 p-4 rounded-xl border border-parchment-200 space-y-2">
+              <p>They want to see if you view your past as an asset or a drawback. A CS graduate has theory but often lacks emotional maturity, client awareness, and deadline resilience.</p>
+              <p><strong>Your win:</strong> Highlight that you bring Day-1 professional reliability, communication clarity, and project management that takes years to teach.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-mono text-xs uppercase text-autumn-700 font-semibold">Model Response Structure (C1 English):</h4>
+            <div id="hs-bullets" class="text-xs sm:text-sm text-slatewarm-900 leading-relaxed bg-autumn-50/60 p-4 rounded-xl border border-autumn-200 space-y-2">
+              <p>• <em>"A fresh CS graduate brings valuable algorithmic theory, but I bring immediate professional maturity."</em></p>
+              <p>• <em>"Having managed cross-functional teams and delivery milestones on award-winning productions, I don't panic under tight deadlines."</em></p>
+              <p>• <em>"I write clean, typed code with an acute awareness of client requirements, user experience, and team velocity."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 7: INTERACTIVE VOCABULARY FLASHCARDS & 6-QUESTION QUIZ     -->
+    <!-- =================================================================== -->
+    <section class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-8">
+      <div class="border-b border-[#e6decb] pb-4">
+        <span class="text-xs font-mono uppercase tracking-widest text-sage-700 font-semibold">Practice & Review Deck</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slatewarm-900 mt-0.5">
+          Part 7 • Tech Collocations Flashcards & 6-Question Readiness Quiz
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600 mt-1">
+          Review 12 key tech interview terms with interactive flip flashcards, followed by a quick comprehension quiz to seal in your gains!
+        </p>
+      </div>
+
+      <!-- Flashcard Interactive Carousel -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-serif font-bold text-xl text-slatewarm-900 flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5 text-autumn-700"></i>
+            <span>Interactive Interview Flashcard Deck</span>
+          </h3>
+          <div class="flex items-center gap-2">
+            <span id="fc-index" class="text-xs font-mono text-stone-500">1 / 12</span>
+            <button onclick="prevFlashcard()" class="p-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 border border-parchment-300 text-stone-700">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="nextFlashcard()" class="p-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 border border-parchment-300 text-stone-700">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="max-w-2xl mx-auto perspective-[1000px] cursor-pointer" onclick="flipFlashcard()">
+          <div id="flashcard-element" class="flashcard-inner relative w-full h-64 rounded-3xl transition duration-500 shadow-sm">
+            <!-- Front -->
+            <div class="flashcard-front absolute inset-0 bg-white rounded-3xl p-8 border-2 border-autumn-200 flex flex-col justify-between">
+              <div class="flex justify-between items-center text-xs font-mono text-stone-400">
+                <span id="fc-cat" class="px-2.5 py-0.5 rounded-full bg-parchment-100 text-autumn-800 font-semibold">Tech Architecture</span>
+                <span>Click anywhere to flip ↷</span>
+              </div>
+              <div class="text-center space-y-2">
+                <div id="fc-word" class="font-serif text-3xl sm:text-4xl font-bold text-slatewarm-900">bottleneck</div>
+                <div id="fc-ipa" class="font-mono text-sm text-stone-500">/ˈbɒt.əl.nek/ • noun</div>
+              </div>
+              <div class="text-center text-xs text-stone-400">
+                Tap or click card to reveal English definition & Spanish link
+              </div>
+            </div>
+
+            <!-- Back -->
+            <div class="flashcard-back absolute inset-0 bg-[#fbf9f5] rounded-3xl p-8 border-2 border-sage-300 flex flex-col justify-between">
+              <div class="flex justify-between items-center text-xs font-mono">
+                <span id="fc-level" class="px-2 py-0.5 rounded bg-sage-100 text-sage-800 font-semibold">Level B2</span>
+                <span id="fc-l1" class="text-autumn-800 font-semibold">cuello de botella / punto de congestión</span>
+              </div>
+              <p id="fc-def" class="text-stone-700 text-sm sm:text-base leading-relaxed text-center">
+                A point of congestion in a system that stops or slows down the entire progress of an operation.
+              </p>
+              <div class="text-center text-xs text-stone-500 italic">
+                <button onclick="event.stopPropagation(); speakFlashcardWord();" class="px-3 py-1 rounded-lg bg-white border border-parchment-300 font-sans font-semibold text-stone-700 inline-flex items-center gap-1">
+                  <i data-lucide="volume-2" class="w-3.5 h-3.5 text-sage-600"></i> Listen (UK)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6-Question Interactive Quiz -->
+      <div id="quiz-container" class="space-y-6 pt-6 border-t border-[#e6decb]">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-mono uppercase text-autumn-700 font-semibold">Knowledge Check</span>
+            <h3 class="font-serif font-bold text-2xl text-slatewarm-900">
+              Tech Interview Scenarios: 6 Multiple-Choice Challenges
+            </h3>
+          </div>
+          <div id="quiz-score-badge" class="px-3 py-1 rounded-xl bg-parchment-100 text-stone-800 font-mono text-xs font-semibold border border-parchment-300">
+            Score: <span id="quiz-score">0</span> / 6
+          </div>
+        </div>
+
+        <div id="quiz-card" class="bg-white rounded-2xl p-6 sm:p-8 border-2 border-parchment-300 space-y-4">
+          <div class="flex items-center justify-between text-xs font-mono text-stone-500">
+            <span id="quiz-q-num">Question 1 of 6</span>
+            <span id="quiz-topic">False Friends in Tech</span>
+          </div>
+
+          <h4 id="quiz-q-text" class="font-serif text-xl sm:text-2xl font-bold text-slatewarm-900">
+            You want to tell a British tech recruiter about the project you are working on right now. Which phrase is correct?
+          </h4>
+
+          <div id="quiz-options" class="grid grid-cols-1 gap-3 pt-2">
+            <!-- Options dynamically rendered by JS -->
+          </div>
+
+          <div id="quiz-feedback" class="hidden p-4 rounded-xl text-xs sm:text-sm font-medium leading-relaxed"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 3 REFLECTION PROMPTS FOR LESSON 03                                  -->
+    <!-- =================================================================== -->
+    <section class="sanctuary-card rounded-3xl p-6 sm:p-8 space-y-4">
+      <div class="flex items-center gap-2 text-autumn-800 font-serif font-bold text-2xl">
+        <i data-lucide="coffee" class="w-5 h-5 text-autumn-600"></i>
+        <span>3 Peaceful Prompts to Ponder Before Lesson 03</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+          <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Prompt 01 • The Live Demo</span>
+          <h4 class="font-serif font-bold text-lg text-slatewarm-900">Your Portfolio Walkthrough</h4>
+          <p class="text-stone-600 leading-relaxed">
+            In Lesson 03, we will practice a 3-minute screen-share walkthrough of your personal project in English, explaining the component hierarchy and database schema.
+          </p>
+        </div>
+
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+          <span class="text-[11px] font-mono uppercase text-autumn-700 font-semibold">Prompt 02 • Behavioral Mastery</span>
+          <h4 class="font-serif font-bold text-lg text-slatewarm-900">Handling Tough Feedback</h4>
+          <p class="text-stone-600 leading-relaxed">
+            Think of a time during film production or at Sopra Steria when a client or senior developer requested major changes last minute. How did you negotiate calmly?
+          </p>
+        </div>
+
+        <div class="sanctuary-subcard rounded-2xl p-5 space-y-2">
+          <span class="text-[11px] font-mono uppercase text-sage-700 font-semibold">Prompt 03 • Salary & Rate Negotiation</span>
+          <h4 class="font-serif font-bold text-lg text-slatewarm-900">Defining Your Remote Value</h4>
+          <p class="text-stone-600 leading-relaxed">
+            How to confidently discuss compensation expectations for international remote roles without feeling uncomfortable or undervaluing your combined skills.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-xs text-stone-500 border-t border-[#e6decb]/80 mt-8">
+    <p class="font-serif italic text-base text-slatewarm-800 mb-1">"It's not wasting time—it's investing." — Prepared with care for Barbara & Louie</p>
+    <p>Lesson 02 Interactive Tech Interview Companion • Full-Stack Web Development, Valencia & International Teams</p>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT: DATA, INTERACTIVE CONTROLS, SOUNDSCAPE & AUDIO            -->
+  <!-- ===================================================================== -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. DATA: 12 FLASHCARDS & FLUENCY GYM TERMS
+    // -------------------------------------------------------------------------
+    const GYM_WORDS = [
+      {
+        word: "trade-off",
+        ipa: "/ˈtreɪd.ɒf/",
+        pos: "noun",
+        cat: "Architecture",
+        level: "B2",
+        def: "A situation where you accept an imperfection, delay, or extra cost in order to gain a different advantage.",
+        quote: "When building the Angular service at Sopra Steria, our main trade-off was between fast delivery and strict TypeScript type coverage.",
+        l1: "compromiso técnico / concesión equilibrada"
+      },
+      {
+        word: "edge case",
+        ipa: "/ˈedʒ ˌkeɪs/",
+        pos: "noun",
+        cat: "Debugging & QA",
+        level: "B2",
+        def: "An uncommon situation or input that occurs only at the extreme ends of operating parameters.",
+        quote: "We wrote unit tests to ensure that empty arrays and null API responses were handled gracefully as edge cases.",
+        l1: "caso límite / caso atípico"
+      },
+      {
+        word: "bottleneck",
+        ipa: "/ˈbɒt.əl.nek/",
+        pos: "noun",
+        cat: "Performance",
+        level: "B2",
+        def: "A point of congestion in a system that stops or slows down the entire progress of an operation.",
+        quote: "The unindexed SQL query was our primary database bottleneck during peak user traffic.",
+        l1: "cuello de botella / ralentización"
+      },
+      {
+        word: "cross-functional",
+        ipa: "/ˌkrɒsˈfʌŋk.ʃən.əl/",
+        pos: "adjective",
+        cat: "Team Collaboration",
+        level: "C1",
+        def: "Composed of members with diverse expertise (e.g. UX designers, frontend engineers, product managers).",
+        quote: "My background in creative direction makes me very effective in cross-functional squads where design meets code.",
+        l1: "multidisciplinar / interdepartamental"
+      },
+      {
+        word: "return type",
+        ipa: "/rɪˈtɜːn taɪp/",
+        pos: "noun",
+        cat: "TypeScript",
+        level: "B2",
+        def: "The data type specified after the colon indicating what value a function or method produces.",
+        quote: "I always declare explicit return types on methods so other developers don't have to infer them manually.",
+        l1: "tipo de retorno (en TypeScript/Java)"
+      },
+      {
+        word: "refactor",
+        ipa: "/ˌriːˈfæk.tər/",
+        pos: "verb / noun",
+        cat: "Clean Code",
+        level: "B2",
+        def: "Restructuring existing code without changing its external behavior to improve maintainability and speed.",
+        quote: "During my internship, I refactored several monolithic Angular components into clean, reusable child widgets.",
+        l1: "refactorizar / reestructurar código"
+      },
+      {
+        word: "tactile / hands-on",
+        ipa: "/ˈtæk.taɪl/ • /ˈhændz.ɒn/",
+        pos: "adjective",
+        cat: "Work Style",
+        level: "C1",
+        def: "Involving active, practical physical participation rather than just passive theoretical discussion.",
+        quote: "I thrive on tactile, hands-on production where you can see and feel the tangible outcome of your work.",
+        l1: "práctico / tangible (¡nunca 'touchy'!)"
+      },
+      {
+        word: "stakeholder",
+        ipa: "/ˈsteɪkˌhəʊl.dər/",
+        pos: "noun",
+        cat: "Project Management",
+        level: "B2",
+        def: "Any person, client, or department with an active interest or stake in the success of a project.",
+        quote: "Managing diverse stakeholders for our film production taught me how to present technical constraints with clarity.",
+        l1: "parte interesada / cliente clave"
+      },
+      {
+        word: "seamless",
+        ipa: "/ˈsiːm.ləs/",
+        pos: "adjective",
+        cat: "UX & Integration",
+        level: "C1",
+        def: "Operating with smooth continuity, zero friction, and no visible interruption between components.",
+        quote: "We integrated the payment gateway to ensure a completely seamless checkout flow for users.",
+        l1: "fluido / sin fricción / impecable"
+      },
+      {
+        word: "boilerplate",
+        ipa: "/ˈbɔɪ.lə.pleɪt/",
+        pos: "noun",
+        cat: "Software Engineering",
+        level: "C1",
+        def: "Standardized text or code that can be reused in new contexts without significant modification.",
+        quote: "Using Angular CLI schematics generates the boilerplate code instantly so we can focus on business logic.",
+        l1: "código repetitivo / plantilla base"
+      },
+      {
+        word: "state management",
+        ipa: "/steɪt ˈmæn.ɪdʒ.mənt/",
+        pos: "noun",
+        cat: "Frontend Architecture",
+        level: "B2",
+        def: "The systematic coordination and synchronization of user data, session variables, and UI status.",
+        quote: "Clean state management in Angular ensures that child components stay perfectly synchronized without prop-drilling.",
+        l1: "gestión del estado de la aplicación"
+      },
+      {
+        word: "investing",
+        ipa: "/ɪnˈvest.ɪŋ/",
+        pos: "verb / noun",
+        cat: "Career Strategy",
+        level: "B2",
+        def: "Putting time, energy, and commitment into something with the expectation of lasting value and growth.",
+        quote: "As Louie reminded me in Lesson 01: 'It's not wasting time—it's investing.'",
+        l1: "invertir tiempo y dedicación"
+      }
+    ];
+
+    let currentGymIndex = 0;
+    let gymTimerInterval = null;
+    let pitchTimerInterval = null;
+
+    // -------------------------------------------------------------------------
+    // 2. DATA: 6 HOT SEAT SCENARIOS
+    // -------------------------------------------------------------------------
+    const HOT_SEAT_DATA = [
+      {
+        id: 1,
+        tag: "Scenario 1 • Transferable Seniority",
+        question: "\"Why should we hire someone who switched careers rather than a fresh Computer Science graduate?\"",
+        eval: "<p>They want to see if you view your past as an asset or a drawback. A CS graduate has theory but often lacks emotional maturity, client awareness, and deadline resilience.</p><p><strong>Your win:</strong> Highlight that you bring Day-1 professional reliability, communication clarity, and project management that takes years to teach.</p>",
+        bullets: "<p>• <em>\"A fresh CS graduate brings valuable algorithmic theory, but I bring immediate professional maturity.\"</em></p><p>• <em>\"Having managed cross-functional teams and delivery milestones on award-winning productions, I don't panic under tight deadlines.\"</em></p><p>• <em>\"I write clean, typed code with an acute awareness of client requirements, user experience, and team velocity.\"</em>",
+        spokenText: "A fresh CS graduate brings valuable algorithmic theory, but I bring immediate professional maturity. Having managed cross-functional teams and delivery milestones on award-winning productions, I don't panic under tight deadlines. I write clean, typed code with an acute awareness of client requirements, user experience, and team velocity."
+      },
+      {
+        id: 2,
+        tag: "Scenario 2 • Interdisciplinary Friction",
+        question: "\"How do you handle disagreements with a UI/UX designer on technical feasibility?\"",
+        eval: "<p>They test whether you act like a rigid engineer who says 'that's impossible', or a collaborative partner who finds creative compromises.</p><p><strong>Your win:</strong> Your double degree in Artistic Direction means you speak the designer's language fluently while understanding CSS/DOM limits.</p>",
+        bullets: "<p>• <em>\"Because my background is in artistic direction, I deeply respect the designer's aesthetic intent.\"</em></p><p>• <em>\"Instead of saying 'no', I hop on a quick call and propose two feasible alternatives that preserve the visual goal.\"</em></p><p>• <em>\"I explain the technical trade-off: for example, how a complex animation impacts bundle size or mobile framerate.\"</em>",
+        spokenText: "Because my background is in artistic direction, I deeply respect the designer's aesthetic intent. Instead of saying no, I propose two feasible alternatives that preserve the visual goal, explaining the technical trade-off regarding mobile framerate and bundle size."
+      },
+      {
+        id: 3,
+        tag: "Scenario 3 • Modern AI Tooling",
+        question: "\"How do you use AI tools like Copilot in your daily coding workflow?\"",
+        eval: "<p>They want to verify that you don't copy-paste hallucinated code blindly. Great engineers use AI to accelerate boilerplate and generate edge-case unit tests.</p><p><strong>Your win:</strong> Emphasize that your strong TypeScript typing acts as an infallible guardrail against AI errors.</p>",
+        bullets: "<p>• <em>\"I treat AI as a junior assistant: fantastic for scaffolding boilerplate and suggesting edge-case tests.\"</em></p><p>• <em>\"However, I never merge AI code without line-by-line review. My strict TypeScript type definitions guarantee that AI suggestions adhere to our contracts.\"</em></p><p>• <em>\"Architectural thinking and component lifecycle management always remain my responsibility.\"</em>",
+        spokenText: "I treat AI as a junior assistant: fantastic for scaffolding boilerplate and suggesting edge-case tests. However, I never merge code without line-by-line review. My strict TypeScript type definitions guarantee that suggestions adhere to our contracts."
+      },
+      {
+        id: 4,
+        tag: "Scenario 4 • Debugging Under Pressure",
+        question: "\"Tell me about a time an Angular build failed or a TypeScript error blocked your deployment.\"",
+        eval: "<p>They evaluate your composure and systematic debugging process rather than frantic guessing.</p><p><strong>Your win:</strong> Walk through reading compiler stack traces, checking module declarations, and verifying return types.</p>",
+        bullets: "<p>• <em>\"During my internship at Sopra Steria, a build failed because an external dependency updated its typings breaking our interface.\"</em></p><p>• <em>\"I isolated the breaking commit using git bisect, inspected the type mismatch, and authored an explicit type adapter.\"</em></p><p>• <em>\"We locked package versions in package-lock and added automated CI build checks to prevent regressions.\"</em>",
+        spokenText: "During my internship at Sopra Steria, a build failed because a dependency updated its typings. I isolated the commit, authored an explicit type adapter, and locked package versions in CI to prevent regressions."
+      },
+      {
+        id: 5,
+        tag: "Scenario 5 • Remote Team Reliability",
+        question: "\"Why do you want to work remotely from Valencia for an international company?\"",
+        eval: "<p>Are you self-directed? Can you communicate asynchronously in English across time zones?</p><p><strong>Your win:</strong> You are settled with family in Valencia; remote work gives you focus, and international teams benefit from your long-term dedication.</p>",
+        bullets: "<p>• <em>\"Valencia gives me an exceptional quality of life and family stability, which translates into sustained focus and loyalty.\"</em></p><p>• <em>\"Having coordinated film productions with diverse international contributors, I thrive on proactive written documentation.\"</em></p><p>• <em>\"I treat remote work as an ongoing contract of trust: over-communicating progress, respecting async handoffs, and showing up ready to ship.\"</em>",
+        spokenText: "Valencia gives me exceptional quality of life and family stability, which translates into sustained focus and loyalty. Having coordinated productions with international contributors, I thrive on proactive written documentation and over-communicating progress."
+      }
+    ];
+
+    let currentHotSeatIndex = 1;
+
+    // -------------------------------------------------------------------------
+    // 3. DATA: 6 QUIZ CHALLENGES
+    // -------------------------------------------------------------------------
+    const QUIZ_QUESTIONS = [
+      {
+        topic: "False Friends in Tech",
+        q: "You want to tell a British tech interviewer about the project you are working on right now. Which phrase is correct?",
+        options: [
+          { text: "\"In my actual project, I build Angular components...\"", correct: false, note: "❌ 'Actual' in English means 'real / in fact', not 'current'." },
+          { text: "\"In my current role, I build Angular components...\"", correct: true, note: "✓ Perfect! 'Current' translates the Spanish 'actual'." },
+          { text: "\"In my presently job, I build Angular components...\"", correct: false, note: "❌ Grammatically incorrect. 'Presently' is an adverb." }
+        ]
+      },
+      {
+        topic: "Craft & Tactile Work",
+        q: "How should Barbara describe her love for physical stop-motion animation craft in an interview?",
+        options: [
+          { text: "\"I really enjoy touchy creative work with clay puppets.\"", correct: false, note: "❌ 'Touchy' means irritable or easily offended!" },
+          { text: "\"I thrive on tactile, hands-on creative production.\"", correct: true, note: "✓ Exactly! 'Tactile' or 'hands-on' celebrates physical craftsmanship." },
+          { text: "\"I like touching projects with my hands.\"", correct: false, note: "❌ Sounds awkward and unnatural in professional English." }
+        ]
+      },
+      {
+        topic: "Explaining DAW Internationally",
+        q: "What is the best way to describe Spain's 'Ciclo Formativo de Grado Superior (DAW)' to a London engineering manager?",
+        options: [
+          { text: "\"I did a cycle of superior formation in software.\"", correct: false, note: "❌ Literal translation that confuses international recruiters." },
+          { text: "\"I completed a two-year Advanced Vocational Degree in Web Application Development.\"", correct: true, note: "✓ Flawless! This clearly conveys the depth, rigor, and technical focus." },
+          { text: "\"I just did a fast coding academy.\"", correct: false, note: "❌ Undersells two rigorous years of formal study!" }
+        ]
+      },
+      {
+        topic: "TypeScript Syntax Pronunciation",
+        q: "In TypeScript: `const age: number = 30;` — what is the punctuation mark `:` called?",
+        options: [
+          { text: "Two dots", correct: false, note: "❌ Casual, but not professional terminology." },
+          { text: "A colon", correct: true, note: "✓ Yes! `:` is a colon, used for type annotations." },
+          { text: "A semicolon", correct: false, note: "❌ `;` is a semicolon, used to terminate statements." }
+        ]
+      },
+      {
+        topic: "STAR Storytelling",
+        q: "What does the 'A' stand for in the STAR interview technique?",
+        options: [
+          { text: "Arguments you had with the client", correct: false, note: "❌ Definitely not!" },
+          { text: "Action — the concrete technical steps YOU took to solve the problem", correct: true, note: "✓ Correct! Action proves your specific engineering contribution." },
+          { text: "Algorithms you memorized for leetcode", correct: false, note: "❌ The interview is about real product execution." }
+        ]
+      },
+      {
+        topic: "Emotional Tone & Praise",
+        q: "When a hiring manager compliments Barbara on her Goya-nominated film, how should she respond?",
+        options: [
+          { text: "\"Thank you, I was so flustered to receive that honor!\"", correct: false, note: "❌ 'Flustered' means stressed and agitated." },
+          { text: "\"Thank you, we were truly flattered and honored by the nomination!\"", correct: true, note: "✓ Spot on! 'Flattered' means gratified and modestly pleased." },
+          { text: "\"Thank you, it was very funny for us.\"", correct: false, note: "❌ 'Funny' means hilarious, not gratifying." }
+        ]
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    // -------------------------------------------------------------------------
+    // 4. UI FUNCTIONS: GYM, PITCH & STAR
+    // -------------------------------------------------------------------------
+    function drawRandomGymWord() {
+      let nextIndex = Math.floor(Math.random() * GYM_WORDS.length);
+      if (nextIndex === currentGymIndex) nextIndex = (nextIndex + 1) % GYM_WORDS.length;
+      currentGymIndex = nextIndex;
+      renderGymCard();
+    }
+
+    function renderGymCard() {
+      const item = GYM_WORDS[currentGymIndex];
+      document.getElementById('gym-word-title').innerText = item.word;
+      document.getElementById('gym-word-ipa').innerText = item.ipa + " • " + item.pos;
+      document.getElementById('gym-word-def').innerText = item.def;
+      document.getElementById('gym-word-quote').innerHTML = item.quote;
+      document.getElementById('gym-word-cat').innerText = "Category: " + item.cat;
+      document.getElementById('gym-word-level').innerText = item.level;
+      document.getElementById('gym-word-spanish').innerHTML = "Conexión en español: <strong>" + item.l1 + "</strong>";
+      document.getElementById('gym-counter').innerText = "Card " + (currentGymIndex + 1) + " of " + GYM_WORDS.length;
+    }
+
+    function startGymTimer(seconds) {
+      clearInterval(gymTimerInterval);
+      let remaining = seconds;
+      const btn = document.getElementById('gym-timer-btn');
+      const text = document.getElementById('gym-timer-text');
+      btn.classList.add('bg-amber-300');
+
+      gymTimerInterval = setInterval(() => {
+        text.innerText = remaining + "s Left • Speak!";
+        remaining--;
+        if (remaining < 0) {
+          clearInterval(gymTimerInterval);
+          text.innerText = "Time Up! Next Word";
+          btn.classList.remove('bg-amber-300');
+          if (typeof confetti === 'function') confetti({ particleCount: 35, spread: 60 });
+        }
+      }, 1000);
+    }
+
+    function startPitchTimer(seconds) {
+      clearInterval(pitchTimerInterval);
+      let remaining = seconds;
+      const text = document.getElementById('pitch-timer-text');
+
+      pitchTimerInterval = setInterval(() => {
+        const mins = Math.floor(remaining / 60);
+        const secs = remaining % 60;
+        text.innerText = mins + ":" + (secs < 10 ? "0" : "") + secs + " Remaining";
+        remaining--;
+        if (remaining < 0) {
+          clearInterval(pitchTimerInterval);
+          text.innerText = "90s Complete! Well Done";
+          if (typeof confetti === 'function') confetti({ particleCount: 50, spread: 70 });
+        }
+      }, 1000);
+    }
+
+    function selectPitchBeat(num) {
+      for (let i = 1; i <= 4; i++) {
+        const card = document.getElementById('beat-card-' + i);
+        if (i === num) {
+          card.className = "cursor-pointer sanctuary-subcard rounded-2xl p-4 border-2 border-autumn-500 bg-autumn-50/50 space-y-2 transition shadow-sm";
+        } else {
+          card.className = "cursor-pointer sanctuary-subcard rounded-2xl p-4 border border-parchment-300 hover:border-autumn-300 space-y-2 transition";
+        }
+      }
+    }
+
+    function copyPitchText() {
+      const text = document.getElementById('pitch-script-content').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btnText = document.getElementById('copy-btn-text');
+        btnText.innerText = "Copied to Clipboard!";
+        setTimeout(() => { btnText.innerText = "Copy Script"; }, 2500);
+      });
+    }
+
+    function switchStarCase(num) {
+      const case1 = document.getElementById('star-case-1');
+      const case2 = document.getElementById('star-case-2');
+      const btn1 = document.getElementById('star-btn-1');
+      const btn2 = document.getElementById('star-btn-2');
+
+      if (num === 1) {
+        case1.classList.remove('hidden');
+        case2.classList.add('hidden');
+        btn1.className = "px-4 py-2 rounded-xl text-xs font-semibold transition bg-sage-700 text-white shadow-sm";
+        btn2.className = "px-4 py-2 rounded-xl text-xs font-semibold transition bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300";
+      } else {
+        case1.classList.add('hidden');
+        case2.classList.remove('hidden');
+        btn2.className = "px-4 py-2 rounded-xl text-xs font-semibold transition bg-autumn-700 text-white shadow-sm";
+        btn1.className = "px-4 py-2 rounded-xl text-xs font-semibold transition bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300";
+      }
+    }
+
+    function selectHotSeat(num) {
+      currentHotSeatIndex = num;
+      const scenario = HOT_SEAT_DATA.find(s => s.id === num);
+      if (!scenario) return;
+
+      document.getElementById('hs-tag').innerText = scenario.tag;
+      document.getElementById('hs-question').innerText = scenario.question;
+      document.getElementById('hs-eval').innerHTML = scenario.eval;
+      document.getElementById('hs-bullets').innerHTML = scenario.bullets;
+
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById('hs-btn-' + i);
+        if (i === num) {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-autumn-700 text-white shadow-sm transition";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 hover:bg-parchment-200 text-stone-700 border border-parchment-300 transition";
+        }
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. FLASHCARDS & QUIZ UI
+    // -------------------------------------------------------------------------
+    let currentFcIndex = 0;
+    let isFlipped = false;
+
+    function renderFlashcard() {
+      const item = GYM_WORDS[currentFcIndex];
+      const card = document.getElementById('flashcard-element');
+      card.classList.remove('flashcard-flipped');
+      isFlipped = false;
+
+      document.getElementById('fc-index').innerText = (currentFcIndex + 1) + " / " + GYM_WORDS.length;
+      document.getElementById('fc-cat').innerText = item.cat;
+      document.getElementById('fc-word').innerText = item.word;
+      document.getElementById('fc-ipa').innerText = item.ipa + " • " + item.pos;
+      document.getElementById('fc-level').innerText = "Level " + item.level;
+      document.getElementById('fc-l1').innerText = item.l1;
+      document.getElementById('fc-def').innerText = item.def;
+    }
+
+    function flipFlashcard() {
+      const card = document.getElementById('flashcard-element');
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        card.classList.add('flashcard-flipped');
+      } else {
+        card.classList.remove('flashcard-flipped');
+      }
+    }
+
+    function nextFlashcard() {
+      currentFcIndex = (currentFcIndex + 1) % GYM_WORDS.length;
+      renderFlashcard();
+    }
+
+    function prevFlashcard() {
+      currentFcIndex = (currentFcIndex - 1 + GYM_WORDS.length) % GYM_WORDS.length;
+      renderFlashcard();
+    }
+
+    function speakFlashcardWord() {
+      const item = GYM_WORDS[currentFcIndex];
+      speakWord(item.word);
+    }
+
+    function renderQuizQuestion() {
+      quizAnswered = false;
+      const q = QUIZ_QUESTIONS[currentQuizIndex];
+      document.getElementById('quiz-q-num').innerText = "Question " + (currentQuizIndex + 1) + " of " + QUIZ_QUESTIONS.length;
+      document.getElementById('quiz-topic').innerText = q.topic;
+      document.getElementById('quiz-q-text').innerText = q.q;
+
+      const optContainer = document.getElementById('quiz-options');
+      optContainer.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "text-left p-4 rounded-xl border border-parchment-200 hover:border-autumn-300 hover:bg-parchment-50 transition text-xs sm:text-sm font-medium text-slatewarm-900";
+        btn.innerText = opt.text;
+        btn.onclick = () => handleQuizAnswer(idx);
+        optContainer.appendChild(btn);
+      });
+
+      const fb = document.getElementById('quiz-feedback');
+      fb.className = "hidden";
+      fb.innerHTML = '';
+    }
+
+    function handleQuizAnswer(selectedIdx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = QUIZ_QUESTIONS[currentQuizIndex];
+      const opt = q.options[selectedIdx];
+      const fb = document.getElementById('quiz-feedback');
+      fb.classList.remove('hidden');
+
+      if (opt.correct) {
+        quizScore++;
+        document.getElementById('quiz-score').innerText = quizScore;
+        fb.className = "p-4 rounded-xl text-xs sm:text-sm font-medium leading-relaxed bg-green-50 border border-green-200 text-green-900";
+        fb.innerHTML = "<strong>Correct!</strong> " + opt.note;
+        if (typeof confetti === 'function') confetti({ particleCount: 25, spread: 50 });
+      } else {
+        fb.className = "p-4 rounded-xl text-xs sm:text-sm font-medium leading-relaxed bg-red-50 border border-red-200 text-red-900";
+        fb.innerHTML = "<strong>Not quite.</strong> " + opt.note;
+      }
+
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = "mt-3 px-4 py-1.5 rounded-xl bg-autumn-700 hover:bg-autumn-800 text-white text-xs font-semibold block transition";
+      nextBtn.innerText = currentQuizIndex < QUIZ_QUESTIONS.length - 1 ? "Next Question →" : "Restart Quiz ↺";
+      nextBtn.onclick = () => {
+        if (currentQuizIndex < QUIZ_QUESTIONS.length - 1) {
+          currentQuizIndex++;
+        } else {
+          currentQuizIndex = 0;
+          quizScore = 0;
+          document.getElementById('quiz-score').innerText = quizScore;
+        }
+        renderQuizQuestion();
+      };
+      fb.appendChild(nextBtn);
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. SPEECH SYNTHESIS & SOUNDSCAPE
+    // -------------------------------------------------------------------------
+    let currentVoiceRate = 1.0;
+
+    function toggleVoiceRate() {
+      currentVoiceRate = currentVoiceRate === 1.0 ? 0.85 : 1.0;
+      document.getElementById('voice-rate-text').innerText = currentVoiceRate + "× UK";
+    }
+
+    function speakWord(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-GB';
+      utter.rate = currentVoiceRate;
+      const voices = window.speechSynthesis.getVoices();
+      const ukVoice = voices.find(v => v.lang.includes('en-GB') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Libby') || v.name.includes('Sonia') || v.name.includes('George'))) || voices.find(v => v.lang.includes('en-GB'));
+      if (ukVoice) utter.voice = ukVoice;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakGymWord() {
+      const item = GYM_WORDS[currentGymIndex];
+      speakWord(item.word + ". " + item.quote);
+    }
+
+    function speakPitchModel() {
+      const text = document.getElementById('pitch-script-content').innerText;
+      speakWord(text);
+    }
+
+    function speakFiveYearModel() {
+      const text = document.getElementById('five-year-script-content').innerText;
+      speakWord(text);
+    }
+
+    function speakHotSeatModel() {
+      const scenario = HOT_SEAT_DATA.find(s => s.id === currentHotSeatIndex);
+      if (scenario) speakWord(scenario.spokenText);
+    }
+
+    function toggleTeacherDrawer() {
+      const drawer = document.getElementById('teacher-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    // Procedural Web Audio API Ambient Soundscape Generator
+    let audioCtx = null;
+    let isSoundPlaying = false;
+    let soundNodes = [];
+
+    function toggleSoundscape() {
+      if (isSoundPlaying) {
+        stopSoundscape();
+      } else {
+        startSoundscape();
+      }
+    }
+
+    function startSoundscape() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        audioCtx = new AudioContext();
+
+        // 3-second pink noise buffer
+        const bufferSize = audioCtx.sampleRate * 3;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.035;
+          b6 = white * 0.115926;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        // Bandpass Filter simulating Mediterranean coastal breeze
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 360;
+        filter.Q.value = 1.8;
+
+        // LFO for slow wind swell
+        const lfo = audioCtx.createOscillator();
+        lfo.frequency.value = 0.16;
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.value = 180;
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0.22;
+
+        whiteNoise.connect(filter);
+        filter.connect(masterGain);
+        masterGain.connect(audioCtx.destination);
+
+        whiteNoise.start();
+        lfo.start();
+
+        soundNodes = [whiteNoise, lfo, masterGain];
+        isSoundPlaying = true;
+        document.getElementById('soundscape-label').innerText = "Breeze Audio: On";
+        document.getElementById('soundscape-btn').classList.add('bg-amber-100', 'text-autumn-900');
+      } catch (e) {
+        console.error("AudioContext error:", e);
+      }
+    }
+
+    function stopSoundscape() {
+      soundNodes.forEach(node => {
+        try { if (node.stop) node.stop(); } catch(e){}
+        try { if (node.disconnect) node.disconnect(); } catch(e){}
+      });
+      if (audioCtx && audioCtx.state !== 'closed') {
+        audioCtx.close();
+      }
+      soundNodes = [];
+      isSoundPlaying = false;
+      document.getElementById('soundscape-label').innerText = "Breeze Audio: Off";
+      document.getElementById('soundscape-btn').classList.remove('bg-amber-100', 'text-autumn-900');
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. INITIALIZATION WITH SAFE DEFENSIVE GUARDS
+    // -------------------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderGymCard();
+        renderFlashcard();
+        renderQuizQuestion();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } catch (err) {
+        console.error("Initialization error safely caught:", err);
+      }
+    });
+  </script>
+</body>
+</html>
