@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara & Louie • Lesson 04: The Senior Pivot Interview Arcade</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#844423',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e3ebe6',
+              200: '#c7d7cd',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#395346',
+            },
+            ink: {
+              900: '#1f2421',
+              700: '#3f4742',
+              500: '#646e68',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons & Canvas Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f9f6f0;
+      color: #1f2421;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .game-card {
+      background: #fffdf9;
+      border: 1px solid #e5dccb;
+      box-shadow: 0 10px 30px -12px rgba(31, 36, 33, 0.08);
+    }
+    .tab-btn {
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background-color: #1f2421;
+      color: #fbf9f5;
+      box-shadow: 0 4px 12px rgba(31, 36, 33, 0.16);
+    }
+    .wheel-container {
+      position: relative;
+      width: 310px;
+      height: 310px;
+    }
+    #wheel-svg {
+      transition: transform 4.2s cubic-bezier(0.12, 0.85, 0.16, 1);
+      transform-origin: center center;
+    }
+    .pulse-ring {
+      animation: pulseGlow 1.6s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(190, 111, 56, 0.35); }
+      50% { box-shadow: 0 0 0 10px rgba(190, 111, 56, 0); }
+    }
+    .star-bar-seg {
+      transition: width 0.35s ease, opacity 0.25s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Arcade Header -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-[#f9f6f0]/90 border-b border-[#e5dccb]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-autumn-500 text-white flex items-center justify-center shadow-sm font-serif text-xl font-bold">
+          B
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 leading-none">
+              The Senior Pivot Arcade
+            </h1>
+            <span class="hidden sm:inline-block text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-sage-100 text-sage-700 border border-sage-200">
+              Lesson 04 • Fun Interview Lab
+            </span>
+          </div>
+          <p class="text-xs text-ink-500 mt-0.5">
+            Barbara G. &amp; Louie • Angular / TypeScript + 10 yrs Creative Production
+          </p>
+        </div>
+      </div>
+
+      <!-- Scoreboard & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 bg-white border border-[#e5dccb] rounded-xl px-3 py-1.5 shadow-sm">
+          <span class="text-xs font-mono uppercase text-ink-500">Score</span>
+          <span id="score-display" class="font-mono font-bold text-lg text-autumn-600">0</span>
+          <span class="text-xs text-ink-500">|</span>
+          <span class="text-xs font-mono uppercase text-ink-500">Streak</span>
+          <span id="streak-display" class="font-mono font-bold text-sm text-sage-600">0🔥</span>
+        </div>
+
+        <button onclick="addBonusPoints(100, 'Great spoken answer!')"
+          class="px-3 py-1.5 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
+          title="Tutor button: award points for a great spoken answer">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>+100 Spoken Win</span>
+        </button>
+
+        <button id="sound-toggle-btn" onclick="toggleSound()"
+          class="p-2 rounded-xl bg-white border border-[#e5dccb] hover:bg-parchment-100 text-ink-700 transition"
+          title="Toggle game sound effects">
+          <i id="sound-icon" data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-3 flex items-center gap-2 overflow-x-auto">
+      <button id="tab-btn-buzzer" onclick="switchTab('buzzer')" class="tab-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <span>1. Kill the Apology</span>
+      </button>
+      <button id="tab-btn-wheel" onclick="switchTab('wheel')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="disc" class="w-4 h-4"></i>
+        <span>2. Spin &amp; Power Word</span>
+      </button>
+      <button id="tab-btn-star" onclick="switchTab('star')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="timer" class="w-4 h-4"></i>
+        <span>3. STAR Speed-Run</span>
+      </button>
+      <button id="tab-btn-director" onclick="switchTab('director')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="gavel" class="w-4 h-4"></i>
+        <span>4. Hire or Pass?</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div class="bg-ink-900 text-parchment-50 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-autumn-400/40">
+      <span class="text-lg">🎉</span>
+      <span id="toast-text" class="text-sm font-medium">Nice!</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== GAME 1: KILL THE APOLOGY ==================== -->
+    <section id="panel-buzzer" class="space-y-6">
+      <div class="game-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-autumn-600 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Warm-Up • 8 Rounds
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              Game 1: The Confidence Buzzer
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              Spot the apologetic "junior hedging" in each sentence. Say a stronger senior version <strong>out loud</strong> first, then pick the best Power Reframe below!
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-mono text-ink-500">Card</span>
+            <div id="buzzer-progress" class="font-mono text-lg font-bold text-ink-900">1 / 8</div>
+          </div>
+        </div>
+
+        <!-- Apology Quote Box -->
+        <div class="rounded-2xl bg-red-50/70 border-2 border-red-200 p-5 sm:p-6 mb-6">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-red-700 flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              Undersell Alert (Don't Say This!)
+            </span>
+            <span id="buzzer-trap-tag" class="text-xs font-mono text-red-600 bg-white px-2.5 py-0.5 rounded-full border border-red-200">
+              Trap: "Just / Only"
+            </span>
+          </div>
+          <p id="buzzer-weak-quote" class="font-serif text-xl sm:text-2xl text-ink-900 italic leading-snug">
+            "I'm sorry, I only have internship experience in Angular, I'm still just a junior."
+          </p>
+        </div>
+
+        <!-- 3 Reframe Choices -->
+        <div class="space-y-3">
+          <div class="text-xs font-mono uppercase tracking-wider text-ink-500 mb-1">
+            Step 1: Say your own fix out loud. Step 2: Click the strongest Senior Reframe:
+          </div>
+          <div id="buzzer-options" class="grid grid-cols-1 gap-3"></div>
+        </div>
+
+        <!-- Explanation + Controls -->
+        <div id="buzzer-feedback" class="hidden mt-5 rounded-xl p-4 border"></div>
+
+        <div class="flex items-center justify-between mt-6 pt-4 border-t border-[#e5dccb]">
+          <button onclick="prevBuzzer()" class="px-4 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+            ← Previous
+          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="speakCurrentBuzzer(0.85)" class="px-3 py-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-xs font-mono font-semibold text-ink-700 transition">
+              🔊 0.85× Slow
+            </button>
+            <button onclick="speakCurrentBuzzer(1.0)" class="px-3 py-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-xs font-mono font-semibold text-ink-700 transition">
+              🔊 1.0× Natural
+            </button>
+          </div>
+          <button onclick="nextBuzzer()" class="px-5 py-2 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Next Card →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GAME 2: SPIN & POWER WORD ==================== -->
+    <section id="panel-wheel" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- Left: Spinning Wheel -->
+        <div class="lg:col-span-5 game-card rounded-2xl p-6 flex flex-col items-center">
+          <h2 class="font-serif text-2xl font-bold text-ink-900 text-center">
+            Question Roulette
+          </h2>
+          <p class="text-xs text-ink-500 text-center mt-1 mb-5">
+            Spin for a surprise interview question + a secret Power Word!
+          </p>
+
+          <div class="wheel-container flex items-center justify-center my-2">
+            <!-- Top Pointer -->
+            <div class="absolute -top-3 z-20 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[22px] border-t-ink-900 drop-shadow"></div>
+
+            <svg id="wheel-svg" viewBox="0 0 300 300" class="w-full h-full drop-shadow-md rounded-full border-4 border-ink-900 bg-white">
+              <!-- Slices rendered by JS -->
+            </svg>
+
+            <button onclick="spinWheel()" id="spin-btn"
+              class="absolute z-10 w-16 h-16 rounded-full bg-ink-900 hover:bg-autumn-600 text-white font-mono text-xs font-bold uppercase tracking-wider shadow-lg border-4 border-[#fbf9f5] transition pulse-ring">
+              SPIN
+            </button>
+          </div>
+
+          <button onclick="spinWheel()" class="mt-5 w-full py-3 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white font-semibold text-sm shadow-sm transition flex items-center justify-center gap-2">
+            <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+            <span>Spin the Interview Wheel!</span>
+          </button>
+        </div>
+
+        <!-- Right: Active Challenge Card + Timer -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="game-card rounded-2xl p-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <span id="wheel-category-badge" class="text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-sage-100 text-sage-700 border border-sage-200">
+                Ready to Spin
+              </span>
+
+              <!-- Live Answer Timer -->
+              <div class="flex items-center gap-2">
+                <span id="wheel-timer-display" class="font-mono text-xl font-bold text-ink-900 bg-parchment-100 px-3 py-1 rounded-lg border border-[#e5dccb]">
+                  01:30
+                </span>
+                <button onclick="toggleWheelTimer()" id="wheel-timer-btn" class="px-3 py-1.5 rounded-lg bg-ink-900 text-white text-xs font-semibold hover:bg-ink-700 transition">
+                  ▶ Start 90s
+                </button>
+                <button onclick="resetWheelTimer()" class="px-2.5 py-1.5 rounded-lg border border-[#e5dccb] text-xs font-semibold text-ink-700 hover:bg-parchment-100 transition">
+                  Reset
+                </button>
+              </div>
+            </div>
+
+            <h3 id="wheel-question-text" class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 leading-snug min-h-[4.5rem]">
+              Click "Spin the Interview Wheel!" to draw your first question.
+            </h3>
+
+            <p id="wheel-coach-tip" class="text-sm text-ink-500 mt-3 italic">
+              Tip: Use one of your hesitation killers ("That's a great question—at a high level...") if you need 2 seconds to think!
+            </p>
+
+            <!-- Secret Power Word Box -->
+            <div class="mt-6 rounded-2xl bg-autumn-50 border border-autumn-200 p-4 sm:p-5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span class="text-[11px] font-mono uppercase tracking-wider text-autumn-700 font-bold">
+                    🎯 Secret Power Word (+200 Bonus if used naturally!)
+                  </span>
+                  <div class="flex items-center gap-3 mt-1">
+                    <span id="power-word-term" class="font-mono text-xl font-bold text-ink-900">trade-off</span>
+                    <span id="power-word-ipa" class="font-mono text-xs text-ink-500">/ˈtreɪd.ɒf/</span>
+                    <button onclick="speakPowerWord()" class="px-2.5 py-1 rounded-lg bg-white border border-autumn-200 text-xs font-semibold text-autumn-700 hover:bg-autumn-100 transition">
+                      🔊 Listen
+                    </button>
+                  </div>
+                </div>
+                <button onclick="claimPowerWordBonus()" class="px-4 py-2 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-bold shadow-sm transition">
+                  ✅ Used It! (+200)
+                </button>
+              </div>
+              <p id="power-word-example" class="text-xs text-ink-700 mt-2">
+                Example: "The main trade-off was shipping faster versus adding stricter TypeScript validation."
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Hesitation Killers Strip -->
+          <div class="game-card rounded-2xl p-4">
+            <div class="text-xs font-mono uppercase tracking-wider text-ink-500 mb-2">
+              ⚡ Emergency Hesitation Killers (Click to Hear)
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="speakText('That is a very fair question. At a high level...')" class="text-xs px-3 py-1.5 rounded-lg bg-parchment-100 hover:bg-parchment-200 text-ink-900 transition">
+                "That's a very fair question—at a high level..."
+              </button>
+              <button onclick="speakText('To put that into practical perspective...')" class="text-xs px-3 py-1.5 rounded-lg bg-parchment-100 hover:bg-parchment-200 text-ink-900 transition">
+                "To put that into practical perspective..."
+              </button>
+              <button onclick="speakText('The core trade-off we faced was...')" class="text-xs px-3 py-1.5 rounded-lg bg-parchment-100 hover:bg-parchment-200 text-ink-900 transition">
+                "The core trade-off we faced was..."
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GAME 3: STAR SPEED-RUN ==================== -->
+    <section id="panel-star" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left: Fix the Rambling Candidate -->
+        <div class="lg:col-span-7 game-card rounded-2xl p-6">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-mono uppercase tracking-wider text-sage-700 bg-sage-100 px-2.5 py-1 rounded-full border border-sage-200">
+              Part A • Cut the Fluff
+            </span>
+            <span id="star-puzzle-score" class="text-xs font-mono font-bold text-ink-700">0 / 2 Fluff Lines Cut</span>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-ink-900">
+            Fix the Rambling Candidate!
+          </h2>
+          <p class="text-sm text-ink-500 mt-1 mb-4">
+            This candidate spent way too long on Situation! Click the <strong>2 fluff lines</strong> to delete them and bring the answer into the golden <strong>S 15% • T 10% • A 50% • R 25%</strong> balance.
+          </p>
+
+          <!-- Live Balance Bar -->
+          <div class="mb-5">
+            <div class="flex justify-between text-[11px] font-mono text-ink-500 mb-1">
+              <span>S (Situation)</span>
+              <span>T (Task)</span>
+              <span>A (Action)</span>
+              <span>R (Result)</span>
+            </div>
+            <div class="w-full h-4 rounded-full overflow-hidden flex bg-parchment-200 border border-[#e5dccb]">
+              <div id="bar-s" class="star-bar-seg bg-red-400 h-full" style="width: 55%"></div>
+              <div id="bar-t" class="star-bar-seg bg-amber-400 h-full" style="width: 10%"></div>
+              <div id="bar-a" class="star-bar-seg bg-sage-500 h-full" style="width: 25%"></div>
+              <div id="bar-r" class="star-bar-seg bg-ink-900 h-full" style="width: 10%"></div>
+            </div>
+            <p id="star-balance-status" class="text-xs font-mono text-red-600 mt-1.5">
+              ⚠️ Too much Situation! Cut the irrelevant backstory below.
+            </p>
+          </div>
+
+          <div id="star-lines-container" class="space-y-2.5"></div>
+        </div>
+
+        <!-- Right: 60s STAR Live Pacer -->
+        <div class="lg:col-span-5 game-card rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Part B • Live Speaking Pacer
+            </span>
+            <h3 class="font-serif text-2xl font-bold text-ink-900 mt-2">
+              60-Second STAR Sprint
+            </h3>
+            <p class="text-sm text-ink-500 mt-1">
+              Pick a prompt and hit <strong>Start Sprint</strong>. The blocks light up to pace your speaking in real time!
+            </p>
+
+            <div class="mt-4 p-3.5 rounded-xl bg-parchment-100 border border-[#e5dccb]">
+              <div class="text-[11px] font-mono uppercase text-ink-500">Sprint Prompt</div>
+              <p id="sprint-prompt-text" class="text-sm font-semibold text-ink-900 mt-1">
+                "Tell me about a time you caught a tricky bug or edge case right before a deadline."
+              </p>
+              <button onclick="cycleSprintPrompt()" class="mt-2 text-xs font-semibold text-autumn-600 hover:underline">
+                ↻ Switch Prompt
+              </button>
+            </div>
+
+            <!-- 4 Phase Indicators -->
+            <div class="mt-5 space-y-2">
+              <div id="phase-s" class="p-3 rounded-xl border border-[#e5dccb] bg-white flex justify-between items-center transition">
+                <div>
+                  <span class="font-mono font-bold text-xs text-ink-900">S — SITUATION</span>
+                  <p class="text-xs text-ink-500">Where &amp; what project? (Keep it brief!)</p>
+                </div>
+                <span class="font-mono text-xs font-bold text-ink-500">0–9s</span>
+              </div>
+              <div id="phase-t" class="p-3 rounded-xl border border-[#e5dccb] bg-white flex justify-between items-center transition">
+                <div>
+                  <span class="font-mono font-bold text-xs text-ink-900">T — TASK</span>
+                  <p class="text-xs text-ink-500">What was broken or needed?</p>
+                </div>
+                <span class="font-mono text-xs font-bold text-ink-500">9–15s</span>
+              </div>
+              <div id="phase-a" class="p-3 rounded-xl border border-[#e5dccb] bg-white flex justify-between items-center transition">
+                <div>
+                  <span class="font-mono font-bold text-xs text-ink-900">A — ACTION (THE STAR!)</span>
+                  <p class="text-xs text-ink-500">What did YOU code, refactor, or coordinate?</p>
+                </div>
+                <span class="font-mono text-xs font-bold text-ink-500">15–45s</span>
+              </div>
+              <div id="phase-r" class="p-3 rounded-xl border border-[#e5dccb] bg-white flex justify-between items-center transition">
+                <div>
+                  <span class="font-mono font-bold text-xs text-ink-900">R — RESULT</span>
+                  <p class="text-xs text-ink-500">Outcome, metric, or what shipped on time.</p>
+                </div>
+                <span class="font-mono text-xs font-bold text-ink-500">45–60s</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-[#e5dccb] flex items-center justify-between">
+            <span id="sprint-clock" class="font-mono text-2xl font-bold text-ink-900">00s / 60s</span>
+            <div class="flex gap-2">
+              <button onclick="toggleSprint()" id="sprint-btn" class="px-4 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-sm font-semibold transition">
+                ▶ Start Sprint
+              </button>
+              <button onclick="resetSprint()" class="px-3 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GAME 4: HIRE OR PASS (ROLE REVERSAL) ==================== -->
+    <section id="panel-director" class="hidden space-y-6">
+      <div class="game-card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Role Reversal • You Are the Hiring Director!
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              Game 4: Hire or Pass?
+            </h2>
+            <p class="text-sm text-ink-500 mt-1">
+              Barbara, put on your <strong>Hiring Manager hat</strong>. Read the candidate's answer, decide <strong>Hire</strong> or <strong>Pass</strong>, and tell Louie <em>why</em> in 15 seconds!
+            </p>
+          </div>
+          <div id="director-progress" class="font-mono text-lg font-bold text-ink-900">1 / 5</div>
+        </div>
+
+        <div class="rounded-2xl bg-parchment-100 border border-[#e5dccb] p-5 sm:p-6 mb-6">
+          <div class="text-xs font-mono uppercase tracking-wider text-ink-500 mb-1" id="director-q-label">
+            Question: "Why are you leaving film/artistic direction for software?"
+          </div>
+          <p id="director-candidate-quote" class="font-serif text-xl sm:text-2xl text-ink-900 leading-relaxed mt-2">
+            "Honestly, I got bored of my old job and heard tech pays better from home, so I did a course and now I just want a quiet junior role where nobody bothers me."
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-5">
+          <button onclick="judgeCandidate('hire')" class="py-3.5 rounded-xl bg-sage-600 hover:bg-sage-700 text-white font-bold text-base shadow-sm transition flex items-center justify-center gap-2">
+            <span>✅ HIRE (Green Flag)</span>
+          </button>
+          <button onclick="judgeCandidate('pass')" class="py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-base shadow-sm transition flex items-center justify-center gap-2">
+            <span>🚩 PASS (Red Flag)</span>
+          </button>
+        </div>
+
+        <div id="director-feedback" class="hidden rounded-xl p-4 border mb-5"></div>
+
+        <div class="flex justify-between items-center pt-4 border-t border-[#e5dccb]">
+          <button onclick="prevDirector()" class="px-4 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+            ← Previous
+          </button>
+          <button onclick="nextDirector()" class="px-5 py-2 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Next Candidate →
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-[#e5dccb] bg-[#f6f1e7]/60 py-4 text-center text-xs text-ink-500 font-mono">
+    Barbara &amp; Louie • Interview Arcade • Built for confident, zero-apology senior storytelling
+  </footer>
+
+  <script>
+    // ==================== STATE & AUDIO ====================
+    let score = 0;
+    let streak = 0;
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playTone(freq, duration, type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          audioCtx = new Ctx();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playWinSound() {
+      playTone(523.25, 0.12, 'triangle');
+      setTimeout(() => playTone(659.25, 0.12, 'triangle'), 90);
+      setTimeout(() => playTone(783.99, 0.22, 'triangle'), 180);
+    }
+
+    function playOopsSound() {
+      playTone(220, 0.18, 'sawtooth');
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('sound-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', soundEnabled ? 'volume-2' : 'volume-x');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+      showToast(soundEnabled ? 'Sound effects ON' : 'Sound effects MUTE');
+    }
+
+    function addBonusPoints(pts, msg) {
+      score += pts;
+      streak += 1;
+      document.getElementById('score-display').textContent = String(score);
+      document.getElementById('streak-display').textContent = streak + '🔥';
+      playWinSound();
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 45, spread: 60, origin: { y: 0.75 } });
+      }
+      if (msg) showToast('+' + pts + ' pts — ' + msg);
+    }
+
+    function showToast(text) {
+      const el = document.getElementById('toast-banner');
+      const txt = document.getElementById('toast-text');
+      if (!el || !txt) return;
+      txt.textContent = text;
+      el.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.add('hidden'), 2600);
+    }
+
+    function speakText(text, rate) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-GB';
+      u.rate = rate || 1.0;
+      window.speechSynthesis.speak(u);
+    }
+
+    function switchTab(tabName) {
+      const tabs = ['buzzer', 'wheel', 'star', 'director'];
+      tabs.forEach((t) => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (panel) panel.classList.toggle('hidden', t !== tabName);
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/70', 'text-ink-700');
+          } else {
+            btn.classList.remove('active');
+            btn.classList.add('bg-white/70', 'text-ink-700');
+          }
+        }
+      });
+    }
+
+    // ==================== GAME 1: KILL THE APOLOGY ====================
+    const BUZZER_CARDS = [
+      {
+        trap: 'Trap: "Sorry / Only / Just"',
+        weak: '"I\'m sorry, I only have internship experience in Angular, I\'m still just a junior."',
+        options: [
+          { text: '"I\'m trying to learn Angular as fast as I can, even though I\'m new."', best: false },
+          { text: '"At Sopra Steria I shipped client-facing Angular and TypeScript features, backed by 10 years of production discipline."', best: true },
+          { text: '"I don\'t have years of coding yet, but I\'m a very hard worker."', best: false }
+        ],
+        why: 'Never apologize for your career pivot. Pair your concrete Sopra Steria Angular/TypeScript work with your 10 years of shipping complex productions.'
+      },
+      {
+        trap: 'Trap: Downplaying Film/Art Background',
+        weak: '"Before this I worked in film and art direction, which has nothing to do with coding."',
+        options: [
+          { text: '"My 10 years in artistic direction trained me in cross-functional communication, tight deadlines, and systems thinking."', best: true },
+          { text: '"I used to do art, so I have a good eye for nice colors on websites."', best: false },
+          { text: '"I left art because I wanted something completely different."', best: false }
+        ],
+        why: 'Your Goya-nominated production background is executive maturity—budgeting, coordinating cross-functional teams, and delivering under pressure.'
+      },
+      {
+        trap: 'Trap: Apologizing for English',
+        weak: '"Sorry if my English isn\'t perfect, sometimes I forget technical words."',
+        options: [
+          { text: '"I\'m still studying English every week to improve my grammar."', best: false },
+          { text: '"Please tell me if you don\'t understand my Spanish accent."', best: false },
+          { text: '"Let me put that into practical perspective—the main bottleneck we solved was..."', best: true }
+        ],
+        why: 'Never draw attention to minor hesitations. Use a natural buffer phrase ("To put that into practical perspective...") and keep moving forward.'
+      },
+      {
+        trap: 'Trap: Passive "We" Instead of "I"',
+        weak: '"At my internship, the team refactored some components and fixed a few bugs."',
+        options: [
+          { text: '"I refactored a monolithic Angular component into reusable sub-components and enforced strict return types."', best: true },
+          { text: '"We all worked together nicely as a team on the Angular app."', best: false },
+          { text: '"My mentor told me which files to clean up and I followed instructions."', best: false }
+        ],
+        why: 'Interviewers hire YOU, not your team. Use "I" for your technical actions, while crediting the team for shared success.'
+      },
+      {
+        trap: 'Trap: Underselling TypeScript Rigor',
+        weak: '"I just used TypeScript because the project already had it set up."',
+        options: [
+          { text: '"TypeScript is okay, though sometimes the red squiggly lines are annoying."', best: false },
+          { text: '"I rely on strict TypeScript types and explicit return types to catch edge cases before runtime."', best: true },
+          { text: '"I know JavaScript, and TypeScript is basically the same thing."', best: false }
+        ],
+        why: 'In the AI coding era, engineering managers love developers who use strict typing to prevent sloppy bugs.'
+      },
+      {
+        trap: 'Trap: Vague 5-Year Answer',
+        weak: '"In five years I don\'t know, maybe still coding somewhere remote if I\'m lucky."',
+        options: [
+          { text: '"I want to be a senior architect or CTO in three years."', best: false },
+          { text: '"I want to grow deeply within a product team—owning architecture, mentoring juniors, and shipping reliable software from Valencia."', best: true },
+          { text: '"I haven\'t really thought about five years from now."', best: false }
+        ],
+        why: 'Companies want stability and craft. Showing you want to grow WITH a team from Valencia signals loyalty without arrogance.'
+      },
+      {
+        trap: 'Trap: Freezing on Unknowns',
+        weak: '"I\'ve never used that library before, so I probably can\'t do that."',
+        options: [
+          { text: '"I haven\'t used that specific library in production yet, but in Angular I\'ve solved the same pattern using RxJS—here\'s how I\'d approach it."', best: true },
+          { text: '"I\'m sure I could watch a YouTube tutorial over the weekend."', best: false },
+          { text: '"No, sorry, we didn\'t cover that in my DAW degree."', best: false }
+        ],
+        why: 'Bridge from what you DO know to what they are asking. Senior engineers think in patterns, not memorized syntax.'
+      },
+      {
+        trap: 'Trap: Weak Closing',
+        weak: '"Nope, I don\'t have any questions for you, everything was very clear!"',
+        options: [
+          { text: '"How many vacation days do we get per year?"', best: false },
+          { text: '"What is the biggest technical bottleneck or cross-functional challenge your front-end team is tackling this quarter?"', best: true },
+          { text: '"Did I pass the interview?"', best: false }
+        ],
+        why: 'Asking about their current bottleneck flips the dynamic into a peer-to-peer engineering conversation.'
+      }
+    ];
+
+    let buzzerIdx = 0;
+    let buzzerAnswered = false;
+
+    function renderBuzzer() {
+      const card = BUZZER_CARDS[buzzerIdx];
+      buzzerAnswered = false;
+      document.getElementById('buzzer-progress').textContent = (buzzerIdx + 1) + ' / ' + BUZZER_CARDS.length;
+      document.getElementById('buzzer-trap-tag').textContent = card.trap;
+      document.getElementById('buzzer-weak-quote').textContent = card.weak;
+
+      const fb = document.getElementById('buzzer-feedback');
+      fb.classList.add('hidden');
+      fb.innerHTML = '';
+
+      const container = document.getElementById('buzzer-options');
+      container.innerHTML = card.options.map((opt, idx) => {
+        return '<button onclick="selectBuzzerOption(' + idx + ')" id="bopt-' + idx + '" class="text-left p-4 rounded-xl border border-[#e5dccb] bg-white hover:border-autumn-400 hover:bg-autumn-50/40 transition text-sm sm:text-base font-medium text-ink-900">' +
+          '<span class="font-mono text-xs text-ink-500 mr-2">[' + String.fromCharCode(65 + idx) + ']</span> ' + opt.text +
+          '</button>';
+      }).join('');
+    }
+
+    function selectBuzzerOption(idx) {
+      if (buzzerAnswered) return;
+      const card = BUZZER_CARDS[buzzerIdx];
+      const chosen = card.options[idx];
+      const fb = document.getElementById('buzzer-feedback');
+      fb.classList.remove('hidden');
+
+      if (chosen.best) {
+        buzzerAnswered = true;
+        document.getElementById('bopt-' + idx).classList.add('border-sage-600', 'bg-sage-50', 'ring-2', 'ring-sage-500/30');
+        fb.className = 'mt-5 rounded-xl p-4 border border-sage-200 bg-sage-50 text-sage-700 text-sm';
+        fb.innerHTML = '<strong>🔥 Senior Reframe!</strong> ' + card.why;
+        addBonusPoints(100, 'Confidence Buzzer');
+      } else {
+        streak = 0;
+        document.getElementById('streak-display').textContent = '0🔥';
+        document.getElementById('bopt-' + idx).classList.add('border-red-300', 'bg-red-50', 'opacity-70');
+        fb.className = 'mt-5 rounded-xl p-4 border border-red-200 bg-red-50 text-red-700 text-sm';
+        fb.innerHTML = '<strong>Not quite!</strong> That one still sounds a bit passive or defensive. Try another option!';
+        playOopsSound();
+      }
+    }
+
+    function speakCurrentBuzzer(rate) {
+      const best = BUZZER_CARDS[buzzerIdx].options.find(o => o.best);
+      if (best) speakText(best.text.replace(/"/g, ''), rate);
+    }
+
+    function nextBuzzer() {
+      buzzerIdx = (buzzerIdx + 1) % BUZZER_CARDS.length;
+      renderBuzzer();
+    }
+
+    function prevBuzzer() {
+      buzzerIdx = (buzzerIdx - 1 + BUZZER_CARDS.length) % BUZZER_CARDS.length;
+      renderBuzzer();
+    }
+
+    // ==================== GAME 2: SPIN & POWER WORD ====================
+    const WHEEL_SLICES = [
+      {
+        label: '90s Pitch',
+        color: '#be6f38',
+        cat: 'Career Story',
+        q: 'Tell me about yourself and why you pivoted from artistic direction to full-stack development.',
+        tip: 'Hit all 4 beats: Film/Goya discipline → DAW degree → Sopra Steria Angular/TS → Remote value from Valencia.',
+        word: 'cross-functional',
+        ipa: '/ˌkrɒsˈfʌŋk.ʃən.əl/',
+        ex: '"My background makes me naturally strong in cross-functional teams where design meets engineering."'
+      },
+      {
+        label: 'Messy Code',
+        color: '#5b826f',
+        cat: 'Technical STAR',
+        q: 'Tell me about a time you had to refactor messy code or enforce strict TypeScript types under a tight deadline.',
+        tip: 'Keep Situation to 10 seconds. Spend 50% of your answer on the exact steps YOU took.',
+        word: 'refactor',
+        ipa: '/ˌriːˈfæk.tər/',
+        ex: '"I decided to refactor the component into smaller typed units so we could test each piece cleanly."'
+      },
+      {
+        label: 'Design Clash',
+        color: '#d38c57',
+        cat: 'Collaboration',
+        q: 'A designer changes the UI layout 2 hours before a sprint demo. How do you handle it?',
+        tip: 'Channel your inner Film Producer! Calmly assess scope, communicate trade-offs, and protect the release.',
+        word: 'trade-off',
+        ipa: '/ˈtreɪd.ɒf/',
+        ex: '"I walked the designer through the trade-off between a quick CSS tweak now versus a full component change next sprint."'
+      },
+      {
+        label: 'Slow App',
+        color: '#395346',
+        cat: 'Debugging',
+        q: 'Users say a page feels sluggish. How do you investigate and fix it?',
+        tip: 'Check network requests, unnecessary re-renders, and data payloads step by step.',
+        word: 'bottleneck',
+        ipa: '/ˈbɒt.əl.nek/',
+        ex: '"By profiling the network tab, we discovered the real bottleneck was an unpaginated API call."'
+      },
+      {
+        label: 'Edge Case',
+        color: '#a3582b',
+        cat: 'Quality & Testing',
+        q: 'Tell me about an unexpected bug or edge case you caught before it hit production.',
+        tip: 'Explain what the edge case was (null/empty state, mobile viewport, race condition) and how you prevented it.',
+        word: 'edge case',
+        ipa: '/ˈedʒ ˌkeɪs/',
+        ex: '"Our unit test caught an edge case where an empty array crashed the summary card."'
+      },
+      {
+        label: 'Paella Code',
+        color: '#476858',
+        cat: 'Fun Curveball',
+        q: 'Fun Curveball: If clean Angular architecture were a Spanish dish (like Valencian paella), what would the ingredients be?',
+        tip: 'Smile and have fun! E.g. TypeScript = the socarrat (crispy foundation), components = clean ingredients, no shortcuts!',
+        word: 'encapsulation',
+        ipa: '/ɪnˌkæp.sjʊˈleɪ.ʃən/',
+        ex: '"Good component encapsulation keeps every flavor clean instead of turning the codebase into soup!"'
+      },
+      {
+        label: 'AI Era',
+        color: '#844423',
+        cat: 'Modern Engineering',
+        q: 'With AI tools writing code today, why should we hire a developer at your level?',
+        tip: 'AI writes syntax, not architecture. Mention strict types, edge cases, and human stakeholder alignment.',
+        word: 'ownership',
+        ipa: '/ˈəʊ.nə.ʃɪp/',
+        ex: '"AI can generate snippets, but a team needs an engineer who takes ownership of type safety and user experience."'
+      },
+      {
+        label: '5 Years',
+        color: '#646e68',
+        cat: 'Culture & Vision',
+        q: 'Where do you see yourself in 5 years, and why are you looking for a remote role?',
+        tip: 'Sound grounded, loyal, and craft-focused—growing deep roots with a product team from Valencia.',
+        word: 'scalability',
+        ipa: '/ˌskeɪ.ləˈbɪl.ə.ti/',
+        ex: '"In five years I want to be a trusted senior contributor focused on front-end scalability and mentoring."'
+      }
+    ];
+
+    let wheelAngle = 0;
+    let activeSlice = WHEEL_SLICES[0];
+    let wheelTimerSec = 90;
+    let wheelTimerInterval = null;
+
+    function buildWheelSVG() {
+      const svg = document.getElementById('wheel-svg');
+      if (!svg) return;
+      const n = WHEEL_SLICES.length;
+      const cx = 150, cy = 150, r = 148;
+      let html = '';
+
+      WHEEL_SLICES.forEach((slice, i) => {
+        const startDeg = (i * 360) / n - 90;
+        const endDeg = ((i + 1) * 360) / n - 90;
+        const startRad = (startDeg * Math.PI) / 180;
+        const endRad = (endDeg * Math.PI) / 180;
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+
+        html += '<path d="M ' + cx + ' ' + cy + ' L ' + x1 + ' ' + y1 + ' A ' + r + ' ' + r + ' 0 0 1 ' + x2 + ' ' + y2 + ' Z" fill="' + slice.color + '" stroke="#fbf9f5" stroke-width="2" />';
+
+        const midDeg = startDeg + 360 / (2 * n);
+        const midRad = (midDeg * Math.PI) / 180;
+        const tx = cx + 96 * Math.cos(midRad);
+        const ty = cy + 96 * Math.sin(midRad);
+        html += '<text x="' + tx + '" y="' + ty + '" fill="#ffffff" font-size="11" font-weight="700" font-family="Plus Jakarta Sans, sans-serif" text-anchor="middle" dominant-baseline="middle" transform="rotate(' + (midDeg + 90) + ', ' + tx + ', ' + ty + ')">' + slice.label + '</text>';
+      });
+
+      svg.innerHTML = html;
+    }
+
+    function spinWheel() {
+      const idx = Math.floor(Math.random() * WHEEL_SLICES.length);
+      const n = WHEEL_SLICES.length;
+      const sliceAngle = 360 / n;
+      // Target angle so chosen slice lands at top (0 deg)
+      const targetMod = (360 - (idx * sliceAngle + sliceAngle / 2)) % 360;
+      const currentMod = wheelAngle % 360;
+      const delta = (targetMod - currentMod + 360) % 360;
+      wheelAngle += 360 * 5 + delta;
+
+      const svg = document.getElementById('wheel-svg');
+      if (svg) svg.style.transform = 'rotate(' + wheelAngle + 'deg)';
+      playTone(440, 0.1, 'triangle');
+
+      setTimeout(() => {
+        activeSlice = WHEEL_SLICES[idx];
+        document.getElementById('wheel-category-badge').textContent = activeSlice.cat;
+        document.getElementById('wheel-question-text').textContent = activeSlice.q;
+        document.getElementById('wheel-coach-tip').textContent = 'Coach Tip: ' + activeSlice.tip;
+        document.getElementById('power-word-term').textContent = activeSlice.word;
+        document.getElementById('power-word-ipa').textContent = activeSlice.ipa;
+        document.getElementById('power-word-example').textContent = 'Example: ' + activeSlice.ex;
+        resetWheelTimer();
+        playWinSound();
+      }, 4250);
+    }
+
+    function speakPowerWord() {
+      speakText(activeSlice.word + '. ' + activeSlice.ex.replace(/"/g, ''), 0.95);
+    }
+
+    function claimPowerWordBonus() {
+      addBonusPoints(200, 'Used "' + activeSlice.word + '"!');
+    }
+
+    function updateWheelTimerDisplay() {
+      const m = String(Math.floor(wheelTimerSec / 60)).padStart(2, '0');
+      const s = String(wheelTimerSec % 60).padStart(2, '0');
+      document.getElementById('wheel-timer-display').textContent = m + ':' + s;
+    }
+
+    function toggleWheelTimer() {
+      const btn = document.getElementById('wheel-timer-btn');
+      if (wheelTimerInterval) {
+        clearInterval(wheelTimerInterval);
+        wheelTimerInterval = null;
+        btn.textContent = '▶ Resume';
+      } else {
+        btn.textContent = '⏸ Pause';
+        wheelTimerInterval = setInterval(() => {
+          if (wheelTimerSec > 0) {
+            wheelTimerSec -= 1;
+            updateWheelTimerDisplay();
+          } else {
+            clearInterval(wheelTimerInterval);
+            wheelTimerInterval = null;
+            btn.textContent = 'Done!';
+            playTone(660, 0.35, 'triangle');
+            showToast('Time! Great job staying concise.');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetWheelTimer() {
+      clearInterval(wheelTimerInterval);
+      wheelTimerInterval = null;
+      wheelTimerSec = 90;
+      updateWheelTimerDisplay();
+      document.getElementById('wheel-timer-btn').textContent = '▶ Start 90s';
+    }
+
+    // ==================== GAME 3: STAR SPEED-RUN ====================
+    const STAR_LINES = [
+      { id: 0, tag: 'S', text: 'During my Angular internship at Sopra Steria, our team maintained an enterprise client dashboard.', fluff: false },
+      { id: 1, tag: 'FLUFF', text: 'It was a rainy Tuesday in Valencia and my laptop battery was at 12%, plus I had just finished a coffee with my colleague.', fluff: true },
+      { id: 2, tag: 'FLUFF', text: 'The company has 50,000 employees worldwide and was founded in France many years ago.', fluff: true },
+      { id: 3, tag: 'T', text: 'We needed to eliminate runtime crashes caused by untyped API responses before Friday\'s release.', fluff: false },
+      { id: 4, tag: 'A', text: 'I introduced strict TypeScript interfaces, declared explicit return types on all service methods, and added unit tests for empty-array edge cases.', fluff: false },
+      { id: 5, tag: 'R', text: 'As a result, we shipped on schedule with zero type-related bugs in QA and cut debugging time in half.', fluff: false }
+    ];
+
+    let cutFluffIds = [];
+
+    function renderStarPuzzle() {
+      const container = document.getElementById('star-lines-container');
+      container.innerHTML = STAR_LINES.map((line) => {
+        const isCut = cutFluffIds.includes(line.id);
+        if (isCut) {
+          return '<div class="p-3 rounded-xl border border-dashed border-sage-300 bg-sage-50/50 text-xs font-mono text-sage-700 flex items-center justify-between">' +
+            '<span>✂️ Fluff removed! (' + line.text.slice(0, 42) + '...)</span>' +
+            '<span>+50 pts</span></div>';
+        }
+        return '<button onclick="clickStarLine(' + line.id + ')" class="w-full text-left p-3.5 rounded-xl border border-[#e5dccb] bg-white hover:border-red-300 hover:bg-red-50/30 transition text-sm text-ink-900 flex items-start gap-3">' +
+          '<span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-parchment-100 text-ink-700 shrink-0">' + (line.fluff ? 'S?' : line.tag) + '</span>' +
+          '<span>' + line.text + '</span></button>';
+      }).join('');
+
+      const cutCount = cutFluffIds.length;
+      document.getElementById('star-puzzle-score').textContent = cutCount + ' / 2 Fluff Lines Cut';
+
+      const barS = document.getElementById('bar-s');
+      const barT = document.getElementById('bar-t');
+      const barA = document.getElementById('bar-a');
+      const barR = document.getElementById('bar-r');
+      const status = document.getElementById('star-balance-status');
+
+      if (cutCount === 0) {
+        barS.style.width = '55%'; barT.style.width = '10%'; barA.style.width = '25%'; barR.style.width = '10%';
+        barS.className = 'star-bar-seg bg-red-400 h-full';
+        status.className = 'text-xs font-mono text-red-600 mt-1.5';
+        status.textContent = '⚠️ Too much Situation (55%)! Cut 2 fluff lines below.';
+      } else if (cutCount === 1) {
+        barS.style.width = '35%'; barT.style.width = '10%'; barA.style.width = '38%'; barR.style.width = '17%';
+        barS.className = 'star-bar-seg bg-amber-400 h-full';
+        status.className = 'text-xs font-mono text-autumn-600 mt-1.5';
+        status.textContent = 'Getting closer! Cut 1 more irrelevant line.';
+      } else {
+        barS.style.width = '15%'; barT.style.width = '10%'; barA.style.width = '50%'; barR.style.width = '25%';
+        barS.className = 'star-bar-seg bg-sage-600 h-full';
+        status.className = 'text-xs font-mono text-sage-700 font-bold mt-1.5';
+        status.textContent = '✅ Golden Ratio Unlocked: S 15% • T 10% • A 50% • R 25%!';
+      }
+    }
+
+    function clickStarLine(id) {
+      const line = STAR_LINES.find(l => l.id === id);
+      if (!line) return;
+      if (line.fluff) {
+        if (!cutFluffIds.includes(id)) {
+          cutFluffIds.push(id);
+          addBonusPoints(50, 'Fluff cut!');
+          renderStarPuzzle();
+        }
+      } else {
+        playOopsSound();
+        showToast('Keep that line! It is essential ' + line.tag + ' context.');
+      }
+    }
+
+    const SPRINT_PROMPTS = [
+      '"Tell me about a time you caught a tricky bug or edge case right before a deadline."',
+      '"Describe a moment you had to coordinate between designers and developers to ship a feature."',
+      '"Tell me about a component you refactored to make it cleaner or more reusable."'
+    ];
+    let sprintPromptIdx = 0;
+    let sprintSec = 0;
+    let sprintInterval = null;
+
+    function cycleSprintPrompt() {
+      sprintPromptIdx = (sprintPromptIdx + 1) % SPRINT_PROMPTS.length;
+      document.getElementById('sprint-prompt-text').textContent = SPRINT_PROMPTS[sprintPromptIdx];
+    }
+
+    function updateSprintUI() {
+      document.getElementById('sprint-clock').textContent = String(sprintSec).padStart(2, '0') + 's / 60s';
+      const activePhase = sprintSec < 9 ? 's' : sprintSec < 15 ? 't' : sprintSec < 45 ? 'a' : 'r';
+      ['s', 't', 'a', 'r'].forEach((p) => {
+        const el = document.getElementById('phase-' + p);
+        if (!el) return;
+        if (sprintSec > 0 && p === activePhase) {
+          el.classList.add('border-autumn-500', 'bg-autumn-50', 'ring-2', 'ring-autumn-400/30');
+          el.classList.remove('bg-white', 'border-[#e5dccb]');
+        } else {
+          el.classList.remove('border-autumn-500', 'bg-autumn-50', 'ring-2', 'ring-autumn-400/30');
+          el.classList.add('bg-white', 'border-[#e5dccb]');
+        }
+      });
+    }
+
+    function toggleSprint() {
+      const btn = document.getElementById('sprint-btn');
+      if (sprintInterval) {
+        clearInterval(sprintInterval);
+        sprintInterval = null;
+        btn.textContent = '▶ Resume';
+      } else {
+        btn.textContent = '⏸ Pause';
+        sprintInterval = setInterval(() => {
+          if (sprintSec < 60) {
+            sprintSec += 1;
+            updateSprintUI();
+          } else {
+            clearInterval(sprintInterval);
+            sprintInterval = null;
+            btn.textContent = 'Done!';
+            addBonusPoints(150, 'Completed 60s STAR Sprint!');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetSprint() {
+      clearInterval(sprintInterval);
+      sprintInterval = null;
+      sprintSec = 0;
+      document.getElementById('sprint-btn').textContent = '▶ Start Sprint';
+      updateSprintUI();
+    }
+
+    // ==================== GAME 4: HIRE OR PASS ====================
+    const DIRECTOR_CASES = [
+      {
+        q: 'Question: "Why are you leaving artistic direction for software development?"',
+        quote: '"Honestly, I got bored of film, heard tech pays better from home, so I did a course and just want a quiet junior job."',
+        verdict: 'pass',
+        reason: 'Red Flag! Sounds unmotivated and transactional. A great candidate connects their love of building systems with solving real product problems.'
+      },
+      {
+        q: 'Question: "How do you handle a code review where a senior asks you to rewrite your PR?"',
+        quote: '"I love thorough reviews. At Sopra Steria I learned enterprise conventions quickly by asking why a pattern was preferred, then applying it across my next PRs."',
+        verdict: 'hire',
+        reason: 'Green Flag! Zero ego, high curiosity, and demonstrates coachability—exactly what Louie\'s recruitment playbook looks for.'
+      },
+      {
+        q: 'Question: "How did your previous company handle deadlines?"',
+        quote: '"At my old studio we did things way better than most tech teams. Honestly, if this team doesn\'t use my workflow, things will probably fail."',
+        verdict: 'pass',
+        reason: 'Red Flag! "Pride comes before a fall." Carrying arrogance from a past industry makes teams worry you won\'t adapt to their architecture.'
+      },
+      {
+        q: 'Question: "Tell me about a bug you struggled with."',
+        quote: '"An RxJS subscription kept firing after navigation. I isolated the bottleneck, added takeUntilDestroyed, and documented the fix for the team."',
+        verdict: 'hire',
+        reason: 'Green Flag! Specific Angular knowledge, ownership of the fix, and proactive documentation for teammates.'
+      },
+      {
+        q: 'Question: "Do you have any questions for us?"',
+        quote: '"Yes—what\'s one architectural trade-off your front-end team is navigating right now, and how could someone in this role help in the first 90 days?"',
+        verdict: 'hire',
+        reason: 'Instant Hire! Strategic, peer-level question that shows she is already thinking about delivering value in her first 90 days.'
+      }
+    ];
+
+    let directorIdx = 0;
+
+    function renderDirector() {
+      const item = DIRECTOR_CASES[directorIdx];
+      document.getElementById('director-progress').textContent = (directorIdx + 1) + ' / ' + DIRECTOR_CASES.length;
+      document.getElementById('director-q-label').textContent = item.q;
+      document.getElementById('director-candidate-quote').textContent = item.quote;
+      const fb = document.getElementById('director-feedback');
+      fb.classList.add('hidden');
+      fb.innerHTML = '';
+    }
+
+    function judgeCandidate(choice) {
+      const item = DIRECTOR_CASES[directorIdx];
+      const fb = document.getElementById('director-feedback');
+      fb.classList.remove('hidden');
+
+      if (choice === item.verdict) {
+        fb.className = 'rounded-xl p-4 border border-sage-200 bg-sage-50 text-sage-700 text-sm mb-5';
+        fb.innerHTML = '<strong>🎯 Spot-on Hiring Instinct!</strong> ' + item.reason;
+        addBonusPoints(100, 'Sharp Hiring Director');
+      } else {
+        fb.className = 'rounded-xl p-4 border border-red-200 bg-red-50 text-red-700 text-sm mb-5';
+        fb.innerHTML = '<strong>Look closer!</strong> ' + item.reason;
+        playOopsSound();
+      }
+    }
+
+    function nextDirector() {
+      directorIdx = (directorIdx + 1) % DIRECTOR_CASES.length;
+      renderDirector();
+    }
+
+    function prevDirector() {
+      directorIdx = (directorIdx - 1 + DIRECTOR_CASES.length) % DIRECTOR_CASES.length;
+      renderDirector();
+    }
+
+    // ==================== INIT ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderBuzzer();
+        buildWheelSVG();
+        renderStarPuzzle();
+        updateSprintUI();
+        renderDirector();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } catch (err) {
+        console.error('Initialization error caught safely:', err);
+      }
+    });
+  </script>
+</body>
+</html>

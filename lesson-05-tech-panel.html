@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara &amp; Louie • Lesson 05: Live Tech Panel &amp; Offer Simulation</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#844423',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e3ebe6',
+              200: '#c7d7cd',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#395346',
+            },
+            ink: {
+              900: '#1f2421',
+              700: '#3f4742',
+              500: '#646e68',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons & Canvas Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f9f6f0;
+      color: #1f2421;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .panel-card {
+      background: #fffdf9;
+      border: 1px solid #e5dccb;
+      box-shadow: 0 10px 30px -12px rgba(31, 36, 33, 0.08);
+    }
+    .tab-btn {
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background-color: #1f2421;
+      color: #fbf9f5;
+      box-shadow: 0 4px 12px rgba(31, 36, 33, 0.16);
+    }
+    .code-box {
+      background: #1e2321;
+      color: #f6f1e7;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-[#f9f6f0]/90 border-b border-[#e5dccb]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-sage-600 text-white flex items-center justify-center shadow-sm font-serif text-xl font-bold">
+          B
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 leading-none">
+              The Live Tech Panel &amp; Offer Lab
+            </h1>
+            <span class="hidden sm:inline-block text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-autumn-100 text-autumn-700 border border-autumn-200">
+              Lesson 05 • Final-Round Simulation
+            </span>
+          </div>
+          <p class="text-xs text-ink-500 mt-0.5">
+            Barbara G. &amp; Louie • Code Narration, Curveballs, 3-Min Demo &amp; Salary Boundaries
+          </p>
+        </div>
+      </div>
+
+      <!-- Scoreboard & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 bg-white border border-[#e5dccb] rounded-xl px-3 py-1.5 shadow-sm">
+          <span class="text-xs font-mono uppercase text-ink-500">Confidence</span>
+          <span id="score-display" class="font-mono font-bold text-lg text-sage-600">0</span>
+          <span class="text-xs text-ink-500">|</span>
+          <span class="text-xs font-mono uppercase text-ink-500">Cleared</span>
+          <span id="streak-display" class="font-mono font-bold text-sm text-autumn-600">0/4</span>
+        </div>
+
+        <button onclick="addConfidencePoints(100, 'Crisp senior delivery!')"
+          class="px-3 py-1.5 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
+          title="Tutor button: award points for a strong spoken answer">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>+100 Spoken Win</span>
+        </button>
+
+        <button id="sound-toggle-btn" onclick="toggleSound()"
+          class="p-2 rounded-xl bg-white border border-[#e5dccb] hover:bg-parchment-100 text-ink-700 transition"
+          title="Toggle sound effects">
+          <i id="sound-icon" data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-3 flex items-center gap-2 overflow-x-auto">
+      <button id="tab-btn-code" onclick="switchTab('code')" class="tab-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="code-2" class="w-4 h-4"></i>
+        <span>1. Code Narrator</span>
+      </button>
+      <button id="tab-btn-curveball" onclick="switchTab('curveball')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        <span>2. Curveball Shield</span>
+      </button>
+      <button id="tab-btn-demo" onclick="switchTab('demo')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="monitor-play" class="w-4 h-4"></i>
+        <span>3. 3-Min Project Demo</span>
+      </button>
+      <button id="tab-btn-offer" onclick="switchTab('offer')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="handshake" class="w-4 h-4"></i>
+        <span>4. Offer &amp; Boundaries</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div class="bg-ink-900 text-parchment-50 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-sage-400/40">
+      <span class="text-lg">✨</span>
+      <span id="toast-text" class="text-sm font-medium">Nice!</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== STAGE 1: CODE NARRATOR ==================== -->
+    <section id="panel-code" class="space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-sage-700 bg-sage-50 px-2.5 py-1 rounded-full border border-sage-200">
+              Stage 1 • 12 Mins • Live Code Review Simulation
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              Code Narrator: Think Out Loud in TypeScript
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              In technical interviews, silence makes interviewers nervous. Read the buggy Angular/TypeScript snippet below, explain <strong>what's wrong and how you'd refactor it out loud</strong>, then reveal the model narration.
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-mono text-ink-500">Snippet</span>
+            <div id="code-progress" class="font-mono text-lg font-bold text-ink-900">1 / 4</div>
+          </div>
+        </div>
+
+        <!-- Spoken Code Punctuation Bar -->
+        <div class="rounded-xl bg-parchment-100 border border-[#e5dccb] p-3.5 mb-5">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-ink-500 mb-2">
+            Zero-Freeze Code Punctuation (Click any chip to hear British pronunciation)
+          </div>
+          <div class="flex flex-wrap gap-2" id="punctuation-chips"></div>
+        </div>
+
+        <!-- Buggy vs Clean Code Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <div class="rounded-2xl border border-red-200 bg-red-50/40 p-4">
+            <div class="flex items-center justify-between mb-2">
+              <span id="code-title" class="text-xs font-mono font-bold uppercase tracking-wider text-red-700">
+                PR Review #1 • Untyped API Service
+              </span>
+              <span class="text-[11px] font-mono bg-white px-2 py-0.5 rounded border border-red-200 text-red-600">
+                Spot the issue
+              </span>
+            </div>
+            <pre id="code-buggy" class="code-box rounded-xl p-4 text-xs sm:text-sm overflow-x-auto leading-relaxed"></pre>
+            <p id="code-prompt" class="text-xs text-ink-700 mt-3 italic"></p>
+          </div>
+
+          <div class="rounded-2xl border border-sage-200 bg-sage-50/40 p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-sage-700">
+                  Clean Refactor &amp; Spoken Script
+                </span>
+                <button onclick="toggleCodeReveal()" id="code-reveal-btn" class="text-xs font-semibold px-3 py-1 rounded-lg bg-sage-600 hover:bg-sage-700 text-white transition">
+                  Reveal Fix &amp; Model Script
+                </button>
+              </div>
+              <div id="code-solution-box" class="hidden space-y-3">
+                <pre id="code-clean" class="code-box rounded-xl p-4 text-xs sm:text-sm overflow-x-auto leading-relaxed"></pre>
+                <div class="rounded-xl bg-white border border-sage-200 p-3.5">
+                  <div class="text-[11px] font-mono uppercase tracking-wider text-sage-700 mb-1">
+                    Say It Like a Senior Engineer:
+                  </div>
+                  <p id="code-model-speech" class="text-sm text-ink-900 leading-relaxed"></p>
+                </div>
+              </div>
+              <div id="code-placeholder" class="rounded-xl border border-dashed border-sage-300 bg-white/70 p-6 text-center text-sm text-ink-500 my-4">
+                🎙️ Narrate your diagnosis out loud to Louie first! Mention at least <strong>two</strong> code terms from the bar above, then click <strong>Reveal Fix</strong>.
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 mt-4 pt-3 border-t border-sage-200/70">
+              <div class="flex gap-2">
+                <button onclick="speakCodeModel(0.85)" class="px-3 py-1.5 rounded-lg bg-white border border-[#e5dccb] hover:bg-parchment-100 text-xs font-mono font-semibold text-ink-700 transition">
+                  🔊 0.85× Slow
+                </button>
+                <button onclick="speakCodeModel(1.0)" class="px-3 py-1.5 rounded-lg bg-white border border-[#e5dccb] hover:bg-parchment-100 text-xs font-mono font-semibold text-ink-700 transition">
+                  🔊 1.0× Natural
+                </button>
+              </div>
+              <button onclick="markCodeMastered()" class="px-3.5 py-1.5 rounded-lg bg-sage-600 hover:bg-sage-700 text-white text-xs font-semibold transition">
+                ✅ Nailed Narration (+100)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#e5dccb]">
+          <button onclick="prevCode()" class="px-4 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+            ← Previous Snippet
+          </button>
+          <button onclick="nextCode()" class="px-5 py-2 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Next Snippet →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 2: CURVEBALL SHIELD ==================== -->
+    <section id="panel-curveball" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Stage 2 • 13 Mins • Tough Follow-Ups
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              Curveball Shield: Awkward Questions Turned Strengths
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              Handle the questions candidates dread—career gaps, leaving high-burnout events, AI tools, and post-internship job hunting—with calm, forward-looking authority.
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-mono text-ink-500">Curveball</span>
+            <div id="cb-progress" class="font-mono text-lg font-bold text-ink-900">1 / 6</div>
+          </div>
+        </div>
+
+        <!-- Question & 45s Timer -->
+        <div class="rounded-2xl bg-parchment-100 border border-[#e5dccb] p-5 sm:p-6 mb-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <span id="cb-tag" class="text-xs font-mono font-bold uppercase tracking-wider text-autumn-700 bg-white px-2.5 py-1 rounded-full border border-autumn-200">
+              Category: Career Gap
+            </span>
+            <div class="flex items-center gap-2">
+              <span id="cb-timer" class="font-mono text-lg font-bold text-ink-900 bg-white px-3 py-1 rounded-lg border border-[#e5dccb]">00:45</span>
+              <button onclick="toggleCbTimer()" id="cb-timer-btn" class="px-3 py-1.5 rounded-lg bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-semibold transition">
+                ▶ 45s Answer
+              </button>
+              <button onclick="resetCbTimer()" class="px-2.5 py-1.5 rounded-lg bg-white border border-[#e5dccb] text-xs font-semibold text-ink-700 hover:bg-parchment-50 transition">
+                Reset
+              </button>
+            </div>
+          </div>
+          <p id="cb-question" class="font-serif text-2xl sm:text-3xl font-semibold text-ink-900 leading-snug">
+            "I see a four-year gap on your CV before your film production and web studies. What were you doing during that time?"
+          </p>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            <button onclick="toggleCbHint()" class="text-xs font-semibold text-sage-700 underline underline-offset-2 hover:text-sage-600">
+              Show/Hide Strategy Hint
+            </button>
+            <span id="cb-hint" class="hidden text-xs text-ink-700 bg-white px-3 py-1.5 rounded-lg border border-[#e5dccb]"></span>
+          </div>
+        </div>
+
+        <!-- Reveal Comparison -->
+        <div class="mb-4">
+          <button onclick="revealCbComparison()" id="cb-reveal-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Compare: Defensive Trap vs. Senior Reframe
+          </button>
+        </div>
+
+        <div id="cb-comparison" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+          <div class="rounded-xl border border-red-200 bg-red-50/60 p-4">
+            <div class="text-xs font-mono font-bold uppercase text-red-700 mb-1.5">🚩 Defensive / Over-Explaining</div>
+            <p id="cb-weak" class="text-sm text-ink-900 leading-relaxed italic"></p>
+          </div>
+          <div class="rounded-xl border border-sage-200 bg-sage-50/70 p-4">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-mono font-bold uppercase text-sage-700">✅ Confident Senior Pivot</span>
+              <button onclick="speakCbStrong()" class="text-xs font-mono px-2 py-0.5 rounded bg-white border border-sage-200 text-sage-700 hover:bg-sage-100">
+                🔊 Listen
+              </button>
+            </div>
+            <p id="cb-strong" class="text-sm text-ink-900 leading-relaxed font-medium"></p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#e5dccb]">
+          <button onclick="prevCb()" class="px-4 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+            ← Previous
+          </button>
+          <button onclick="markCbCleared()" class="px-4 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-xs sm:text-sm font-semibold transition">
+            ✅ Cleared Smoothly (+100)
+          </button>
+          <button onclick="nextCb()" class="px-5 py-2 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Next Curveball →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 3: 3-MIN PROJECT DEMO ==================== -->
+    <section id="panel-demo" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left: 4-Beat Teleprompter & Timer -->
+        <div class="lg:col-span-7 panel-card rounded-2xl p-5 sm:p-7">
+          <span class="text-xs font-mono uppercase tracking-wider text-sage-700 bg-sage-50 px-2.5 py-1 rounded-full border border-sage-200">
+            Stage 3 • 13 Mins • Screen-Share Walkthrough
+          </span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+            3-Minute Live Project Demo Builder
+          </h2>
+          <p class="text-sm text-ink-500 mt-1 mb-5">
+            Walk Louie through one of your DAW or Angular projects as if sharing your screen in a final panel. Choose your project focus below, hit <strong>Start 3-Min Demo</strong>, and follow the beats as they light up!
+          </p>
+
+          <!-- Project Selector -->
+          <div class="flex flex-wrap gap-2 mb-5">
+            <button onclick="setDemoTrack('angular')" id="demo-track-angular" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-ink-900 text-white transition">
+              🅰️ Sopra Steria / Angular App
+            </button>
+            <button onclick="setDemoTrack('fullstack')" id="demo-track-fullstack" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 text-ink-700 border border-[#e5dccb] transition">
+              🌐 DAW Full-Stack Capstone
+            </button>
+          </div>
+
+          <!-- 4 Beat Cards -->
+          <div class="space-y-3" id="demo-beats-container"></div>
+
+          <!-- Timer Controls -->
+          <div class="mt-5 pt-4 border-t border-[#e5dccb] flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div class="text-[11px] font-mono uppercase text-ink-500">Demo Clock (Target: 03:00)</div>
+              <div id="demo-clock" class="font-mono text-2xl font-bold text-ink-900">00:00 / 03:00</div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="toggleDemoTimer()" id="demo-btn" class="px-4 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-sm font-semibold transition">
+                ▶ Start 3-Min Demo
+              </button>
+              <button onclick="resetDemoTimer()" class="px-3 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Screen-Share Connector Phrases -->
+        <div class="lg:col-span-5 panel-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Anti-Freeze Connectors
+            </span>
+            <h3 class="font-serif text-2xl font-bold text-ink-900 mt-2 mb-3">
+              Smooth Screen-Share Transitions
+            </h3>
+            <p class="text-xs text-ink-500 mb-4">
+              Click any phrase to hear it aloud, and try dropping at least <strong>3</strong> into your 3-minute walkthrough:
+            </p>
+            <div class="space-y-2.5" id="demo-connectors"></div>
+          </div>
+
+          <div class="mt-6 rounded-xl bg-sage-50 border border-sage-200 p-4">
+            <div class="text-xs font-mono font-bold uppercase text-sage-700 mb-1">💡 Louie's Screen-Share Rule</div>
+            <p class="text-xs text-ink-700 leading-relaxed">
+              Don't narrate every HTML tag! Zoom out first (<em>"Here's the user problem"</em>), show the data flow (<em>"Service → Observable → Component"</em>), and highlight <strong>one</strong> TypeScript safety choice you're proud of.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 4: OFFER & BOUNDARIES ==================== -->
+    <section id="panel-offer" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Stage 4 • 12 Mins • Compensation &amp; Remote Fit
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              Offer Negotiation &amp; Work-Life Boundaries
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              You pivoted out of 26-hour overtime weeks in production so you can be present for your family in Valencia. Practice discussing pay and healthy async boundaries with warmth and clarity.
+            </p>
+          </div>
+          <div class="font-mono text-lg font-bold text-ink-900" id="offer-progress">1 / 3</div>
+        </div>
+
+        <!-- Scenario Card -->
+        <div class="rounded-2xl bg-parchment-100 border border-[#e5dccb] p-5 sm:p-6 mb-5">
+          <div class="text-xs font-mono uppercase tracking-wider text-ink-500 mb-1" id="offer-stage-label">
+            Scenario 1 • Recruiter Screening
+          </div>
+          <p id="offer-prompt" class="font-serif text-xl sm:text-2xl text-ink-900 leading-snug mt-1"></p>
+        </div>
+
+        <!-- 3 Choices -->
+        <div class="space-y-3 mb-5" id="offer-options"></div>
+        <div id="offer-feedback" class="hidden rounded-xl p-4 border mb-5 text-sm"></div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-[#e5dccb]">
+          <button onclick="prevOffer()" class="px-4 py-2 rounded-xl border border-[#e5dccb] text-sm font-semibold text-ink-700 hover:bg-parchment-100 transition">
+            ← Previous Scenario
+          </button>
+          <button onclick="speakOfferBest()" class="px-3.5 py-2 rounded-xl bg-parchment-100 hover:bg-parchment-200 text-xs font-mono font-semibold text-ink-700 transition">
+            🔊 Hear Best Reply
+          </button>
+          <button onclick="nextOffer()" class="px-5 py-2 rounded-xl bg-ink-900 hover:bg-ink-700 text-white text-sm font-semibold transition">
+            Next Scenario →
+          </button>
+        </div>
+      </div>
+
+      <!-- Reverse-Interview Vetting Builder -->
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <h3 class="font-serif text-2xl font-bold text-ink-900 mb-1">
+          Your Remote Culture Vetting Checklist
+        </h3>
+        <p class="text-sm text-ink-500 mb-4">
+          How to check if a remote team respects sustainable hours—without sounding clock-watching! Pick <strong>2</strong> to ask Louie in roleplay:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="vetting-questions"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-[#e5dccb] bg-[#f6f1e7]/60 py-4 text-center text-xs text-ink-500 font-mono">
+    Barbara &amp; Louie • Lesson 05: Live Tech Panel &amp; Offer Simulation • Valencia → Remote Full-Stack
+  </footer>
+
+  <script>
+    // ==================== STATE & AUDIO ====================
+    let score = 0;
+    const stagesCompleted = new Set();
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playTone(freq, duration, type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          audioCtx = new Ctx();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playWinSound() {
+      playTone(523.25, 0.12, 'triangle');
+      setTimeout(() => playTone(659.25, 0.12, 'triangle'), 90);
+      setTimeout(() => playTone(783.99, 0.22, 'triangle'), 180);
+    }
+
+    function playOopsSound() {
+      playTone(220, 0.18, 'sawtooth');
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('sound-icon');
+      if (icon) {
+        icon.setAttribute('data-lucide', soundEnabled ? 'volume-2' : 'volume-x');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+      showToast(soundEnabled ? 'Sound effects ON' : 'Sound effects MUTED');
+    }
+
+    function addConfidencePoints(pts, msg, stageKey) {
+      score += pts;
+      if (stageKey) stagesCompleted.add(stageKey);
+      document.getElementById('score-display').textContent = String(score);
+      document.getElementById('streak-display').textContent = stagesCompleted.size + '/4';
+      playWinSound();
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 42, spread: 58, origin: { y: 0.76 } });
+      }
+      if (msg) showToast('+' + pts + ' pts — ' + msg);
+    }
+
+    function showToast(text) {
+      const el = document.getElementById('toast-banner');
+      const txt = document.getElementById('toast-text');
+      if (!el || !txt) return;
+      txt.textContent = text;
+      el.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.add('hidden'), 2600);
+    }
+
+    function speakText(text, rate) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-GB';
+      u.rate = rate || 1.0;
+      window.speechSynthesis.speak(u);
+    }
+
+    function switchTab(tabName) {
+      const tabs = ['code', 'curveball', 'demo', 'offer'];
+      tabs.forEach((t) => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (panel) panel.classList.toggle('hidden', t !== tabName);
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/70', 'text-ink-700');
+          } else {
+            btn.classList.remove('active');
+            btn.classList.add('bg-white/70', 'text-ink-700');
+          }
+        }
+      });
+    }
+
+    // ==================== STAGE 1: CODE NARRATOR ====================
+    const PUNCTUATION_CHIPS = [
+      { sym: ':', spoken: 'colon' },
+      { sym: ';', spoken: 'semicolon' },
+      { sym: '=>', spoken: 'arrow function' },
+      { sym: '<T>', spoken: 'generic type T' },
+      { sym: '?:', spoken: 'optional property' },
+      { sym: '?.', spoken: 'optional chaining' },
+      { sym: '??', spoken: 'nullish coalescing' },
+      { sym: '{}', spoken: 'curly braces' }
+    ];
+
+    const CODE_SNIPPETS = [
+      {
+        title: 'PR Review #1 • Untyped API Service',
+        buggy:
+`getUserProfile(id) {
+  return this.http.get('/api/users/' + id);
+}`,
+        prompt: 'Coach Cue: What is missing on the parameter, the return type, and the HTTP generic?',
+        clean:
+`getUserProfile(id: string): Observable<UserProfile> {
+  return this.http.get<UserProfile>(\`/api/users/\${id}\`);
+}`,
+        speech: 'In this service method, I would add a string type after the colon on id, declare an explicit Observable UserProfile return type, and pass UserProfile as the generic argument to http dot get so the compiler catches shape mismatches early.'
+      },
+      {
+        title: 'PR Review #2 • RxJS Subscription Leak',
+        buggy:
+`ngOnInit() {
+  this.ordersService.stream$.subscribe(data => {
+    this.orders = data;
+  });
+}`,
+        prompt: 'Coach Cue: Explain the memory leak when the user navigates away, and how Angular handles cleanup.',
+        clean:
+`private destroyRef = inject(DestroyRef);
+
+ngOnInit(): void {
+  this.ordersService.stream$
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((data: Order[]) => {
+      this.orders = data;
+    });
+}`,
+        speech: 'Here we have an unmanaged subscription that keeps running after the component is destroyed. I would add a void return type to ngOnInit, pipe the stream through takeUntilDestroyed, or consume it directly in the template with the async pipe.'
+      },
+      {
+        title: 'PR Review #3 • Nested Undefined Crash',
+        buggy:
+`getCityLabel(user: any) {
+  return user.address.city.toUpperCase();
+}`,
+        prompt: 'Coach Cue: Spot the "any" trap and how to guard nested optional fields safely.',
+        clean:
+`interface User {
+  address?: { city?: string };
+}
+
+getCityLabel(user: User): string {
+  return (user.address?.city ?? 'Valencia').toUpperCase();
+}`,
+        speech: 'First, I would replace any with a strict User interface using optional properties. Then I would use optional chaining with a question mark dot and nullish coalescing with double question marks to provide a safe fallback before calling toUpperCase.'
+      },
+      {
+        title: 'PR Review #4 • Fat Monolithic Component',
+        buggy:
+`// DashboardComponent handles API fetch,
+// CSV export, form validation, and modal state
+// inside one 600-line file.`,
+        prompt: 'Coach Cue: Use "encapsulation", "reusable", and "separation of concerns" to describe your refactor.',
+        clean:
+`// 1. Smart container: fetches typed state via Service
+// 2. Presentational <app-filter-bar> (@Input / @Output)
+// 3. Export helper moved to pure utility function`,
+        speech: 'To improve encapsulation and testability, I would split this monolithic component into a smart container for data fetching, pure presentational child components communicating via inputs and outputs, and a separate utility function for CSV formatting.'
+      }
+    ];
+
+    let codeIdx = 0;
+
+    function renderPunctuationChips() {
+      const box = document.getElementById('punctuation-chips');
+      if (!box) return;
+      box.innerHTML = PUNCTUATION_CHIPS.map((c) => {
+        return '<button onclick="speakText(\'' + c.spoken + '\', 0.9)" class="px-2.5 py-1 rounded-lg bg-white border border-[#e5dccb] hover:border-sage-500 text-xs flex items-center gap-1.5 transition">' +
+          '<code class="font-mono font-bold text-autumn-600">' + c.sym + '</code>' +
+          '<span class="text-ink-700 font-medium">' + c.spoken + '</span>' +
+          '</button>';
+      }).join('');
+    }
+
+    function renderCodeSnippet() {
+      const item = CODE_SNIPPETS[codeIdx];
+      document.getElementById('code-progress').textContent = (codeIdx + 1) + ' / ' + CODE_SNIPPETS.length;
+      document.getElementById('code-title').textContent = item.title;
+      document.getElementById('code-buggy').textContent = item.buggy;
+      document.getElementById('code-prompt').textContent = item.prompt;
+      document.getElementById('code-clean').textContent = item.clean;
+      document.getElementById('code-model-speech').textContent = '"' + item.speech + '"';
+
+      document.getElementById('code-solution-box').classList.add('hidden');
+      document.getElementById('code-placeholder').classList.remove('hidden');
+      document.getElementById('code-reveal-btn').textContent = 'Reveal Fix & Model Script';
+    }
+
+    function toggleCodeReveal() {
+      const sol = document.getElementById('code-solution-box');
+      const ph = document.getElementById('code-placeholder');
+      const btn = document.getElementById('code-reveal-btn');
+      const hidden = sol.classList.contains('hidden');
+      sol.classList.toggle('hidden', !hidden);
+      ph.classList.toggle('hidden', hidden);
+      btn.textContent = hidden ? 'Hide Solution' : 'Reveal Fix & Model Script';
+    }
+
+    function speakCodeModel(rate) {
+      speakText(CODE_SNIPPETS[codeIdx].speech, rate);
+    }
+
+    function markCodeMastered() {
+      addConfidencePoints(100, 'Clean Code Narration!', 'code');
+    }
+
+    function nextCode() {
+      codeIdx = (codeIdx + 1) % CODE_SNIPPETS.length;
+      renderCodeSnippet();
+    }
+
+    function prevCode() {
+      codeIdx = (codeIdx - 1 + CODE_SNIPPETS.length) % CODE_SNIPPETS.length;
+      renderCodeSnippet();
+    }
+
+    // ==================== STAGE 2: CURVEBALL SHIELD ====================
+    const CURVEBALLS = [
+      {
+        tag: 'Category: Career Gap',
+        q: '"I see a four-year gap on your CV before your production work and web studies. What were you doing during that time?"',
+        hint: 'Strategy: State it cleanly in 1 sentence with zero apology, then pivot immediately to your return, Goya-nominated production, and 2-year DAW degree.',
+        weak: '"Yeah, sorry, I had two babies very close together so I stopped working for four or five years and then photography changed because of AI so it was hard to come back..."',
+        strong: '"I took planned family leave to raise my two young children. When I returned, I pivoted proactively—coordinating production on a Goya-nominated animated short film, then completing an intensive two-year full-stack web degree (DAW) and an Angular internship at Sopra Steria."'
+      },
+      {
+        tag: 'Category: Leaving Events / Hours',
+        q: '"Cultural events and film production sound exciting! Why did you leave that world for software?"',
+        hint: 'Strategy: Never complain about bosses or sound afraid of hard work. Frame it as seeking long-term craft, systems building, and sustainable focus.',
+        weak: '"Honestly I was exhausted because I had to work 26 extra hours a week and answer my phone on the beach, and I hated having no life."',
+        strong: '"I loved the fast-paced problem-solving in production, and shipping a Goya-nominated film taught me how to coordinate teams under pressure. Over time, I realized my favorite work was building digital systems—so I retrained in full-stack development to invest my energy in scalable, sustainable engineering."'
+      },
+      {
+        tag: 'Category: Post-Internship',
+        q: '"Why didn\'t you stay on full-time at Sopra Steria after your three-month internship?"',
+        hint: 'Strategy: Keep it factual and upbeat—highlight what you delivered and what kind of team you\'re targeting now.',
+        weak: '"They weren\'t really hiring juniors right now because of the market and AI, so my contract just ended."',
+        strong: '"The internship was a fixed three-month academic placement as part of my DAW degree. It gave me huge confidence working inside enterprise Angular and TypeScript conventions, and now I\'m looking for a permanent remote product team where I can grow long-term from Valencia."'
+      },
+      {
+        tag: 'Category: AI & Junior Hiring',
+        q: '"With AI writing so much frontend code now, what value do you bring as a newer developer?"',
+        hint: 'Strategy: Remember your Lesson 01 insight! You describe the problem clearly instead of copy-pasting blindly, and enforce strict TypeScript contracts.',
+        weak: '"I use AI to help me debug faster because I\'m still learning, though I know seniors worry juniors rely on it too much."',
+        strong: '"AI can generate snippets, but it doesn\'t own architecture or edge cases. At Sopra Steria, I used AI as a thinking partner—explaining what a function needed to do rather than pasting blind code—while relying on strict TypeScript types and code reviews to ship reliable features."'
+      },
+      {
+        tag: 'Category: Stack Flexibility',
+        q: '"You used React in your studies and Angular at Sopra Steria—which do you prefer, and what if we use Vue or React?"',
+        hint: 'Strategy: Show you think in component patterns, state management, and TypeScript—not framework tribalism.',
+        weak: '"I only know a little React from school and mostly Angular from my internship, so I might be slow at first if you use something else."',
+        strong: '"I\'m comfortable in both! Angular gave me strong discipline in TypeScript, services, and RxJS streams, while React sharpened my component and state thinking. Because the core patterns—encapsulation, typed props, and clean state flow—are shared, I adapt quickly to any modern stack."'
+      },
+      {
+        tag: 'Category: Remote Reliability',
+        q: '"How do we know you can stay connected and autonomous working remotely from Valencia?"',
+        hint: 'Strategy: Connect 10 years of independent production logistics with proactive async communication.',
+        weak: '"I really need remote because of my family and home in Valencia, and I promise I always answer messages fast."',
+        strong: '"For over a decade I coordinated cross-functional film and event teams across schedules and budgets—so structured async updates, clear documentation, and hitting milestones without micromanagement are second nature to me."'
+      }
+    ];
+
+    let cbIdx = 0;
+    let cbSec = 45;
+    let cbInterval = null;
+
+    function renderCb() {
+      const item = CURVEBALLS[cbIdx];
+      document.getElementById('cb-progress').textContent = (cbIdx + 1) + ' / ' + CURVEBALLS.length;
+      document.getElementById('cb-tag').textContent = item.tag;
+      document.getElementById('cb-question').textContent = item.q;
+      document.getElementById('cb-hint').textContent = item.hint;
+      document.getElementById('cb-hint').classList.add('hidden');
+      document.getElementById('cb-weak').textContent = item.weak;
+      document.getElementById('cb-strong').textContent = item.strong;
+      document.getElementById('cb-comparison').classList.add('hidden');
+      document.getElementById('cb-reveal-btn').textContent = 'Compare: Defensive Trap vs. Senior Reframe';
+      resetCbTimer();
+    }
+
+    function toggleCbHint() {
+      document.getElementById('cb-hint').classList.toggle('hidden');
+    }
+
+    function revealCbComparison() {
+      const box = document.getElementById('cb-comparison');
+      const btn = document.getElementById('cb-reveal-btn');
+      const isHidden = box.classList.contains('hidden');
+      box.classList.toggle('hidden', !isHidden);
+      btn.textContent = isHidden ? 'Hide Comparison' : 'Compare: Defensive Trap vs. Senior Reframe';
+    }
+
+    function speakCbStrong() {
+      speakText(CURVEBALLS[cbIdx].strong, 0.95);
+    }
+
+    function markCbCleared() {
+      addConfidencePoints(100, 'Curveball handled like a pro!', 'curveball');
+    }
+
+    function nextCb() {
+      cbIdx = (cbIdx + 1) % CURVEBALLS.length;
+      renderCb();
+    }
+
+    function prevCb() {
+      cbIdx = (cbIdx - 1 + CURVEBALLS.length) % CURVEBALLS.length;
+      renderCb();
+    }
+
+    function updateCbTimerDisplay() {
+      document.getElementById('cb-timer').textContent = '00:' + String(cbSec).padStart(2, '0');
+    }
+
+    function toggleCbTimer() {
+      const btn = document.getElementById('cb-timer-btn');
+      if (cbInterval) {
+        clearInterval(cbInterval);
+        cbInterval = null;
+        btn.textContent = '▶ Resume';
+      } else {
+        btn.textContent = '⏸ Pause';
+        cbInterval = setInterval(() => {
+          if (cbSec > 0) {
+            cbSec -= 1;
+            updateCbTimerDisplay();
+          } else {
+            clearInterval(cbInterval);
+            cbInterval = null;
+            btn.textContent = 'Done!';
+            playTone(660, 0.3, 'triangle');
+            showToast('45s complete! Now compare your answer.');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetCbTimer() {
+      clearInterval(cbInterval);
+      cbInterval = null;
+      cbSec = 45;
+      updateCbTimerDisplay();
+      document.getElementById('cb-timer-btn').textContent = '▶ 45s Answer';
+    }
+
+    // ==================== STAGE 3: 3-MIN PROJECT DEMO ====================
+    const DEMO_TRACKS = {
+      angular: [
+        { id: 'b1', time: '0:00 – 0:30', start: 0, end: 30, title: 'Beat 1: User Problem & Context', cue: 'What does the app solve, and who uses it? Keep it to 2 crisp sentences—no setup backstory yet.' },
+        { id: 'b2', time: '0:30 – 1:15', start: 30, end: 75, title: 'Beat 2: Component Hierarchy & Data Flow', cue: 'Walk from the parent container down to reusable child components, typed Services, and RxJS streams.' },
+        { id: 'b3', time: '1:15 – 2:15', start: 75, end: 135, title: 'Beat 3: TypeScript Safety & Hardest Bug', cue: 'Zoom into ONE specific trade-off or bug (e.g., strict return types, empty-state edge case, or async pipe cleanup).' },
+        { id: 'b4', time: '2:15 – 3:00', start: 135, end: 180, title: 'Beat 4: Testing & What I\'d Improve Next', cue: 'End forward-looking: unit tests, accessibility, or performance optimization you would tackle in the next sprint.' }
+      ],
+      fullstack: [
+        { id: 'b1', time: '0:00 – 0:30', start: 0, end: 30, title: 'Beat 1: Project Goal & Stack Overview', cue: 'Name the problem, target users, and stack (e.g., React/JS frontend + Laravel/PHP or Java API + SQL database).' },
+        { id: 'b2', time: '0:30 – 1:15', start: 30, end: 75, title: 'Beat 2: End-to-End Request Flow', cue: 'Trace one real user action from UI click → REST endpoint → database query → JSON response back to state.' },
+        { id: 'b3', time: '1:15 – 2:15', start: 75, end: 135, title: 'Beat 3: Architecture Decision & Edge Case', cue: 'Explain one schema/validation decision or bottleneck you fixed (e.g., auth guard, form validation, SQL join).' },
+        { id: 'b4', time: '2:15 – 3:00', start: 135, end: 180, title: 'Beat 4: Lessons & TypeScript Upgrade', cue: 'Finish strong: how applying strict typing or cleaner component encapsulation would level up v2.' }
+      ]
+    };
+
+    const DEMO_CONNECTORS = [
+      'Let me share my screen and start with the core user problem this solves.',
+      'At the architectural level, data flows from the service layer into presentational components.',
+      'One intentional trade-off I made here was prioritizing strict type safety over quick shortcuts.',
+      'To handle that edge case cleanly, I added a guard before rendering.',
+      'If I had one more sprint on this, the first bottleneck I would tackle is...'
+    ];
+
+    let activeDemoTrack = 'angular';
+    let demoSec = 0;
+    let demoInterval = null;
+
+    function setDemoTrack(track) {
+      activeDemoTrack = track;
+      const btnA = document.getElementById('demo-track-angular');
+      const btnF = document.getElementById('demo-track-fullstack');
+      if (track === 'angular') {
+        btnA.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-ink-900 text-white transition';
+        btnF.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 text-ink-700 border border-[#e5dccb] transition';
+      } else {
+        btnF.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-ink-900 text-white transition';
+        btnA.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-parchment-100 text-ink-700 border border-[#e5dccb] transition';
+      }
+      renderDemoBeats();
+    }
+
+    function renderDemoBeats() {
+      const beats = DEMO_TRACKS[activeDemoTrack];
+      const box = document.getElementById('demo-beats-container');
+      box.innerHTML = beats.map((b) => {
+        const isActive = demoSec > 0 && demoSec >= b.start && demoSec < b.end;
+        const cls = isActive
+          ? 'p-4 rounded-xl border-2 border-autumn-500 bg-autumn-50 transition'
+          : 'p-4 rounded-xl border border-[#e5dccb] bg-white transition';
+        return '<div class="' + cls + '">' +
+          '<div class="flex items-center justify-between gap-2 mb-1">' +
+            '<span class="font-semibold text-sm text-ink-900">' + b.title + '</span>' +
+            '<span class="font-mono text-xs font-bold text-sage-700 bg-sage-50 px-2 py-0.5 rounded">' + b.time + '</span>' +
+          '</div>' +
+          '<p class="text-xs text-ink-500 leading-relaxed">' + b.cue + '</p>' +
+        '</div>';
+      }).join('');
+    }
+
+    function renderDemoConnectors() {
+      const box = document.getElementById('demo-connectors');
+      box.innerHTML = DEMO_CONNECTORS.map((phrase, idx) => {
+        return '<button onclick="speakText(DEMO_CONNECTORS[' + idx + '], 0.95)" class="w-full text-left p-3 rounded-xl border border-[#e5dccb] bg-white hover:border-autumn-400 hover:bg-autumn-50/40 transition text-xs sm:text-sm text-ink-900 flex items-start justify-between gap-2">' +
+          '<span>"' + phrase + '"</span>' +
+          '<span class="font-mono text-xs text-autumn-600 shrink-0">🔊</span>' +
+        '</button>';
+      }).join('');
+    }
+
+    function updateDemoClock() {
+      const m = String(Math.floor(demoSec / 60)).padStart(2, '0');
+      const s = String(demoSec % 60).padStart(2, '0');
+      document.getElementById('demo-clock').textContent = m + ':' + s + ' / 03:00';
+      renderDemoBeats();
+    }
+
+    function toggleDemoTimer() {
+      const btn = document.getElementById('demo-btn');
+      if (demoInterval) {
+        clearInterval(demoInterval);
+        demoInterval = null;
+        btn.textContent = '▶ Resume';
+      } else {
+        btn.textContent = '⏸ Pause';
+        demoInterval = setInterval(() => {
+          if (demoSec < 180) {
+            demoSec += 1;
+            updateDemoClock();
+          } else {
+            clearInterval(demoInterval);
+            demoInterval = null;
+            btn.textContent = 'Done!';
+            addConfidencePoints(150, 'Completed 3-Min Demo!', 'demo');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetDemoTimer() {
+      clearInterval(demoInterval);
+      demoInterval = null;
+      demoSec = 0;
+      document.getElementById('demo-btn').textContent = '▶ Start 3-Min Demo';
+      updateDemoClock();
+    }
+
+    // ==================== STAGE 4: OFFER & BOUNDARIES ====================
+    const OFFER_SCENARIOS = [
+      {
+        stage: 'Scenario 1 • Salary / Rate Expectations',
+        prompt: 'Recruiter: "What are your gross annual salary expectations for this remote Angular/TypeScript role?"',
+        options: [
+          { text: '"Honestly I\'m just starting out in tech, so whatever standard junior salary you pay is fine for me."', best: false },
+          { text: '"Based on my research for remote TypeScript roles at this scope—and the cross-functional experience I bring—I\'m targeting a range of €X to €Y, though I\'d love to learn more about the total package and growth path."', best: true },
+          { text: '"I need at least €75,000 because I have ten years of work experience in film."', best: false }
+        ],
+        why: 'Never say "whatever you pay is fine." Give a calm, researched range anchored to the engineering scope while signaling openness to the full package.'
+      },
+      {
+        stage: 'Scenario 2 • Protecting Work-Life Boundaries',
+        prompt: 'Hiring Manager: "We work across time zones, so occasionally things get busy near a release. How do you manage deadlines and availability?"',
+        options: [
+          { text: '"I\'m happy to answer messages 24/7 on weekends if there\'s a bug!"', best: false },
+          { text: '"I refuse to work after 5 PM because my kids come first and I had too much overtime in my old job."', best: false },
+          { text: '"I\'m very structured with milestone planning—coming from film production, I spot bottlenecks early so releases stay predictable. During core hours I\'m deeply focused, and for true launch emergencies I appreciate clear advance coordination."', best: true }
+        ],
+        why: 'You sound calm, reliable, and boundary-smart: you prevent chaos through planning rather than promising 24/7 burnout or sounding defensive.'
+      },
+      {
+        stage: 'Scenario 3 • Negotiating Start Date & Onboarding',
+        prompt: 'Recruiter: "If we send an offer on Friday, how soon could you start, and what would help your first month go smoothly?"',
+        options: [
+          { text: '"I can start immediately! Just give me a codebase and I\'ll figure everything out alone."', best: false },
+          { text: '"I\'m available to start on [Date]. In my first 30 days, a structured onboarding buddy and clear PR conventions—just like I thrived with at Sopra Steria—would help me ship value quickly."', best: true },
+          { text: '"I\'m not sure, maybe in two months? I have to check my kids\' school schedule first."', best: false }
+        ],
+        why: 'Clear start date + asking for PR conventions/onboarding signals senior self-awareness and lowers ramp-up risk.'
+      }
+    ];
+
+    const VETTING_QUESTIONS = [
+      'How does your engineering team balance async deep-focus work with synchronous meetings?',
+      'When requirements shift mid-sprint, how are scope trade-offs communicated with product and design?',
+      'What does a healthy, realistic on-call or release week look like for frontend engineers here?',
+      'How do code reviews work on this squad—what separates a good PR from a great one?'
+    ];
+
+    let offerIdx = 0;
+    let offerAnswered = false;
+
+    function renderOffer() {
+      const item = OFFER_SCENARIOS[offerIdx];
+      offerAnswered = false;
+      document.getElementById('offer-progress').textContent = (offerIdx + 1) + ' / ' + OFFER_SCENARIOS.length;
+      document.getElementById('offer-stage-label').textContent = item.stage;
+      document.getElementById('offer-prompt').textContent = item.prompt;
+
+      const fb = document.getElementById('offer-feedback');
+      fb.classList.add('hidden');
+      fb.innerHTML = '';
+
+      const box = document.getElementById('offer-options');
+      box.innerHTML = item.options.map((opt, idx) => {
+        return '<button onclick="selectOfferOption(' + idx + ')" id="oopt-' + idx + '" class="w-full text-left p-4 rounded-xl border border-[#e5dccb] bg-white hover:border-sage-500 hover:bg-sage-50/40 transition text-sm font-medium text-ink-900">' +
+          '<span class="font-mono text-xs text-ink-500 mr-2">[' + String.fromCharCode(65 + idx) + ']</span>' + opt.text +
+        '</button>';
+      }).join('');
+    }
+
+    function selectOfferOption(idx) {
+      if (offerAnswered) return;
+      const item = OFFER_SCENARIOS[offerIdx];
+      const chosen = item.options[idx];
+      const fb = document.getElementById('offer-feedback');
+      fb.classList.remove('hidden');
+
+      if (chosen.best) {
+        offerAnswered = true;
+        document.getElementById('oopt-' + idx).classList.add('border-sage-600', 'bg-sage-50', 'ring-2', 'ring-sage-500/30');
+        fb.className = 'rounded-xl p-4 border border-sage-200 bg-sage-50 text-sage-700 mb-5 text-sm';
+        fb.innerHTML = '<strong>🤝 Balanced &amp; Confident!</strong> ' + item.why;
+        addConfidencePoints(100, 'Strong Offer Boundary', 'offer');
+      } else {
+        document.getElementById('oopt-' + idx).classList.add('border-red-300', 'bg-red-50', 'opacity-75');
+        fb.className = 'rounded-xl p-4 border border-red-200 bg-red-50 text-red-700 mb-5 text-sm';
+        fb.innerHTML = '<strong>Watch the trap!</strong> Either too self-sacrificing or too rigid. Try another phrasing!';
+        playOopsSound();
+      }
+    }
+
+    function speakOfferBest() {
+      const best = OFFER_SCENARIOS[offerIdx].options.find(o => o.best);
+      if (best) speakText(best.text.replace(/"/g, ''), 0.95);
+    }
+
+    function nextOffer() {
+      offerIdx = (offerIdx + 1) % OFFER_SCENARIOS.length;
+      renderOffer();
+    }
+
+    function prevOffer() {
+      offerIdx = (offerIdx - 1 + OFFER_SCENARIOS.length) % OFFER_SCENARIOS.length;
+      renderOffer();
+    }
+
+    function renderVettingQuestions() {
+      const box = document.getElementById('vetting-questions');
+      box.innerHTML = VETTING_QUESTIONS.map((q, idx) => {
+        return '<button onclick="speakText(VETTING_QUESTIONS[' + idx + '], 0.95)" class="text-left p-3.5 rounded-xl border border-[#e5dccb] bg-parchment-50 hover:border-autumn-400 hover:bg-autumn-50/40 transition text-sm text-ink-900 flex items-start justify-between gap-2">' +
+          '<span>"' + q + '"</span>' +
+          '<span class="font-mono text-xs text-sage-700 shrink-0">🔊</span>' +
+        '</button>';
+      }).join('');
+    }
+
+    // ==================== INIT ====================
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderPunctuationChips();
+        renderCodeSnippet();
+        renderCb();
+        renderDemoBeats();
+        renderDemoConnectors();
+        renderOffer();
+        renderVettingQuestions();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } catch (err) {
+        console.error('Initialization error caught safely:', err);
+      }
+    });
+  </script>
+</body>
+</html>
