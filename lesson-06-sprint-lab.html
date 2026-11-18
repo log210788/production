@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara &amp; Louie • Lesson 06: Day-1 Agile Sprint, Phrasal Verbs &amp; UX Lab</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#844423',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e3ebe6',
+              200: '#c7d7cd',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#395346',
+            },
+            ink: {
+              900: '#1f2421',
+              700: '#3f4742',
+              500: '#646e68',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons & Canvas Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f9f6f0;
+      color: #1f2421;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .panel-card {
+      background: #fffdf9;
+      border: 1px solid #e5dccb;
+      box-shadow: 0 10px 30px -12px rgba(31, 36, 33, 0.08);
+    }
+    .tab-btn {
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background-color: #1f2421;
+      color: #fbf9f5;
+      box-shadow: 0 4px 12px rgba(31, 36, 33, 0.16);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-[#f9f6f0]/90 border-b border-[#e5dccb]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-sage-600 text-white flex items-center justify-center shadow-sm font-serif text-xl font-bold">
+          B
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 leading-none">
+              Day-1 Agile Sprint, Phrasal Verbs &amp; UX Lab
+            </h1>
+            <span class="hidden sm:inline-block text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-sage-100 text-sage-700 border border-sage-200">
+              Lesson 06 • Nov 18
+            </span>
+          </div>
+          <p class="text-xs text-ink-500 mt-0.5">
+            Barbara G. &amp; Louie • Particle Logic, 45s BLUF Standups, Scope Creep Pushback &amp; UX Product Rescue
+          </p>
+        </div>
+      </div>
+
+      <!-- Scoreboard & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 bg-white border border-[#e5dccb] rounded-xl px-3 py-1.5 shadow-sm">
+          <span class="text-xs font-mono uppercase text-ink-500">Sprint XP</span>
+          <span id="score-display" class="font-mono font-bold text-lg text-sage-600">0</span>
+        </div>
+
+        <button onclick="addSprintPoints(100, 'Crisp native engineering phrasing!')"
+          class="px-3 py-1.5 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>+100 Spoken Win</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-3 flex items-center gap-2 overflow-x-auto">
+      <button id="tab-btn-phrasal" onclick="switchTab('phrasal')" class="tab-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span>1. Phrasal Verb Decoder</span>
+      </button>
+      <button id="tab-btn-standup" onclick="switchTab('standup')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="timer" class="w-4 h-4"></i>
+        <span>2. 45s BLUF Standup</span>
+      </button>
+      <button id="tab-btn-scope" onclick="switchTab('scope')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <span>3. Scope Creep Pushback</span>
+      </button>
+      <button id="tab-btn-ux" onclick="switchTab('ux')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="layout-template" class="w-4 h-4"></i>
+        <span>4. UX Product Rescue</span>
+      </button>
+      <div class="ml-auto flex items-center gap-1.5 pl-2">
+        <a href="index.html" class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-white/80 border border-[#e5dccb] text-ink-700 hover:bg-parchment-100 whitespace-nowrap">← Portal</a>
+        <a href="lesson-05-tech-panel.html" class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-sage-600 text-white hover:bg-sage-700 whitespace-nowrap">Lesson 05</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div class="bg-ink-900 text-parchment-50 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-sage-400/40">
+      <span class="text-lg">✨</span>
+      <span id="toast-text" class="text-sm font-medium">Nice!</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== TAB 1: PHRASAL VERB DECODER ==================== -->
+    <section id="panel-phrasal" class="space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-sage-700 bg-sage-50 px-2.5 py-1 rounded-full border border-sage-200">
+              Part 1 • 13 Mins • Stop Memorizing Random Lists
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              The Tech Phrasal Verb Decoder: Read the Particle!
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-3xl">
+              Spanish speakers already know formal English verbs (<em>deploy, resolve, eliminate, postpone</em>) because they come from Latin. In daily standups and Slack, native devs use <strong>Phrasal Verbs</strong>. The secret: group them by the <strong>particle</strong> (<code>OUT</code>, <code>UP</code>, <code>OFF</code>, <code>DOWN</code>), which holds 70% of the visual meaning!
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 Particle Blueprint Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="rounded-2xl bg-sage-50/70 border border-sage-200 p-4 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-lg bg-sage-600 text-white font-mono text-xs font-bold">1. [ OUT ]</span>
+              <span class="text-[11px] font-mono text-sage-700">Expand / Eliminate</span>
+            </div>
+            <p class="text-xs text-ink-700">Imagine unrolling a carpet across a room, or smoothing wrinkles out flat.</p>
+            <div class="space-y-2 pt-1 text-xs">
+              <div onclick="speakText('roll out the update')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>roll out</span><span>🔊</span></div>
+                <div class="text-ink-500">deploy gradually (<em>desplegar</em>)</div>
+              </div>
+              <div onclick="speakText('iron out the bugs')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>iron out</span><span>🔊</span></div>
+                <div class="text-ink-500">smooth out small bugs (<em>pulir</em>)</div>
+              </div>
+              <div onclick="speakText('rule out a database issue')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>rule out</span><span>🔊</span></div>
+                <div class="text-ink-500">discard/eliminate a cause (<em>descartar</em>)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-autumn-50/70 border border-autumn-200 p-4 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-lg bg-autumn-600 text-white font-mono text-xs font-bold">2. [ UP ]</span>
+              <span class="text-[11px] font-mono text-autumn-700">Make Visible / Start</span>
+            </div>
+            <p class="text-xs text-ink-700">Imagine raising a red warning flag in the air, or an engine spinning to life.</p>
+            <div class="space-y-2 pt-1 text-xs">
+              <div onclick="speakText('flag up an edge case')" class="cursor-pointer p-2 rounded-xl bg-white border border-autumn-200 hover:border-autumn-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>flag up</span><span>🔊</span></div>
+                <div class="text-ink-500">raise a risk early (<em>señalar / avisar</em>)</div>
+              </div>
+              <div onclick="speakText('spin up a test server')" class="cursor-pointer p-2 rounded-xl bg-white border border-autumn-200 hover:border-autumn-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>spin up</span><span>🔊</span></div>
+                <div class="text-ink-500">launch a server/container fast</div>
+              </div>
+              <div onclick="speakText('bring up in the standup')" class="cursor-pointer p-2 rounded-xl bg-white border border-autumn-200 hover:border-autumn-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>bring up</span><span>🔊</span></div>
+                <div class="text-ink-500">mention a topic (<em>sacar un tema</em>)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-parchment-100/90 border border-parchment-300 p-4 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-lg bg-ink-900 text-white font-mono text-xs font-bold">3. [ OFF ]</span>
+              <span class="text-[11px] font-mono text-ink-700">Launch / Checkpoint</span>
+            </div>
+            <p class="text-xs text-ink-700">Imagine kicking a football to start a match, or pushing a task off your desk.</p>
+            <div class="space-y-2 pt-1 text-xs">
+              <div onclick="speakText('kick off the sprint')" class="cursor-pointer p-2 rounded-xl bg-white border border-parchment-300 hover:border-ink-700 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>kick off</span><span>🔊</span></div>
+                <div class="text-ink-500">start a meeting/project (<em>arrancar</em>)</div>
+              </div>
+              <div onclick="speakText('sign off on the release')" class="cursor-pointer p-2 rounded-xl bg-white border border-parchment-300 hover:border-ink-700 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>sign off on</span><span>🔊</span></div>
+                <div class="text-ink-500">officially approve (<em>dar el visto bueno</em>)</div>
+              </div>
+              <div onclick="speakText('put it off until next sprint')" class="cursor-pointer p-2 rounded-xl bg-white border border-parchment-300 hover:border-ink-700 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>put off</span><span>🔊</span></div>
+                <div class="text-ink-500">postpone/delay (<em>posponer</em>)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-sage-50/70 border border-sage-200 p-4 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-lg bg-sage-700 text-white font-mono text-xs font-bold">4. [ DOWN ]</span>
+              <span class="text-[11px] font-mono text-sage-700">Split / Funnel</span>
+            </div>
+            <p class="text-xs text-ink-700">Imagine breaking a big rock into small pieces, or funneling 10 suspects to 1.</p>
+            <div class="space-y-2 pt-1 text-xs">
+              <div onclick="speakText('break down the epic into tickets')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>break down</span><span>🔊</span></div>
+                <div class="text-ink-500">split into small tasks (<em>desglosar</em>)</div>
+              </div>
+              <div onclick="speakText('narrow down the root cause')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>narrow down</span><span>🔊</span></div>
+                <div class="text-ink-500">reduce possibilities (<em>acotar</em>)</div>
+              </div>
+              <div onclick="speakText('step down or turn down')" class="cursor-pointer p-2 rounded-xl bg-white border border-sage-200 hover:border-sage-500 transition">
+                <div class="font-bold text-ink-900 flex justify-between"><span>turn down</span><span>🔊</span></div>
+                <div class="text-ink-500">reject an offer/idea (<em>rechazar</em>)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pronoun Sandwich Banner -->
+        <div class="rounded-2xl bg-amber-50/90 border border-amber-200 p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="text-xs font-mono font-bold uppercase text-autumn-700">🥪 The "Pronoun Sandwich" Rule (IT / THEM)</div>
+            <p class="text-xs sm:text-sm text-ink-900">
+              When you replace the noun with <strong>it</strong> or <strong>them</strong>, lock the pronoun <strong>IN THE MIDDLE</strong>:
+              <span class="font-mono font-semibold text-sage-700 ml-1">roll IT out</span> •
+              <span class="font-mono font-semibold text-sage-700">iron THEM out</span> •
+              <span class="font-mono font-semibold text-sage-700">put IT off</span> •
+              <span class="font-mono font-semibold text-sage-700">narrow IT down</span>
+              <span class="text-xs text-ink-500 ml-1">(3-word exception: <em>sign off on IT</em>)</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive 6-Item Upgrade Grid -->
+        <div class="space-y-3">
+          <div class="text-xs font-mono font-bold uppercase tracking-wider text-ink-500">
+            Live Drill: Say the Natural Phrasal-Verb Upgrade Out Loud, Then Click to Reveal
+          </div>
+          <div id="pv-drill-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: 45s BLUF STANDUP ==================== -->
+    <section id="panel-standup" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Part 2 • 12 Mins • Zero-Ramble Architecture &amp; Standup Updates
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              The 45-Second "BLUF" Daily Standup &amp; Bug Triage
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              <strong>BLUF = Bottom Line Up Front.</strong> Instead of telling a long chronological story and losing your train of thought, hit the <strong>3 lighted beats</strong> below in 45 seconds flat.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="standup-timer" class="font-mono text-2xl font-bold text-ink-900 bg-parchment-100 px-4 py-1.5 rounded-xl border border-[#e5dccb]">00:45</span>
+            <button id="standup-timer-btn" onclick="toggleStandupTimer()" class="px-4 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-xs sm:text-sm font-semibold transition">
+              ▶ Start 45s Standup
+            </button>
+            <button onclick="resetStandupTimer()" class="px-3 py-2 rounded-xl bg-white border border-[#e5dccb] text-xs font-semibold text-ink-700 hover:bg-parchment-100">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Phase Progress Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+          <div id="beat-1" class="p-3.5 rounded-xl border-2 border-sage-500 bg-sage-50 transition">
+            <div class="text-[11px] font-mono font-bold uppercase text-sage-700">0:00 – 0:10 • Beat 1</div>
+            <div class="font-bold text-sm text-ink-900 mt-0.5">1. Headline Status</div>
+            <p class="text-xs text-ink-500 mt-0.5">"Quick update on [the feature/bug]—here is where we stand..."</p>
+          </div>
+          <div id="beat-2" class="p-3.5 rounded-xl border border-[#e5dccb] bg-white transition">
+            <div class="text-[11px] font-mono font-bold uppercase text-autumn-700">0:10 – 0:30 • Beat 2</div>
+            <div class="font-bold text-sm text-ink-900 mt-0.5">2. Ruled Out &amp; Narrowed Down</div>
+            <p class="text-xs text-ink-500 mt-0.5">"We <strong>ruled out</strong> X and <strong>narrowed it down</strong> to Y. I'm <strong>ironing it out</strong> now."</p>
+          </div>
+          <div id="beat-3" class="p-3.5 rounded-xl border border-[#e5dccb] bg-white transition">
+            <div class="text-[11px] font-mono font-bold uppercase text-sage-700">0:30 – 0:45 • Beat 3</div>
+            <div class="font-bold text-sm text-ink-900 mt-0.5">3. Sign-Off / Rollout Ask</div>
+            <p class="text-xs text-ink-500 mt-0.5">"To <strong>roll it out</strong> tomorrow, I just need [Team] to <strong>sign off on</strong> Z."</p>
+          </div>
+        </div>
+
+        <!-- Scenario Selector -->
+        <div class="flex flex-wrap gap-2 mb-4" id="triage-tabs"></div>
+
+        <!-- Active Triage Card -->
+        <div id="triage-card-box" class="rounded-2xl bg-parchment-50 border border-[#e5dccb] p-5 space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: SCOPE CREEP PUSHBACK ==================== -->
+    <section id="panel-scope" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="mb-5">
+          <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-sage-700 bg-sage-50 px-2.5 py-1 rounded-full border border-sage-200">
+            Part 3A • 7 Mins • Diplomatic Engineering Boundaries
+          </span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+            Stopping Friday Scope Creep Without Saying a Flat "No"
+          </h2>
+          <p class="text-sm text-ink-500 mt-1 max-w-3xl">
+            In international tech teams, saying a blunt <em>"No, that's impossible"</em> sounds rigid, while saying <em>"Yes"</em> causes burnout. Use the <strong>Validate → Flag Up Risk → Trade-Off</strong> formula.
+          </p>
+        </div>
+
+        <div id="scope-scenarios-box" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: UX PRODUCT RESCUE ==================== -->
+    <section id="panel-ux" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-autumn-700 bg-autumn-50 px-2.5 py-1 rounded-full border border-autumn-200">
+              Part 3B • 8 Mins • Design Thinking + Frontend Architecture
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
+              The UX &amp; Accessibility Product Rescue Clinic
+            </h2>
+            <p class="text-sm text-ink-500 mt-1 max-w-2xl">
+              Put on your <strong>Design Thinking + Full-Stack</strong> hat. Pick a broken real-world app below, diagnose why users are dropping off, and pitch <strong>3 concrete fixes in 60 seconds</strong>.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="ux-timer" class="font-mono text-2xl font-bold text-ink-900 bg-parchment-100 px-4 py-1.5 rounded-xl border border-[#e5dccb]">01:00</span>
+            <button id="ux-timer-btn" onclick="toggleUxTimer()" class="px-4 py-2 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs sm:text-sm font-semibold transition">
+              ▶ 60s Pitch Timer
+            </button>
+          </div>
+        </div>
+
+        <div id="ux-cards-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let sprintScore = 0;
+
+    const PV_DRILLS = [
+      {
+        id: 1,
+        stiff: '1. "Let\'s POSTPONE the dark-mode feature until Sprint 2."',
+        target: '"Let\'s PUT OFF the dark-mode feature until Sprint 2 — let\'s PUT IT OFF."',
+        particle: 'OFF = push off your desk to later'
+      },
+      {
+        id: 2,
+        stiff: '2. "We ELIMINATED a database issue and REDUCED the cause to CSS."',
+        target: '"We RULED OUT a database issue and NARROWED IT DOWN to CSS."',
+        particle: 'OUT = cross off list • DOWN = funnel'
+      },
+      {
+        id: 3,
+        stiff: '3. "We need to RESOLVE two small bugs before we DEPLOY the update."',
+        target: '"We need to IRON OUT two small bugs — let\'s IRON THEM OUT before we ROLL IT OUT."',
+        particle: 'OUT = flatten wrinkles & unroll carpet'
+      },
+      {
+        id: 4,
+        stiff: '4. "I want to MENTION an accessibility risk before QA APPROVES the release."',
+        target: '"I want to FLAG UP an accessibility risk before QA SIGNS OFF ON the release."',
+        particle: 'UP = raise a red flag • OFF = official checkpoint'
+      },
+      {
+        id: 5,
+        stiff: '5. "Can we LAUNCH a test server and SPLIT this epic into smaller tasks?"',
+        target: '"Can we SPIN UP a test server and BREAK DOWN this epic into smaller tickets?"',
+        particle: 'UP = spin engine • DOWN = break into pieces'
+      },
+      {
+        id: 6,
+        stiff: '6. "Before we START the sprint, let\'s APPROVE the API contract."',
+        target: '"Before we KICK OFF the sprint, let\'s SIGN OFF ON the API contract."',
+        particle: 'OFF = start match & official signature'
+      }
+    ];
+
+    const TRIAGE_CASES = [
+      {
+        title: 'Case 1: Mobile Safari Checkout Freeze',
+        context: '15% of iPhone users cannot click the "Pay Now" button on the checkout modal.',
+        facts: [
+          'Ruled out: Stripe payment API (backend logs show 200 OK).',
+          'Narrowed down to: An overlapping z-index sticky footer on small viewports.',
+          'Next step: Ironing out the CSS flexbox layout now; need QA to sign off on mobile testing so we can roll it out by 4 PM.'
+        ],
+        model: '"Quick update on the iPhone checkout freeze: we ruled out a Stripe API failure and narrowed it down to a sticky footer overlapping the Pay button on small screens. I\'m ironing out the CSS layout right now, and once QA signs off on it, we can roll it out this afternoon."'
+      },
+      {
+        title: 'Case 2: Slow Analytics Dashboard Load (6 Seconds)',
+        context: 'Enterprise clients complained the main Angular dashboard takes 6.5 seconds to render.',
+        facts: [
+          'Ruled out: Frontend component re-rendering.',
+          'Narrowed down to: An unpaginated endpoint fetching 10,000 rows at once.',
+          'Next step: Breaking down the fix into server pagination + lazy loading; need Backend to sign off on the new query parameters.'
+        ],
+        model: '"Here\'s where we stand on the slow dashboard load: we ruled out an Angular rendering issue and narrowed it down to an unpaginated API call pulling 10,000 rows. We\'ve broken the fix down into lazy loading plus server pagination, and I just need Backend to sign off on the new query params."'
+      },
+      {
+        title: 'Case 3: Silent Logout After 10 Minutes',
+        context: 'Users filling out a long multi-step form get logged out before clicking Submit.',
+        facts: [
+          'Ruled out: Browser cookie settings.',
+          'Narrowed down to: Missing silent refresh-token interceptor when the user stays on one route.',
+          'Next step: Spinning up a staging build to test the Angular HTTP interceptor before rolling it out tomorrow.'
+        ],
+        model: '"Quick update on the premature logout bug: we ruled out browser cookies and narrowed it down to our HTTP interceptor not refreshing tokens during single-page form edits. I\'m spinning up a staging build to iron out the edge cases, and we\'ll roll it out tomorrow morning."'
+      }
+    ];
+
+    const SCOPE_CASES = [
+      {
+        pmQuote: 'PM (Thursday 4:30 PM): "Bárbara! The client just asked if we can add a real-time PDF export button to the dashboard before Monday\'s launch. It\'s just one button, right?"',
+        steps: [
+          '1. Validate: "I totally see why PDF export is high-value for the client..."',
+          '2. Flag Up Risk: "...however, I want to flag up a risk: generating clean multi-page PDFs touches our data tables and hasn\'t been QA-tested."',
+          '3. Trade-Off: "To protect Monday\'s launch, let\'s roll out the core dashboard first, put off the PDF export until Sprint 2, and break it down properly on Tuesday."'
+        ]
+      },
+      {
+        pmQuote: 'Tech Lead: "Let\'s skip writing unit tests for the new team-lobby matchmaking flow so we can ship before Friday."',
+        steps: [
+          '1. Validate: "I know we\'re keen to ship the matchmaking flow before Friday..."',
+          '2. Flag Up Risk: "...but I\'d like to flag up that state transitions in team lobbies have tricky edge cases when users leave and rejoin."',
+          '3. Trade-Off: "If we spend two hours writing core unit tests now, we\'ll iron out regressions early and avoid a hotfix over the weekend."'
+        ]
+      }
+    ];
+
+    const UX_CASES = [
+      {
+        badge: 'Challenge 1 • Healthcare UX',
+        title: 'The Valencia Clinic Booking Drop-Off',
+        problem: 'A local clinic rolled out an online appointment portal, but 68% of patients over age 65 abandon the form on Step 2 (selecting a specialist & uploading an insurance card photo).',
+        vocab: ['cognitive load', 'break down the form', 'high-contrast typography', 'put off optional uploads', 'accessible tap targets'],
+        tip: 'Use your Design Thinking empathy: put yourself in an older patient\'s shoes! How do you simplify the flow?'
+      },
+      {
+        badge: 'Challenge 2 • E-Commerce Checkout',
+        title: 'The 14-Field Mobile Cart Abandonment',
+        problem: 'A neighborhood artisan market app forces mobile users to create an account, verify their email, and fill out 14 address fields before seeing delivery fees.',
+        vocab: ['user friction', 'flag up shipping costs upfront', 'guest checkout', 'iron out form validation', 'roll out an A/B test'],
+        tip: 'Explain what you would rule out, what you would cut down on, and what you would roll out first.'
+      },
+      {
+        badge: 'Challenge 3 • Accessibility Audit',
+        title: 'The Keyboard-Trap Dashboard',
+        problem: 'An enterprise HR dashboard looks sleek, but uses low-contrast grey text, colour-only status dots (red/green), and custom dropdowns that keyboard/screen-reader users cannot close.',
+        vocab: ['WCAG compliance', 'keyboard navigation', 'ARIA labels', 'colour-blind safe icons', 'sign off on accessibility'],
+        tip: 'Connect back to your wheelchair-empathy insight from Friday: design for the edge case so everyone benefits!'
+      }
+    ];
+
+    let activeTriageIdx = 0;
+    let standupTimerId = null;
+    let standupRemaining = 45;
+    let uxTimerId = null;
+    let uxRemaining = 60;
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-GB';
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    }
+
+    function addSprintPoints(pts, msg) {
+      sprintScore += pts;
+      const el = document.getElementById('score-display');
+      if (el) el.textContent = String(sprintScore);
+      const banner = document.getElementById('toast-banner');
+      const txt = document.getElementById('toast-text');
+      if (banner && txt) {
+        txt.textContent = msg + ' (+' + pts + ' XP)';
+        banner.classList.remove('hidden');
+        setTimeout(function() { banner.classList.add('hidden'); }, 2600);
+      }
+      if (typeof confetti === 'function' && sprintScore % 200 === 0) {
+        confetti({ particleCount: 45, spread: 60, origin: { y: 0.7 } });
+      }
+    }
+
+    function switchTab(tabName) {
+      const tabs = ['phrasal', 'standup', 'scope', 'ux'];
+      tabs.forEach(function(t) {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (panel) {
+          if (t === tabName) panel.classList.remove('hidden');
+          else panel.classList.add('hidden');
+        }
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/70', 'text-ink-700');
+          } else {
+            btn.classList.remove('active');
+            btn.classList.add('bg-white/70', 'text-ink-700');
+          }
+        }
+      });
+    }
+
+    function renderPvDrills() {
+      const grid = document.getElementById('pv-drill-grid');
+      if (!grid) return;
+      grid.innerHTML = PV_DRILLS.map(function(d) {
+        return '<div class="rounded-xl bg-parchment-50 border border-[#e5dccb] p-4 flex flex-col justify-between gap-3">' +
+          '<div>' +
+            '<div class="text-xs font-mono text-ink-500 mb-1">' + d.particle + '</div>' +
+            '<p class="text-sm font-semibold text-ink-900">' + d.stiff + '</p>' +
+            '<div id="pv-ans-' + d.id + '" class="hidden mt-2.5 p-3 rounded-lg bg-sage-50 border border-sage-200 text-xs sm:text-sm font-bold text-sage-700">' +
+              d.target +
+            '</div>' +
+          '</div>' +
+          '<div class="flex items-center justify-between pt-2 border-t border-[#e5dccb]/70">' +
+            '<button onclick="revealPv(' + d.id + ')" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-sage-600 hover:bg-sage-700 text-white transition">Reveal Natural Upgrade</button>' +
+            '<button onclick="speakText(\'' + d.target.replace(/'/g, "\\'").replace(/"/g, '') + '\')" class="text-xs font-mono text-ink-700 hover:text-ink-900 px-2 py-1">🔊 Listen</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function revealPv(id) {
+      const box = document.getElementById('pv-ans-' + id);
+      if (box) {
+        box.classList.toggle('hidden');
+        if (!box.classList.contains('hidden')) {
+          addSprintPoints(50, 'Phrasal verb unlocked!');
+        }
+      }
+    }
+
+    function renderTriage() {
+      const tabsBox = document.getElementById('triage-tabs');
+      const cardBox = document.getElementById('triage-card-box');
+      if (!tabsBox || !cardBox) return;
+
+      tabsBox.innerHTML = TRIAGE_CASES.map(function(c, idx) {
+        const activeClass = idx === activeTriageIdx
+          ? 'bg-ink-900 text-white'
+          : 'bg-white border border-[#e5dccb] text-ink-700 hover:bg-parchment-100';
+        return '<button onclick="selectTriage(' + idx + ')" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition ' + activeClass + '">' +
+          c.title +
+        '</button>';
+      }).join('');
+
+      const cur = TRIAGE_CASES[activeTriageIdx];
+      cardBox.innerHTML =
+        '<div class="flex flex-wrap items-center justify-between gap-2">' +
+          '<h3 class="font-serif text-xl font-bold text-ink-900">' + cur.title + '</h3>' +
+          '<span class="text-xs font-mono px-2.5 py-1 rounded-full bg-autumn-100 text-autumn-700">Use at least 3 phrasal verbs!</span>' +
+        '</div>' +
+        '<p class="text-sm text-ink-700 font-medium">' + cur.context + '</p>' +
+        '<ul class="space-y-1.5 text-xs sm:text-sm text-ink-700 bg-white p-4 rounded-xl border border-[#e5dccb]">' +
+          cur.facts.map(function(f) { return '<li>• ' + f + '</li>'; }).join('') +
+        '</ul>' +
+        '<div class="flex flex-wrap items-center gap-2 pt-1">' +
+          '<button onclick="toggleTriageModel()" class="px-3.5 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-xs font-semibold transition">Reveal Model 45s Update</button>' +
+          '<button onclick="speakText(\'' + cur.model.replace(/'/g, "\\'").replace(/"/g, '') + '\')" class="px-3 py-2 rounded-xl bg-white border border-[#e5dccb] text-xs font-mono font-semibold text-ink-700">🔊 Listen UK</button>' +
+          '<button onclick="addSprintPoints(100, \'Nailed the 45s BLUF Standup!\')" class="ml-auto px-3.5 py-2 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-semibold">✅ Delivered Under 45s (+100)</button>' +
+        '</div>' +
+        '<div id="triage-model-box" class="hidden p-4 rounded-xl bg-sage-50 border border-sage-200 text-sm text-ink-900 leading-relaxed">' +
+          cur.model +
+        '</div>';
+    }
+
+    function selectTriage(idx) {
+      activeTriageIdx = idx;
+      renderTriage();
+    }
+
+    function toggleTriageModel() {
+      const b = document.getElementById('triage-model-box');
+      if (b) b.classList.toggle('hidden');
+    }
+
+    function updateBeatHighlight(secLeft) {
+      const b1 = document.getElementById('beat-1');
+      const b2 = document.getElementById('beat-2');
+      const b3 = document.getElementById('beat-3');
+      if (!b1 || !b2 || !b3) return;
+      [b1, b2, b3].forEach(function(el) {
+        el.className = 'p-3.5 rounded-xl border border-[#e5dccb] bg-white transition';
+      });
+      const elapsed = 45 - secLeft;
+      if (elapsed < 10) {
+        b1.className = 'p-3.5 rounded-xl border-2 border-sage-600 bg-sage-50 shadow-sm transition';
+      } else if (elapsed < 30) {
+        b2.className = 'p-3.5 rounded-xl border-2 border-autumn-500 bg-autumn-50 shadow-sm transition';
+      } else {
+        b3.className = 'p-3.5 rounded-xl border-2 border-sage-600 bg-sage-50 shadow-sm transition';
+      }
+    }
+
+    function toggleStandupTimer() {
+      const btn = document.getElementById('standup-timer-btn');
+      if (standupTimerId) {
+        clearInterval(standupTimerId);
+        standupTimerId = null;
+        if (btn) btn.textContent = '▶ Resume 45s';
+        return;
+      }
+      if (standupRemaining <= 0) standupRemaining = 45;
+      if (btn) btn.textContent = '⏸ Pause';
+      standupTimerId = setInterval(function() {
+        standupRemaining--;
+        const disp = document.getElementById('standup-timer');
+        if (disp) {
+          const s = standupRemaining < 10 ? '0' + standupRemaining : String(standupRemaining);
+          disp.textContent = '00:' + s;
+        }
+        updateBeatHighlight(standupRemaining);
+        if (standupRemaining <= 0) {
+          clearInterval(standupTimerId);
+          standupTimerId = null;
+          if (btn) btn.textContent = '▶ Start 45s Standup';
+          addSprintPoints(100, '45-Second Standup Complete!');
+        }
+      }, 1000);
+    }
+
+    function resetStandupTimer() {
+      if (standupTimerId) clearInterval(standupTimerId);
+      standupTimerId = null;
+      standupRemaining = 45;
+      const disp = document.getElementById('standup-timer');
+      const btn = document.getElementById('standup-timer-btn');
+      if (disp) disp.textContent = '00:45';
+      if (btn) btn.textContent = '▶ Start 45s Standup';
+      updateBeatHighlight(45);
+    }
+
+    function renderScopeCases() {
+      const box = document.getElementById('scope-scenarios-box');
+      if (!box) return;
+      box.innerHTML = SCOPE_CASES.map(function(c, i) {
+        return '<div class="rounded-2xl bg-parchment-50 border border-[#e5dccb] p-5 space-y-3">' +
+          '<div class="p-3.5 rounded-xl bg-autumn-50 border border-autumn-200 text-sm font-semibold text-ink-900">' +
+            '💬 ' + c.pmQuote +
+          '</div>' +
+          '<div class="text-xs font-mono uppercase text-ink-500">Speak your diplomatic pushback first, then click to compare:</div>' +
+          '<button onclick="document.getElementById(\'scope-ans-' + i + '\').classList.toggle(\'hidden\')" class="px-3.5 py-1.5 rounded-lg bg-sage-600 hover:bg-sage-700 text-white text-xs font-semibold transition">Reveal 3-Step Diplomatic Pushback</button>' +
+          '<div id="scope-ans-' + i + '" class="hidden space-y-1.5 p-4 rounded-xl bg-white border border-sage-200 text-xs sm:text-sm text-ink-900">' +
+            c.steps.map(function(s) { return '<div>' + s + '</div>'; }).join('') +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function renderUxCases() {
+      const grid = document.getElementById('ux-cards-grid');
+      if (!grid) return;
+      grid.innerHTML = UX_CASES.map(function(u) {
+        return '<div class="rounded-2xl bg-parchment-50 border border-[#e5dccb] p-5 flex flex-col justify-between space-y-4">' +
+          '<div class="space-y-2.5">' +
+            '<span class="text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-sage-100 text-sage-700">' + u.badge + '</span>' +
+            '<h3 class="font-serif text-xl font-bold text-ink-900">' + u.title + '</h3>' +
+            '<p class="text-xs sm:text-sm text-ink-700 leading-relaxed">' + u.problem + '</p>' +
+            '<div class="pt-2">' +
+              '<div class="text-[11px] font-mono uppercase text-ink-500 mb-1.5">Target Phrases to Weave In:</div>' +
+              '<div class="flex flex-wrap gap-1.5">' +
+                u.vocab.map(function(v) {
+                  return '<span class="px-2 py-0.5 rounded-md bg-white border border-[#e5dccb] font-mono text-[11px] text-sage-700 font-semibold">' + v + '</span>';
+                }).join('') +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="p-3 rounded-xl bg-autumn-50/70 border border-autumn-200 text-xs text-ink-700">' +
+            '💡 <strong>Coach Cue:</strong> ' + u.tip +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function toggleUxTimer() {
+      const btn = document.getElementById('ux-timer-btn');
+      if (uxTimerId) {
+        clearInterval(uxTimerId);
+        uxTimerId = null;
+        if (btn) btn.textContent = '▶ Resume 60s';
+        return;
+      }
+      if (uxRemaining <= 0) uxRemaining = 60;
+      if (btn) btn.textContent = '⏸ Pause';
+      uxTimerId = setInterval(function() {
+        uxRemaining--;
+        const disp = document.getElementById('ux-timer');
+        if (disp) {
+          const s = uxRemaining < 10 ? '0' + uxRemaining : String(uxRemaining);
+          disp.textContent = '00:' + s;
+        }
+        if (uxRemaining <= 0) {
+          clearInterval(uxTimerId);
+          uxTimerId = null;
+          if (btn) btn.textContent = '▶ 60s Pitch Timer';
+          addSprintPoints(100, '60-Second UX Rescue Pitch Complete!');
+        }
+      }, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      try {
+        renderPvDrills();
+        renderTriage();
+        renderScopeCases();
+        renderUxCases();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          lucide.createIcons();
+        }
+      } catch (err) {
+        console.error('Init error:', err);
+      }
+    });
+  </script>
+</body>
+</html>
