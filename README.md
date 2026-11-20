@@ -57,3 +57,7 @@ Interactive lesson companions, cleaned transcripts, and spatial vocabulary syste
 - **Lesson Plans & Companion Notes:**
   - [Lesson_11-18-2026_Plan.md](./Lesson_11-18-2026_Plan.md) • [Preply Canvas Kit](./Lesson_11-18-2026_Preply_Canvas.md)
 - **Features:** *Phrasal Verb Particle Decoder* (`OUT • UP • OFF • DOWN` + Pronoun Sandwich), *45-Second BLUF Standup & Bug Triage*, *Scope Creep Pushback Roleplay*, and *UX & Accessibility Product Rescue Lab*.
+
+### 9. **[Lesson 07: JS, Angular & Programming Best Practices Study Lab (`lesson-07-js-angular-prep.html`)](https://log210788.github.io/production/lesson-07-js-angular-prep.html)**
+- **Lesson Plan:** [Lesson_11-20-2026_Plan.md](./Lesson_11-20-2026_Plan.md)
+- **Features:** *8 Programming Best Practices* (with `❌ Before / ✅ After` code, spoken interview phrases, and a 30-second pitch timer), *JavaScript Technical Drills* (`var` vs `let` + `setTimeout`, `fetch` error handling, immutability), *Angular Basics & Code Review* (component communication, RxJS memory leak fix, `OnPush` change detection), and *4-Step Interview Technique Checklist*.

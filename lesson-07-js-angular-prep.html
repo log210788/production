@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara &amp; Louie • Lesson 07: JS, Angular &amp; Best Practices Study Lab</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            parchment: {
+              50: '#fbf9f5',
+              100: '#f6f1e7',
+              200: '#ede3d1',
+              300: '#dfd0b5',
+            },
+            autumn: {
+              50: '#fcf6f0',
+              100: '#f7e9db',
+              200: '#eed0b5',
+              400: '#d38c57',
+              500: '#be6f38',
+              600: '#a3582b',
+              700: '#844423',
+            },
+            sage: {
+              50: '#f4f7f5',
+              100: '#e3ebe6',
+              200: '#c7d7cd',
+              500: '#5b826f',
+              600: '#476858',
+              700: '#395346',
+            },
+            ink: {
+              900: '#1f2421',
+              700: '#3f4742',
+              500: '#646e68',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons & Canvas Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f9f6f0;
+      color: #1f2421;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .panel-card {
+      background: #fffdf9;
+      border: 1px solid #e5dccb;
+      box-shadow: 0 10px 30px -12px rgba(31, 36, 33, 0.08);
+    }
+    .tab-btn {
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background-color: #1f2421;
+      color: #fbf9f5;
+      box-shadow: 0 4px 12px rgba(31, 36, 33, 0.16);
+    }
+    pre code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-[#f9f6f0]/90 border-b border-[#e5dccb]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-sage-600 text-white flex items-center justify-center shadow-sm font-serif text-xl font-bold">
+          B
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-serif text-xl sm:text-2xl font-bold text-ink-900 leading-none">
+              JS, Angular &amp; Best Practices Study Lab
+            </h1>
+            <span class="hidden sm:inline-block text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-autumn-100 text-autumn-700 border border-autumn-200">
+              Lesson 07 • Study Prep
+            </span>
+          </div>
+          <p class="text-xs text-ink-500 mt-0.5">
+            Barbara G. &amp; Louie • Programming Best Practices, JavaScript Drills, Angular Basics &amp; Interview Technique
+          </p>
+        </div>
+      </div>
+
+      <!-- Progress & Audio Speed -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 bg-white border border-[#e5dccb] rounded-xl px-3 py-1.5 shadow-sm">
+          <span class="text-xs font-mono uppercase text-ink-500">Prep XP</span>
+          <span id="score-display" class="font-mono font-bold text-lg text-sage-600">0</span>
+        </div>
+        <button id="speed-btn" onclick="toggleSpeechRate()"
+          class="px-3 py-1.5 rounded-xl bg-white border border-[#e5dccb] hover:bg-parchment-100 text-xs font-mono font-semibold text-ink-700 transition shadow-sm"
+          title="Toggle voice speed">
+          🔊 0.95×
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-3 flex items-center gap-2 overflow-x-auto">
+      <button id="tab-btn-practices" onclick="switchTab('practices')" class="tab-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="award" class="w-4 h-4"></i>
+        <span>1. Best Practices (8)</span>
+      </button>
+      <button id="tab-btn-js" onclick="switchTab('js')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="code-2" class="w-4 h-4"></i>
+        <span>2. JavaScript Drills</span>
+      </button>
+      <button id="tab-btn-angular" onclick="switchTab('angular')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="boxes" class="w-4 h-4"></i>
+        <span>3. Angular Basics &amp; Review</span>
+      </button>
+      <button id="tab-btn-technique" onclick="switchTab('technique')" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/70 border border-[#e5dccb] text-ink-700 hover:bg-white whitespace-nowrap flex items-center gap-2">
+        <i data-lucide="mic" class="w-4 h-4"></i>
+        <span>4. Interview Technique</span>
+      </button>
+      <div class="ml-auto flex items-center gap-1.5 pl-2">
+        <a href="index.html" class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-white/80 border border-[#e5dccb] text-ink-700 hover:bg-parchment-100 whitespace-nowrap">← Portal</a>
+        <a href="lesson-06-sprint-lab.html" class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-sage-600 text-white hover:bg-sage-700 whitespace-nowrap">Lesson 06</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div class="bg-ink-900 text-parchment-50 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-sage-400/40">
+      <span class="text-lg">✨</span>
+      <span id="toast-text" class="text-sm font-medium">Nice!</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== TAB 1: PROGRAMMING BEST PRACTICES ==================== -->
+    <section id="panel-practices" class="space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div class="max-w-3xl space-y-2">
+            <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-sage-100 text-sage-700 border border-sage-200">
+              Study Focus • Next Live Practice Prep
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900">
+              “What are your programming best practices?”
+            </h2>
+            <p class="text-sm text-ink-700 leading-relaxed">
+              When an interviewer asks this question, they want to see that you write code that is <strong>easy to read</strong>, <strong>safe to change</strong>, and <strong>easy to test</strong>. Study the 8 principles below and practice the 30-second summary out loud before our next live mock interview!
+            </p>
+          </div>
+          <div class="bg-autumn-50 border border-autumn-200 rounded-xl p-3.5 text-xs text-autumn-700 max-w-xs">
+            <div class="font-bold uppercase tracking-wider font-mono mb-1">Two Hiring Pillars</div>
+            <p class="leading-relaxed">1. <strong>Knowing the basics of Angular</strong> (components, data flow, RxJS cleanup, signals).<br/>2. <strong>Programming best practices</strong> (clean, readable, testable code).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 30-Second Answer Template + Timer -->
+      <div class="panel-card rounded-2xl p-5 sm:p-6 bg-gradient-to-br from-[#fffdf9] to-[#f4f7f5]">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <div>
+            <h3 class="font-serif text-xl font-bold text-ink-900">Quick 30-Second Interview Answer Template</h3>
+            <p class="text-xs text-ink-500">Listen to the rhythm, then hit Start Timer and say it in your own words under 30 seconds.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="pitch-timer" class="font-mono text-lg font-bold px-3 py-1 rounded-lg bg-white border border-[#e5dccb] text-ink-900">00:30</span>
+            <button onclick="togglePitchTimer()" id="pitch-timer-btn" class="px-3.5 py-2 rounded-xl bg-sage-600 hover:bg-sage-700 text-white text-xs font-semibold transition">
+              ▶ Start 30s
+            </button>
+            <button onclick="speakText(PITCH_QUOTE)" class="px-3.5 py-2 rounded-xl bg-autumn-500 hover:bg-autumn-600 text-white text-xs font-semibold transition">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+        <blockquote class="p-4 rounded-xl bg-white border border-sage-200 text-sm sm:text-base text-ink-900 leading-relaxed italic">
+          “I focus on writing readable, maintainable, and testable code. Specifically, I keep functions small with single responsibilities, use meaningful names and early returns to avoid deep nesting, avoid duplicating logic, handle errors and edge cases explicitly, and prefer immutable data and dependency injection so everything is easy to unit test.”
+        </blockquote>
+      </div>
+
+      <!-- 8 Best Practices Grid -->
+      <div id="practices-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- ==================== TAB 2: JAVASCRIPT DRILLS ==================== -->
+    <section id="panel-js" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-autumn-100 text-autumn-700 border border-autumn-200 mb-2">
+          Self-Test Before Peeking
+        </span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900">JavaScript Technical Interview Drills</h2>
+        <p class="text-sm text-ink-700 mt-1">
+          Read each prompt, say your answer out loud (including <em>why</em>), then click <strong>Reveal Answer &amp; Interviewer Notes</strong> to check yourself.
+        </p>
+      </div>
+
+      <div id="js-drills-container" class="space-y-5"></div>
+    </section>
+
+    <!-- ==================== TAB 3: ANGULAR BASICS & CODE REVIEW ==================== -->
+    <section id="panel-angular" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-sage-100 text-sage-700 border border-sage-200 mb-2">
+          Angular Core &amp; Code Review
+        </span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900">Angular Basics &amp; Live Code Review Prep</h2>
+        <p class="text-sm text-ink-700 mt-1">
+          Focus on clear architecture, knowing when to ask clarifying questions first, and explaining Angular concepts without jargon overload.
+        </p>
+      </div>
+
+      <div id="angular-drills-container" class="space-y-5"></div>
+    </section>
+
+    <!-- ==================== TAB 4: INTERVIEW TECHNIQUE ==================== -->
+    <section id="panel-technique" class="hidden space-y-6">
+      <div class="panel-card rounded-2xl p-5 sm:p-7">
+        <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-autumn-100 text-autumn-700 border border-autumn-200 mb-2">
+          How You Answer Matters Most
+        </span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink-900">The 4-Step Technical Interview Technique</h2>
+        <p class="text-sm text-ink-700 mt-1">
+          In our next live session, we will practice these 4 habits on every question. Check off each phrase as you practice saying it out loud!
+        </p>
+      </div>
+
+      <div id="technique-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-[#e5dccb] bg-[#f6f1e7]/70 py-5 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-ink-500">
+      <span>Barbara G. &amp; Louie • Peaceful English Sanctuary • Lesson 07 Study Lab</span>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="hover:text-ink-900 underline">Portal Home</a>
+        <a href="lesson-05-tech-panel.html" class="hover:text-ink-900 underline">Lesson 05: Tech Panel</a>
+        <a href="lesson-06-sprint-lab.html" class="hover:text-ink-900 underline">Lesson 06: Sprint Lab</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const PITCH_QUOTE = "I focus on writing readable, maintainable, and testable code. Specifically, I keep functions small with single responsibilities, use meaningful names and early returns to avoid deep nesting, avoid duplicating logic, handle errors and edge cases explicitly, and prefer immutable data and dependency injection so everything is easy to unit test.";
+
+    let prepScore = 0;
+    let speechRate = 0.95;
+    let pitchSeconds = 30;
+    let pitchInterval = null;
+
+    const BEST_PRACTICES = [
+      {
+        num: "1",
+        title: "Early Returns (Guard Clauses)",
+        summary: "Instead of nesting if/else blocks deep inside a function, handle invalid cases first and return early.",
+        say: "I use guard clauses to handle edge cases upfront so the main logic stays flat and readable.",
+        bad: `function processOrder(order: Order | null) {\n  if (order) {\n    if (order.items.length > 0) {\n      if (order.isPaid) {\n        return ship(order);\n      }\n    }\n  }\n  return null;\n}`,
+        good: `function processOrder(order: Order | null) {\n  if (!order) return null;\n  if (order.items.length === 0) return null;\n  if (!order.isPaid) return null;\n  return ship(order);\n}`
+      },
+      {
+        num: "2",
+        title: "Single Responsibility Principle",
+        summary: "Each function or class should do one job well. If a function fetches data, transforms it, and updates the UI, split it up.",
+        say: "I keep functions small and single-purpose so they're easier to name, test, and reuse.",
+        tip: "If you need to write a comment explaining what a block of code inside a function does, extract that block into its own well-named function (e.g., calculateDiscount(items) instead of a 30-line loop inside checkout())."
+      },
+      {
+        num: "3",
+        title: "Meaningful Naming & No Magic Numbers",
+        summary: "Code is read far more often than it is written. Names should explain intent, not just data types.",
+        say: "I aim for self-documenting code with clear names and named constants instead of magic numbers.",
+        bad: `if (u.age >= 18 && d > 30) { ... }`,
+        good: `const LEGAL_AGE = 18;\nconst MAX_TRIAL_DAYS = 30;\nif (user.age >= LEGAL_AGE && daysActive > MAX_TRIAL_DAYS) { ... }`
+      },
+      {
+        num: "4",
+        title: "DRY (Don't Repeat Yourself)",
+        summary: "If you copy-paste the same logic in multiple places, extract it into a shared helper. When requirements change, you only update it in one place.",
+        say: "I avoid duplicating business logic by extracting shared helpers, while being careful not to over-abstract two things that only happen to look similar.",
+        tip: "Parameterize the differences (e.g., one formatCurrency(amount, currency) function instead of formatUSD() and formatEUR())."
+      },
+      {
+        num: "5",
+        title: "Explicit Error Handling & Edge Cases",
+        summary: "Never assume inputs are valid or network calls always succeed. Handle null/undefined, empty arrays, and failed async calls gracefully.",
+        say: "I validate inputs at boundaries, handle async errors explicitly, and never silently swallow exceptions.",
+        good: `async function fetchUser(id: string): Promise<User | null> {\n  if (!id) throw new Error("User ID is required");\n  try {\n    const res = await fetch(\`/api/users/\${id}\`);\n    if (!res.ok) throw new Error(\`HTTP \${res.status}\`);\n    return await res.json();\n  } catch (err) {\n    console.error("Failed to fetch user:", err);\n    return null;\n  }\n}`
+      },
+      {
+        num: "6",
+        title: "Immutability & Pure Functions",
+        summary: "Avoid mutating objects or arrays passed into a function. Return new copies instead—this prevents subtle bugs in Angular or React.",
+        say: "I prefer pure functions and immutable updates so state changes are predictable and easier to debug.",
+        bad: `// Mutates original array\nfunction addItem(cart: Item[], item: Item) {\n  cart.push(item);\n  return cart;\n}`,
+        good: `// Returns a new array\nfunction addItem(cart: Item[], item: Item): Item[] {\n  return [...cart, item];\n}`
+      },
+      {
+        num: "7",
+        title: "Testable Code (DI & Separation of Concerns)",
+        summary: "Keep business logic separate from frameworks, APIs, or databases, and pass dependencies in rather than hardcoding them.",
+        say: "I separate business logic from side effects and use dependency injection so I can unit test logic with mocks without needing a live database or API.",
+        tip: "Instead of calling fetch() or new Date() directly inside a calculation function, pass the data or service in as a parameter (or inject it via the constructor / inject() in Angular)."
+      },
+      {
+        num: "8",
+        title: "Small, Clean Commits & Code Reviews",
+        summary: "Best practices also cover how you collaborate with a team every day.",
+        say: "I keep pull requests small and focused, write commit messages that explain why a change was made, and rely on linters like ESLint and Prettier so code reviews focus on logic.",
+        tip: "Small PRs = faster, deeper reviews. Clear commits = explain WHY, not just WHAT."
+      }
+    ];
+
+    const JS_DRILLS = [
+      {
+        id: "js-1",
+        tag: "Closures & Event Loop",
+        question: "What will this code print to the console, why does it happen, and how would you fix it?",
+        code: `for (var i = 0; i < 3; i++) {\n  setTimeout(() => {\n    console.log(i);\n  }, 100);\n}`,
+        answer: "It prints 3, 3, 3 (not 0, 1, 2). Because var is function-scoped (not block-scoped), there is only one shared i variable. The for loop finishes instantly before the 100ms timers run, so by the time setTimeout executes, i is already 3.",
+        fix: "Change var to let (block-scoped, creating a fresh binding per iteration). In older JS without let, you could wrap the timeout in a closure/IIFE or pass i as a 3rd argument to setTimeout.",
+        say: "Because var is function-scoped, all three callbacks share the same i reference. Switching to let gives each iteration its own block-scoped binding, printing 0, 1, 2."
+      },
+      {
+        id: "js-2",
+        tag: "Async / Await & Fetch",
+        question: "How do you write fetchUser(id) with async/await and make sure a 404 Not Found error doesn't slip through silently?",
+        code: `async function fetchUser(id) {\n  // How do we handle network errors AND HTTP 404/500?\n}`,
+        answer: "Wrap the call in try/catch for network failures, AND explicitly check if (!res.ok) before calling res.json(). Many candidates forget that fetch() only rejects on network failure, NOT on HTTP 404 or 500!",
+        fix: "if (!res.ok) throw new Error('HTTP ' + res.status);",
+        say: "I always wrap async calls in try/catch and check response.ok explicitly, because fetch doesn't reject on 404 or 500 status codes."
+      },
+      {
+        id: "js-3",
+        tag: "Immutability & Array Methods",
+        question: "Why should we avoid cart.push(item) inside a state update, and what should we use instead?",
+        code: `// Mutating vs Immutable update`,
+        answer: "Mutating an array in place (.push, .sort, .splice) keeps the same object reference in memory. Frameworks like Angular (especially with OnPush or Signals) rely on reference changes to detect updates—mutating in place can cause UI bugs where the view doesn't update.",
+        fix: "Use spread syntax [...cart, item] or non-mutating methods like .map(), .filter(), and .toSorted().",
+        say: "Returning a new array reference with spread syntax keeps state predictable and ensures Angular change detection and unit tests behave reliably."
+      }
+    ];
+
+    const ANGULAR_DRILLS = [
+      {
+        id: "ng-1",
+        tag: "Architecture & Clarifying First",
+        question: "You need to build a page with a search bar at the top and a user list below it. How do you structure the components and pass data between them?",
+        code: `// Hint: What clarifying questions should you ask BEFORE designing?`,
+        answer: "First, clarify: (1) Are we filtering on the frontend or calling a backend API? (2) How large is the list? (3) Do other routes need this search state? Then design: a smart Parent component holding the state, a SearchBar child emitting search terms (@Output / output()), and a UserList child receiving filtered users (@Input / input()). If shared across pages, use an injectable Service.",
+        fix: "Bonus point: mention debouncing (e.g., debounceTime(300) + distinctUntilChanged()) if calling an API on input!",
+        say: "Before choosing the structure, I'd clarify whether filtering happens client-side or via an API. For a self-contained page, I'd use a smart parent with dumb presentational children communicating via inputs and outputs."
+      },
+      {
+        id: "ng-2",
+        tag: "Code Review • Memory Leak",
+        question: "You're reviewing a teammate's Angular component. What potential bug or performance issue do you spot here, and how would you fix it?",
+        code: `@Component({\n  selector: 'app-user-feed',\n  template: \`<div>{{ users.length }} users loaded</div>\`\n})\nexport class UserFeedComponent implements OnInit {\n  users: User[] = [];\n  constructor(private userService: UserService) {}\n\n  ngOnInit() {\n    this.userService.getUsers$().subscribe(data => {\n      this.users = data;\n    });\n  }\n}`,
+        answer: "There is an unclosed RxJS subscription inside ngOnInit. If getUsers$() is a long-lived stream (like WebSockets, router events, or a Subject) and the user navigates away, the subscription stays alive in memory—causing a memory leak.",
+        fix: "Best fixes: (1) Use the async pipe in the template, (2) use takeUntilDestroyed() in modern Angular, (3) convert to a signal with toSignal(), or (4) unsubscribe in ngOnDestroy with takeUntil(destroy$).",
+        say: "If this observable doesn't auto-complete, leaving an open subscribe() can leak memory when the component is destroyed. I'd prefer the async pipe, toSignal(), or takeUntilDestroyed()."
+      },
+      {
+        id: "ng-3",
+        tag: "Angular Basics • Change Detection",
+        question: "What is the difference between Default and OnPush change detection in Angular, and why does it matter?",
+        code: `changeDetection: ChangeDetectionStrategy.OnPush`,
+        answer: "Default checks the entire component tree on every browser event, timer, or HTTP response. OnPush tells Angular to only re-check a component when its @Input reference changes, an event originates inside it, an async pipe emits, or a Signal updates.",
+        fix: "OnPush dramatically improves performance in large apps—and pairs directly with Best Practice #6 (Immutability).",
+        say: "OnPush limits re-renders to when input references change, local events fire, or signals/async pipes emit, which keeps large Angular apps fast."
+      }
+    ];
+
+    const TECHNIQUES = [
+      {
+        step: "Step 1 • Clarify First",
+        title: "Never jump straight into coding",
+        desc: "Ask 1–2 quick questions before designing or writing code. Interviewers love candidates who check assumptions.",
+        phrase: "Before I jump in, can I clarify one quick thing—is this filtering happening on the client side or via a backend API?"
+      },
+      {
+        step: "Step 2 • Think Aloud",
+        title: "Narrate your thought process",
+        desc: "Avoid 20 seconds of silence. Even a short sentence tells the interviewer how your brain works.",
+        phrase: "I'm tracing the variable scope here—since var is function-scoped, let me check what i equals when the timer fires."
+      },
+      {
+        step: "Step 3 • Trade-offs",
+        title: "Compare Option A vs. Option B",
+        desc: "Senior-minded engineers don't say 'this is the only way.' Mention pros, cons, and why you picked your approach.",
+        phrase: "We could put this in a shared service, which scales well across routes, or keep it in the parent component to stay simpler for now."
+      },
+      {
+        step: "Step 4 • Handle Unknowns",
+        title: "Be honest & reason from first principles",
+        desc: "Never bluff if you forget an exact method name. State what you know and how you'd verify it.",
+        phrase: "I don't remember the exact RxJS operator name offhand, but conceptually I'd want to cancel the previous request when a new search term arrives."
+      }
+    ];
+
+    function addXP(points, message) {
+      prepScore += points;
+      const el = document.getElementById('score-display');
+      if (el) el.textContent = String(prepScore);
+      showToast('+' + points + ' XP • ' + message);
+    }
+
+    function showToast(msg) {
+      const banner = document.getElementById('toast-banner');
+      const text = document.getElementById('toast-text');
+      if (!banner || !text) return;
+      text.textContent = msg;
+      banner.classList.remove('hidden');
+      setTimeout(() => banner.classList.add('hidden'), 2600);
+    }
+
+    function switchTab(tabName) {
+      const tabs = ['practices', 'js', 'angular', 'technique'];
+      tabs.forEach(t => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (panel) panel.classList.toggle('hidden', t !== tabName);
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/70', 'border', 'border-[#e5dccb]', 'text-ink-700');
+          } else {
+            btn.classList.remove('active');
+            btn.classList.add('bg-white/70', 'border', 'border-[#e5dccb]', 'text-ink-700');
+          }
+        }
+      });
+    }
+
+    function toggleSpeechRate() {
+      speechRate = speechRate === 0.95 ? 0.8 : 0.95;
+      const btn = document.getElementById('speed-btn');
+      if (btn) btn.textContent = '🔊 ' + speechRate.toFixed(2).replace(/0$/, '') + '×';
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Speech synthesis not supported in this browser.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-GB';
+      utter.rate = speechRate;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function togglePitchTimer() {
+      const btn = document.getElementById('pitch-timer-btn');
+      const display = document.getElementById('pitch-timer');
+      if (pitchInterval) {
+        clearInterval(pitchInterval);
+        pitchInterval = null;
+        pitchSeconds = 30;
+        if (display) display.textContent = '00:30';
+        if (btn) btn.textContent = '▶ Start 30s';
+        return;
+      }
+      pitchSeconds = 30;
+      if (btn) btn.textContent = '■ Reset';
+      pitchInterval = setInterval(() => {
+        pitchSeconds--;
+        if (display) display.textContent = '00:' + String(pitchSeconds).padStart(2, '0');
+        if (pitchSeconds <= 0) {
+          clearInterval(pitchInterval);
+          pitchInterval = null;
+          if (btn) btn.textContent = '▶ Start 30s';
+          addXP(50, '30-second pitch practiced!');
+          if (typeof confetti === 'function') confetti({ particleCount: 45, spread: 60, origin: { y: 0.7 } });
+        }
+      }, 1000);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function renderPractices() {
+      const grid = document.getElementById('practices-grid');
+      if (!grid) return;
+      grid.innerHTML = BEST_PRACTICES.map(p => {
+        let codeHtml = '';
+        if (p.bad || p.good) {
+          codeHtml = '<div class="grid grid-cols-1 gap-2.5 mt-3">' +
+            (p.bad ? '<div class="rounded-xl bg-[#fdf3f2] border border-[#f2d0cc] p-3"><div class="text-[11px] font-mono font-bold text-[#9e3b33] mb-1">❌ AVOID</div><pre class="text-xs overflow-x-auto text-ink-900"><code>' + escapeHtml(p.bad) + '</code></pre></div>' : '') +
+            (p.good ? '<div class="rounded-xl bg-sage-50 border border-sage-200 p-3"><div class="text-[11px] font-mono font-bold text-sage-700 mb-1">✅ CLEAN</div><pre class="text-xs overflow-x-auto text-ink-900"><code>' + escapeHtml(p.good) + '</code></pre></div>' : '') +
+            '</div>';
+        }
+        const tipHtml = p.tip ? '<div class="mt-3 p-3 rounded-xl bg-parchment-100 border border-parchment-200 text-xs text-ink-700"><strong>How to do it:</strong> ' + escapeHtml(p.tip) + '</div>' : '';
+        const safeSay = p.say.replace(/'/g, "\\'");
+        return '<div class="panel-card rounded-2xl p-5 flex flex-col justify-between">' +
+          '<div>' +
+            '<div class="flex items-center justify-between gap-2 mb-2">' +
+              '<span class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-ink-900 text-parchment-50">#' + p.num + '</span>' +
+              '<button onclick="speakText(\'' + safeSay + '\'); addXP(15, \'Practiced #' + p.num + '\');" class="px-2.5 py-1 rounded-lg bg-autumn-50 hover:bg-autumn-100 border border-autumn-200 text-autumn-700 text-xs font-semibold transition">🔊 Hear Phrase</button>' +
+            '</div>' +
+            '<h3 class="font-serif text-xl font-bold text-ink-900">' + escapeHtml(p.title) + '</h3>' +
+            '<p class="text-sm text-ink-700 mt-1">' + escapeHtml(p.summary) + '</p>' +
+            '<div class="mt-3 p-3 rounded-xl bg-autumn-50/70 border border-autumn-200 text-xs text-ink-900"><span class="font-bold text-autumn-700">What to say:</span> “' + escapeHtml(p.say) + '”</div>' +
+            codeHtml +
+            tipHtml +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function toggleDrillAnswer(id) {
+      const box = document.getElementById('ans-' + id);
+      const btn = document.getElementById('btn-' + id);
+      if (!box) return;
+      const isHidden = box.classList.contains('hidden');
+      box.classList.toggle('hidden');
+      if (btn) btn.textContent = isHidden ? 'Hide Answer' : 'Reveal Answer & Interviewer Notes';
+      if (isHidden) addXP(25, 'Checked drill ' + id.toUpperCase());
+    }
+
+    function renderDrills(containerId, items) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = items.map(item => {
+        const safeSay = item.say.replace(/'/g, "\\'");
+        return '<div class="panel-card rounded-2xl p-5 sm:p-6 space-y-4">' +
+          '<div class="flex flex-wrap items-center justify-between gap-2">' +
+            '<span class="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sage-100 text-sage-700 border border-sage-200">' + escapeHtml(item.tag) + '</span>' +
+            '<button onclick="speakText(\'' + safeSay + '\')" class="px-2.5 py-1 rounded-lg bg-autumn-50 hover:bg-autumn-100 border border-autumn-200 text-autumn-700 text-xs font-semibold">🔊 Hear Model Answer</button>' +
+          '</div>' +
+          '<h3 class="font-serif text-xl font-bold text-ink-900">' + escapeHtml(item.question) + '</h3>' +
+          '<pre class="rounded-xl bg-[#1f2421] text-[#f6f1e7] p-4 text-xs sm:text-sm overflow-x-auto"><code>' + escapeHtml(item.code) + '</code></pre>' +
+          '<button id="btn-' + item.id + '" onclick="toggleDrillAnswer(\'' + item.id + '\')" class="px-4 py-2 rounded-xl bg-ink-900 hover:bg-sage-700 text-white text-xs font-semibold transition">Reveal Answer &amp; Interviewer Notes</button>' +
+          '<div id="ans-' + item.id + '" class="hidden space-y-2.5 pt-2 border-t border-[#e5dccb]">' +
+            '<p class="text-sm text-ink-900 leading-relaxed"><strong>Key Concept:</strong> ' + escapeHtml(item.answer) + '</p>' +
+            '<p class="text-sm text-sage-700 leading-relaxed"><strong>Best Fix / Approach:</strong> ' + escapeHtml(item.fix) + '</p>' +
+            '<div class="p-3 rounded-xl bg-autumn-50 border border-autumn-200 text-xs text-ink-900"><strong class="text-autumn-700">Interview Phrasing:</strong> “' + escapeHtml(item.say) + '”</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function renderTechniques() {
+      const container = document.getElementById('technique-cards-container');
+      if (!container) return;
+      container.innerHTML = TECHNIQUES.map((t, idx) => {
+        const safePhrase = t.phrase.replace(/'/g, "\\'");
+        return '<div class="panel-card rounded-2xl p-5 space-y-3">' +
+          '<div class="flex items-center justify-between gap-2">' +
+            '<span class="text-xs font-mono font-bold text-autumn-700 uppercase tracking-wider">' + escapeHtml(t.step) + '</span>' +
+            '<button onclick="speakText(\'' + safePhrase + '\'); addXP(20, \'Practiced interview phrase\');" class="px-2.5 py-1 rounded-lg bg-sage-50 hover:bg-sage-100 border border-sage-200 text-sage-700 text-xs font-semibold">🔊 Listen</button>' +
+          '</div>' +
+          '<h3 class="font-serif text-xl font-bold text-ink-900">' + escapeHtml(t.title) + '</h3>' +
+          '<p class="text-sm text-ink-700">' + escapeHtml(t.desc) + '</p>' +
+          '<div class="p-3.5 rounded-xl bg-parchment-100 border border-parchment-200 text-xs sm:text-sm text-ink-900 italic">“' + escapeHtml(t.phrase) + '”</div>' +
+          '<label class="inline-flex items-center gap-2 text-xs font-semibold text-sage-700 cursor-pointer pt-1">' +
+            '<input type="checkbox" onchange="if(this.checked) addXP(30, \'Checklist item mastered!\')" class="rounded border-sage-300 text-sage-600 focus:ring-sage-500">' +
+            '<span>I practiced saying this out loud</span>' +
+          '</label>' +
+        '</div>';
+      }).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        renderPractices();
+        renderDrills('js-drills-container', JS_DRILLS);
+        renderDrills('angular-drills-container', ANGULAR_DRILLS);
+        renderTechniques();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } catch (err) {
+        console.error('Initialization error caught safely:', err);
+      }
+    });
+  </script>
+</body>
+</html>
